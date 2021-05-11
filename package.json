@@ -1,0 +1,31 @@
+{
+  "name": "paperquik",
+  "version": "2.0.0",
+  "description": "A site where users can design printable pages.",
+  "main": "index.mjs",
+  "scripts": {
+    "build": "docker build -t registry.gitlab.com/johnmunsch/paperquik .",
+    "login": "docker login registry.gitlab.com",
+    "push": "docker push registry.gitlab.com/johnmunsch/paperquik",
+    "start": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/JohnMunsch/paperquik.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/JohnMunsch/paperquik/issues"
+  },
+  "homepage": "https://gitlab.com/JohnMunsch/paperquik#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lit": "^2.0.0-rc.2",
+    "page": "^1.11.6"
+  },
+  "devDependencies": {
+    "esbuild": "^0.11.20"
+  }
+}
