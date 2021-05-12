@@ -87,6 +87,79 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+body {
+  background-color: #2f3d4e;
+  color: white;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+paperquik-app {
+  display: block;
+}
+
+.jumbotron {
+  height: 350px;
+  padding: 48px 60px 48px 60px;
+}
+
+.jumbotron h1 {
+  font-size: 67.5px;
+  font-weight: 300;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #4e5d6c;
+}
+
+.panel-heading {
+  padding: 10px 15px 10px 15px;
+  background-color: #485563;
+}
+
+.panel-heading h2 {
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+.paperIcon {
+  display: inline-block;
+  background-color: white;
+  padding: 4px;
+
+  color: black;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.paperIcon.notSelected {
+  background-color: gray;
+}
+
+#mc_embed_signup {
+  margin-top: 80px;
+  background: rgb(78, 93, 108);
+  clear: left;
+  font: 14px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#mc_embed_signup label {
+  font-weight: normal;
+}
+
+#mc_embed_signup input {
+  color: black;
+}
+
+/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -161,7 +234,7 @@ textarea {
 
 .clearfix::before,
 .clearfix::after {
-  content: " ";
+  content: ' ';
   display: table;
 }
 
@@ -209,20 +282,20 @@ textarea {
   }
 
   a[href]::after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
   }
 
   abbr[title]::after {
-    content: " (" attr(title) ")";
+    content: ' (' attr(title) ')';
   }
 
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
    */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
+  a[href^='#']::after,
+  a[href^='javascript:']::after {
+    content: '';
   }
 
   pre {
@@ -260,4 +333,3 @@ textarea {
     page-break-after: avoid;
   }
 }
-

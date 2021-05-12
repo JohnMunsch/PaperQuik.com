@@ -3,6 +3,7 @@ import page from 'page';
 
 import './about-page.js';
 import './paper-page.js';
+import { paperSizes } from './paper-generation.js';
 
 export class PaperQuikApp extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -15,10 +16,6 @@ export class PaperQuikApp extends LitElement {
     // All of the properties of this component and a type for each (used when converting
     // attributes to property values).
     return {};
-  }
-
-  static get styles() {
-    return css``;
   }
 
   constructor() {
