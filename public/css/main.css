@@ -130,9 +130,10 @@ paperquik-app {
 
 .paperIcon {
   display: inline-block;
-  background-color: white;
+  margin-right: 5px;
   padding: 4px;
 
+  background-color: white;
   color: black;
   font-size: smaller;
   font-weight: bold;
@@ -140,6 +141,11 @@ paperquik-app {
 
 .paperIcon.notSelected {
   background-color: gray;
+}
+
+.preview svg {
+  width: 100%;
+  height: 100%;
 }
 
 #mc_embed_signup {

@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 // All measurements are in mm and IDs are just randomly generated here:
 export const paperSizes = [
   {
@@ -37,3 +39,30 @@ export const paperSizes = [
     height: 210,
   },
 ];
+
+export function paper(print, paperSize) {
+  return html`<svg
+    class="${print ? 'd-none d-print-block' : ''}"
+    width="${paperSize.width}mm"
+    height="${paperSize.height}mm"
+    viewBox="0 0 ${paperSize.width} ${paperSize.height}"
+    version="1.1"
+  >
+    <g>
+      <rect
+        style="fill:${print ? 'none' : 'white'};fill-rule:evenodd;"
+        width="215.9"
+        height="279.4"
+        x="0"
+        y="0"
+      />
+      <rect
+        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
+        width="191.73621"
+        height="255.73621"
+        x="12.131895"
+        y="12.131895"
+      />
+    </g>
+  </svg>`;
+}

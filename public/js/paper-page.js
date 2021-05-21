@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import { paperSizes } from './paper-generation.js';
+import { paper, paperSizes } from './paper-generation.js';
 
 import './pq-menu.js';
 
@@ -54,40 +54,10 @@ export class PaperPage extends LitElement {
     </div>`;
   }
 
-  paper() {
-    return html`<svg
-      class="d-none d-print-block"
-      width="215.89999mm"
-      height="279.39999mm"
-      viewBox="0 0 215.9 279.4"
-      version="1.1"
-      id="svg8"
-    >
-      <g>
-        <rect
-          style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:0.263791;stroke-opacity:1"
-          id="rect10"
-          width="215.89999mm"
-          height="279.39999mm"
-          x="0"
-          y="0"
-        />
-        <rect
-          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.263791;stroke-opacity:1"
-          id="rect10"
-          width="191.73621"
-          height="255.73621"
-          x="12.131895"
-          y="12.131895"
-        />
-      </g>
-    </svg>`;
-  }
-
   paperIconStyle(paperSize) {
     return {
-      width: paperSize.width / 2.8 + 'px',
-      height: paperSize.height / 2.8 + 'px',
+      width: `${paperSize.width / 2.8}px`,
+      height: `${paperSize.height / 2.8}px`,
     };
   }
 
@@ -112,14 +82,12 @@ export class PaperPage extends LitElement {
     </div>`;
   }
 
-  stepTwo() {
+  stepTwo(paperSize) {
     return html` <div class="panel panel-default layout-section">
       <div class="panel-heading">
         <h2>
           2: Pick a layout
-          <span ng-show="selectedPaper"
-            >for {{ selectedPaper.name }} size paper</span
-          >
+          ${paperSize ? `for ${paperSize.name} size paper` : ''}
         </h2>
       </div>
       <div class="panel-body">
@@ -156,7 +124,7 @@ export class PaperPage extends LitElement {
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-8"></div>
+          <div class="col-md-8 preview">${paper(false, paperSizes[0])}</div>
           <div class="col-md-4">
             <button class="btn btn-primary btn-block" ng-click="print()">
               Print your paper
@@ -211,7 +179,7 @@ export class PaperPage extends LitElement {
   }
 
   render() {
-    return html`${this.paper()}
+    return html`${paper(true, paperSizes[0])}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
       <div class="container d-print-none">
         <div class="jumbotron" ng-show="$storage.showWelcome">
