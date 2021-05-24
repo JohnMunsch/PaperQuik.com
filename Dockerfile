@@ -7,6 +7,7 @@ ENV NODE_ENV production
 COPY package*.json ./
 RUN npm install
 
-COPY ./dist ./dist
+COPY ./index.mjs ./
+COPY ./public ./public
 
 CMD [ "npm", "start" ]

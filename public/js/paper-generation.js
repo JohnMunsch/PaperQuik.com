@@ -73,7 +73,7 @@ export function paper(print, paperSize) {
   // Render the sections within the page.
   // Header - Body - Footer
   if (!paperSize) {
-    return html`<svg></svg>`;
+    return html``;
   }
 
   return html`<svg

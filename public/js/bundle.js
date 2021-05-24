@@ -1408,7 +1408,7 @@
   ];
   function paper(print, paperSize) {
     if (!paperSize) {
-      return T`<svg></svg>`;
+      return T``;
     }
     return T`<svg
     class="${print ? "d-none d-print-block" : ""}"
@@ -1592,7 +1592,7 @@
         </h2>
       </div>
       <div class="panel-body">
-        ${this.size ? T` <div>
+        ${this.size ? T` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
         return T`<a href="/${this.size}/${paperLayout.id}">
                   <div class="layoutIcon">

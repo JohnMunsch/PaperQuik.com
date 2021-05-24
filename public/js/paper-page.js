@@ -116,7 +116,7 @@ export class PaperPage extends LitElement {
       </div>
       <div class="panel-body">
         ${this.size
-          ? html` <div>
+          ? html` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
                 return html`<a href="/${this.size}/${paperLayout.id}">
                   <div class="layoutIcon">

@@ -104,6 +104,11 @@ pq-menu {
   margin-bottom: 10px;
 }
 
+nav {
+  background-color: #bf5a16;
+  color: white;
+}
+
 .jumbotron {
   height: 350px;
   padding: 48px 60px 48px 60px;
@@ -135,6 +140,9 @@ pq-menu {
   padding: 15px;
 }
 
+.papers-wrapper {
+}
+
 .paperIcon {
   display: inline-block;
   margin-right: 5px;
@@ -148,6 +156,11 @@ pq-menu {
 
 .paperIcon.notSelected {
   background-color: gray;
+}
+
+.layouts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .layoutIcon {
