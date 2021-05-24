@@ -102,6 +102,8 @@ paperquik-app {
 .jumbotron {
   height: 350px;
   padding: 48px 60px 48px 60px;
+  background-image: url('/img/Jumbotron-Group-Paper.jpg');
+  background-size: cover;
 }
 
 .jumbotron h1 {

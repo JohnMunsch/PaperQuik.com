@@ -1511,6 +1511,20 @@
     createRenderRoot() {
       return this;
     }
+    jumbotron() {
+      return T` <div class="panel jumbotron" ng-show="$storage.showWelcome">
+      <h1>The Paper You Need - Available Right Away</h1>
+      <p></p>
+      <p>
+        <button
+          class="btn btn-primary btn-lg"
+          ng-click="$storage.showWelcome = false"
+        >
+          Get Started
+        </button>
+      </p>
+    </div>`;
+    }
     adBlock() {
       return T`<div class="panel panel-default">
       <div class="panel-body">
@@ -1655,29 +1669,19 @@
       }
     }
     render() {
-      return T`${paper(true, paperSizes[0])}
+      return T`<div>
+      ${paper(true, paperSizes[0])}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
-      <div class="container d-print-none">
-        <div class="jumbotron" ng-show="$storage.showWelcome">
-          <h1>The Paper You Need - Available Right Away</h1>
-          <p></p>
-          <p>
-            <button
-              class="btn btn-primary btn-lg"
-              ng-click="$storage.showWelcome = false"
-            >
-              Get Started
-            </button>
-          </p>
-        </div>
 
-        ${this.adBlock()} ${this.stepOne()} ${this.stepTwo()}
-        ${this.stepThree()} ${this.adBlock()}
+      <div class="container d-print-none">
+        ${this.jumbotron()} ${this.adBlock()} ${this.stepOne()}
+        ${this.stepTwo()} ${this.stepThree()} ${this.adBlock()}
 
         <footer>
           <p>© 2021 John Munsch</p>
         </footer>
-      </div>`;
+      </div>
+    </div>`;
     }
   };
   customElements.define(PaperPage.it, PaperPage);
