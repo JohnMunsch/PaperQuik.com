@@ -147,7 +147,7 @@ export class PaperPage extends LitElement {
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-8 preview">${paper(false, paperSizes[0])}</div>
+          <div class="col-md-8 preview">${paper(false, this.paperSize)}</div>
           <div class="col-md-4">
             <button class="btn btn-primary btn-block" ng-click="print()">
               Print your paper
@@ -211,7 +211,7 @@ export class PaperPage extends LitElement {
 
   render() {
     return html`<div>
-      ${paper(true, paperSizes[0])}
+      ${paper(true, this.paperSize)}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
 
       <div class="container d-print-none">

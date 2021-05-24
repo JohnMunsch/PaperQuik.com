@@ -1407,6 +1407,9 @@
     }
   ];
   function paper(print, paperSize) {
+    if (!paperSize) {
+      return T`<svg></svg>`;
+    }
     return T`<svg
     class="${print ? "d-none d-print-block" : ""}"
     width="${paperSize.width}mm"
@@ -1417,15 +1420,15 @@
     <g>
       <rect
         style="fill:${print ? "none" : "white"};fill-rule:evenodd;"
-        width="215.9"
-        height="279.4"
+        width="${paperSize.width}"
+        height="${paperSize.height}"
         x="0"
         y="0"
       />
       <rect
         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
-        width="191.73621"
-        height="255.73621"
+        width="${paperSize.width - 2 * 12.131895}"
+        height="${paperSize.height - 2 * 12.131895}"
         x="12.131895"
         y="12.131895"
       />
@@ -1618,7 +1621,7 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-8 preview">${paper(false, paperSizes[0])}</div>
+          <div class="col-md-8 preview">${paper(false, this.paperSize)}</div>
           <div class="col-md-4">
             <button class="btn btn-primary btn-block" ng-click="print()">
               Print your paper
@@ -1678,7 +1681,7 @@
     }
     render() {
       return T`<div>
-      ${paper(true, paperSizes[0])}
+      ${paper(true, this.paperSize)}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
 
       <div class="container d-print-none">

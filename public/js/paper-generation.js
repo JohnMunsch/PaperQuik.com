@@ -70,6 +70,12 @@ export const paperSizes = [
 ];
 
 export function paper(print, paperSize) {
+  // Render the sections within the page.
+  // Header - Body - Footer
+  if (!paperSize) {
+    return html`<svg></svg>`;
+  }
+
   return html`<svg
     class="${print ? 'd-none d-print-block' : ''}"
     width="${paperSize.width}mm"
@@ -80,15 +86,15 @@ export function paper(print, paperSize) {
     <g>
       <rect
         style="fill:${print ? 'none' : 'white'};fill-rule:evenodd;"
-        width="215.9"
-        height="279.4"
+        width="${paperSize.width}"
+        height="${paperSize.height}"
         x="0"
         y="0"
       />
       <rect
         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
-        width="191.73621"
-        height="255.73621"
+        width="${paperSize.width - 2 * 12.131895}"
+        height="${paperSize.height - 2 * 12.131895}"
         x="12.131895"
         y="12.131895"
       />
