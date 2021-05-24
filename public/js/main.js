@@ -1,9 +1,8 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 import page from 'page';
 
 import './about-page.js';
 import './paper-page.js';
-import { paperSizes } from './paper-generation.js';
 
 export class PaperQuikApp extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -25,8 +24,13 @@ export class PaperQuikApp extends LitElement {
       this.renderer = () => html`<about-page></about-page>`;
       this.requestUpdate();
     });
-    page('/paper/:size?/:layout?', () => {
-      this.renderer = () => html`<paper-page></paper-page>`;
+    page('/paper/:size?/:layout?', (ctx) => {
+      console.log(ctx);
+      this.renderer = () =>
+        html`<paper-page
+          .size="${ctx.params.size}"
+          .layout="${ctx.params.layout}"
+        ></paper-page>`;
       this.requestUpdate();
     });
     page('*', '/paper');

@@ -21,11 +21,13 @@
   },
   "homepage": "https://gitlab.com/JohnMunsch/paperquik#readme",
   "dependencies": {
+    "autolayout": "^0.7.0",
     "express": "^4.17.1",
+    "kiwi.js": "^1.1.2",
     "lit": "^2.0.0-rc.2",
     "page": "^1.11.6"
   },
   "devDependencies": {
-    "esbuild": "^0.11.20"
+    "esbuild": "^0.12.1"
   }
 }

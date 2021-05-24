@@ -5,20 +5,20 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+  var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
   var __commonJS = (cb, mod) => function __require() {
-    return mod || (0, cb[Object.keys(cb)[0]])((mod = {exports: {}}).exports, mod), mod.exports;
+    return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
   var __reExport = (target, module, desc) => {
     if (module && typeof module === "object" || typeof module === "function") {
       for (let key of __getOwnPropNames(module))
         if (!__hasOwnProp.call(target, key) && key !== "default")
-          __defProp(target, key, {get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable});
+          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
     }
     return target;
   };
   var __toModule = (module) => {
-    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? {get: () => module.default, enumerable: true} : {value: module, enumerable: true})), module);
+    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
 
   // node_modules/page/page.js
@@ -757,7 +757,7 @@
   var e2;
   var h;
   var r2;
-  var o2 = {toAttribute(t4, i6) {
+  var o2 = { toAttribute(t4, i6) {
     switch (i6) {
       case Boolean:
         t4 = t4 ? "" : null;
@@ -785,9 +785,9 @@
         }
     }
     return s6;
-  }};
+  } };
   var n2 = (t4, i6) => i6 !== t4 && (i6 == i6 || t4 == t4);
-  var l = {attribute: true, type: String, converter: o2, reflect: false, hasChanged: n2};
+  var l = { attribute: true, type: String, converter: o2, reflect: false, hasChanged: n2 };
   var a = class extends HTMLElement {
     constructor() {
       super(), this.\u03A0i = new Map(), this.\u03A0o = void 0, this.\u03A0l = void 0, this.isUpdatePending = false, this.hasUpdated = false, this.\u03A0h = null, this.u();
@@ -811,12 +811,12 @@
       }
     }
     static getPropertyDescriptor(t4, i6, s6) {
-      return {get() {
+      return { get() {
         return this[i6];
       }, set(e4) {
         const h4 = this[t4];
         this[i6] = e4, this.requestUpdate(t4, h4, s6);
-      }, configurable: true, enumerable: true};
+      }, configurable: true, enumerable: true };
     }
     static getPropertyOptions(t4) {
       return this.elementProperties.get(t4) || l;
@@ -965,7 +965,7 @@
     firstUpdated(t4) {
     }
   };
-  a.finalized = true, a.elementProperties = new Map(), a.elementStyles = [], a.shadowRootOptions = {mode: "open"}, (e2 = (s2 = globalThis).reactiveElementPlatformSupport) === null || e2 === void 0 || e2.call(s2, {ReactiveElement: a}), ((h = (r2 = globalThis).reactiveElementVersions) !== null && h !== void 0 ? h : r2.reactiveElementVersions = []).push("1.0.0-rc.2");
+  a.finalized = true, a.elementProperties = new Map(), a.elementStyles = [], a.shadowRootOptions = { mode: "open" }, (e2 = (s2 = globalThis).reactiveElementPlatformSupport) === null || e2 === void 0 || e2.call(s2, { ReactiveElement: a }), ((h = (r2 = globalThis).reactiveElementVersions) !== null && h !== void 0 ? h : r2.reactiveElementVersions = []).push("1.0.0-rc.2");
 
   // node_modules/lit-html/lit-html.js
   var t2;
@@ -973,7 +973,7 @@
   var s3;
   var e3;
   var o3 = globalThis.trustedTypes;
-  var l2 = o3 ? o3.createPolicy("lit-html", {createHTML: (t4) => t4}) : void 0;
+  var l2 = o3 ? o3.createPolicy("lit-html", { createHTML: (t4) => t4 }) : void 0;
   var n3 = `lit$${(Math.random() + "").slice(9)}$`;
   var h2 = "?" + n3;
   var r3 = `<${h2}>`;
@@ -992,7 +992,7 @@
   var $ = /'/g;
   var g = /"/g;
   var y = /^(?:script|style|textarea)$/i;
-  var b = (t4) => (i6, ...s6) => ({_$litType$: t4, strings: i6, values: s6});
+  var b = (t4) => (i6, ...s6) => ({ _$litType$: t4, strings: i6, values: s6 });
   var T = b(1);
   var x = b(2);
   var w = Symbol.for("lit-noChange");
@@ -1024,7 +1024,7 @@
     return [l2 !== void 0 ? l2.createHTML(c2) : c2, e4];
   };
   var N = class {
-    constructor({strings: t4, _$litType$: i6}, s6) {
+    constructor({ strings: t4, _$litType$: i6 }, s6) {
       let e4;
       this.parts = [];
       let l4 = 0, r4 = 0;
@@ -1042,9 +1042,9 @@
                 const s7 = a4[r4++];
                 if (t5.push(i7), s7 !== void 0) {
                   const t6 = e4.getAttribute(s7.toLowerCase() + "$lit$").split(n3), i8 = /([.?@])?(.*)/.exec(s7);
-                  d2.push({type: 1, index: l4, name: i8[2], strings: t6, ctor: i8[1] === "." ? I : i8[1] === "?" ? L : i8[1] === "@" ? R : H});
+                  d2.push({ type: 1, index: l4, name: i8[2], strings: t6, ctor: i8[1] === "." ? I : i8[1] === "?" ? L : i8[1] === "@" ? R : H });
                 } else
-                  d2.push({type: 6, index: l4});
+                  d2.push({ type: 6, index: l4 });
               }
             for (const i7 of t5)
               e4.removeAttribute(i7);
@@ -1054,17 +1054,17 @@
             if (i7 > 0) {
               e4.textContent = o3 ? o3.emptyScript : "";
               for (let s7 = 0; s7 < i7; s7++)
-                e4.append(t5[s7], c()), E.nextNode(), d2.push({type: 2, index: ++l4});
+                e4.append(t5[s7], c()), E.nextNode(), d2.push({ type: 2, index: ++l4 });
               e4.append(t5[i7], c());
             }
           }
         } else if (e4.nodeType === 8)
           if (e4.data === h2)
-            d2.push({type: 2, index: l4});
+            d2.push({ type: 2, index: l4 });
           else {
             let t5 = -1;
             for (; (t5 = e4.data.indexOf(n3, t5 + 1)) !== -1; )
-              d2.push({type: 7, index: l4}), t5 += n3.length - 1;
+              d2.push({ type: 7, index: l4 }), t5 += n3.length - 1;
           }
         l4++;
       }
@@ -1088,7 +1088,7 @@
     }
     u(t4) {
       var i6;
-      const {el: {content: s6}, parts: e4} = this.D, o5 = ((i6 = t4 == null ? void 0 : t4.creationScope) !== null && i6 !== void 0 ? i6 : u2).importNode(s6, true);
+      const { el: { content: s6 }, parts: e4 } = this.D, o5 = ((i6 = t4 == null ? void 0 : t4.creationScope) !== null && i6 !== void 0 ? i6 : u2).importNode(s6, true);
       E.currentNode = o5;
       let l4 = E.nextNode(), n5 = 0, h4 = 0, r4 = e4[0];
       for (; r4 !== void 0; ) {
@@ -1138,7 +1138,7 @@
     }
     _(t4) {
       var i6;
-      const {values: s6, _$litType$: e4} = t4, o5 = typeof e4 == "number" ? this.C(t4) : (e4.el === void 0 && (e4.el = N.createElement(e4.h, this.options)), e4);
+      const { values: s6, _$litType$: e4 } = t4, o5 = typeof e4 == "number" ? this.C(t4) : (e4.el === void 0 && (e4.el = N.createElement(e4.h, this.options)), e4);
       if (((i6 = this.H) === null || i6 === void 0 ? void 0 : i6.D) === o5)
         this.H.v(s6);
       else {
@@ -1242,7 +1242,7 @@
   ((i3 = (a3 = globalThis).litElementVersions) !== null && i3 !== void 0 ? i3 : a3.litElementVersions = []).push("3.0.0-rc.2");
   var h3 = class extends a {
     constructor() {
-      super(...arguments), this.renderOptions = {host: this}, this.\u03A6t = void 0;
+      super(...arguments), this.renderOptions = { host: this }, this.\u03A6t = void 0;
     }
     createRenderRoot() {
       var t4, e4;
@@ -1265,7 +1265,7 @@
       return w;
     }
   };
-  h3.finalized = true, h3._$litElement$ = true, (o4 = (l3 = globalThis).litElementHydrateSupport) === null || o4 === void 0 || o4.call(l3, {LitElement: h3}), (n4 = (s4 = globalThis).litElementPlatformSupport) === null || n4 === void 0 || n4.call(s4, {LitElement: h3});
+  h3.finalized = true, h3._$litElement$ = true, (o4 = (l3 = globalThis).litElementHydrateSupport) === null || o4 === void 0 || o4.call(l3, { LitElement: h3 }), (n4 = (s4 = globalThis).litElementPlatformSupport) === null || n4 === void 0 || n4.call(s4, { LitElement: h3 });
 
   // public/js/main.js
   var import_page = __toModule(require_page());
@@ -1277,9 +1277,6 @@
     }
     static get properties() {
       return {};
-    }
-    static get styles() {
-      return i``;
     }
     constructor() {
       super();
@@ -1294,8 +1291,8 @@
   customElements.define(AboutPage.it, AboutPage);
 
   // node_modules/lit-html/directive.js
-  var t3 = {ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4, EVENT: 5, ELEMENT: 6};
-  var i4 = (t4) => (...i6) => ({_$litDirective$: t4, values: i6});
+  var t3 = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4, EVENT: 5, ELEMENT: 6 };
+  var i4 = (t4) => (...i6) => ({ _$litDirective$: t4, values: i6 });
   var s5 = class {
     constructor(t4) {
     }
@@ -1324,7 +1321,7 @@
       }, "");
     }
     update(e4, [r4]) {
-      const {style: s6} = e4.element;
+      const { style: s6 } = e4.element;
       if (this.St === void 0) {
         this.St = new Set();
         for (const t4 in r4)
@@ -1343,6 +1340,28 @@
   });
 
   // public/js/paper-generation.js
+  var paperLayouts = [
+    {
+      id: "blank",
+      name: "Blank"
+    },
+    {
+      id: "dot-grid",
+      name: "Dot Grid"
+    },
+    {
+      id: "dotted-ruled-lines",
+      name: "Dotted Ruled"
+    },
+    {
+      id: "ruled-lines",
+      name: "Ruled Lines"
+    },
+    {
+      id: "square-graph",
+      name: "Square Graph"
+    }
+  ];
   var paperSizes = [
     {
       id: "letter",
@@ -1361,6 +1380,12 @@
       name: "Legal",
       width: 215.9,
       height: 355.6
+    },
+    {
+      id: "legall",
+      name: "Legal",
+      width: 355.6,
+      height: 215.9
     },
     {
       id: "a4",
@@ -1414,7 +1439,7 @@
       return "pq-menu";
     }
     static get properties() {
-      return {active: String};
+      return { active: String };
     }
     static get styles() {
       return i``;
@@ -1477,13 +1502,11 @@
       return "paper-page";
     }
     static get properties() {
-      return {name: {type: String}};
-    }
-    static get styles() {
-      return i``;
+      return { size: { type: String }, layout: { type: String } };
     }
     constructor() {
       super();
+      this.paperSize = null;
     }
     createRenderRoot() {
       return this;
@@ -1523,11 +1546,10 @@
       </div>
       <div class="panel-body">
         ${paperSizes.map((paperSize) => {
-        return T`<a href="#/paper/${paperSize.id}">
+        return T`<a href="/paper/${paperSize.id}">
             <div
-              class="paperIcon"
+              class="paperIcon ${paperSize.id === this.size ? "selected" : "notSelected"}"
               style="${i5(this.paperIconStyle(paperSize))}"
-              class=""
             >
               <span class="paperName">${paperSize.name}</span>
             </div>
@@ -1536,37 +1558,34 @@
       </div>
     </div>`;
     }
-    stepTwo(paperSize) {
+    stepTwo() {
       return T` <div class="panel panel-default layout-section">
       <div class="panel-heading">
         <h2>
           2: Pick a layout
-          ${paperSize ? `for ${paperSize.name} size paper` : ""}
+          ${this.paperSize ? `for ${this.paperSize.name} size paper` : ""}
         </h2>
       </div>
       <div class="panel-body">
-        <div>
-          <a
-            href="#/layout/{{ layout.id }}"
-            ng-repeat="layout in paperLayouts(selectedPaper)"
-          >
-            <div class="layoutIcon">
-              <span class="layoutName">{{ layout.name }}</span>
-              <div
-                style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"
-              >
-                <img
-                  style="position: relative; width: 100%;"
-                  ng-src="{{ layout.image }}"
-                />
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div ng-if="!selectedPaper">
-          You must pick a paper size before you pick a layout for your page.
-        </div>
+        ${this.size ? T` <div>
+              ${paperLayouts.map((paperLayout) => {
+        return T`<a href="/${this.size}/${paperLayout.id}">
+                  <div class="layoutIcon">
+                    <span class="layoutName">${paperLayout.name}</span>
+                    <div
+                      style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"
+                    >
+                      <img
+                        style="position: relative; width: 100%;"
+                        src="/img/${paperLayout.id}-paper.jpg"
+                      />
+                    </div>
+                  </div>
+                </a>`;
+      })}
+            </div>` : T`<div>
+              You must pick a paper size before you pick a layout for your page.
+            </div>`}
       </div>
     </div>`;
     }
@@ -1630,6 +1649,11 @@
       </div>
     </div> `;
     }
+    willUpdate(changedProperties) {
+      if (changedProperties.has("size")) {
+        this.paperSize = paperSizes.find((paperSize) => paperSize.id === this.size);
+      }
+    }
     render() {
       return T`${paper(true, paperSizes[0])}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
@@ -1672,8 +1696,12 @@
         this.renderer = () => T`<about-page></about-page>`;
         this.requestUpdate();
       });
-      (0, import_page.default)("/paper/:size?/:layout?", () => {
-        this.renderer = () => T`<paper-page></paper-page>`;
+      (0, import_page.default)("/paper/:size?/:layout?", (ctx) => {
+        console.log(ctx);
+        this.renderer = () => T`<paper-page
+          .size="${ctx.params.size}"
+          .layout="${ctx.params.layout}"
+        ></paper-page>`;
         this.requestUpdate();
       });
       (0, import_page.default)("*", "/paper");

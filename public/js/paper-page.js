@@ -1,7 +1,7 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import { paper, paperSizes } from './paper-generation.js';
+import { paper, paperLayouts, paperSizes } from './paper-generation.js';
 
 import './pq-menu.js';
 
@@ -15,15 +15,13 @@ export class PaperPage extends LitElement {
   static get properties() {
     // All of the properties of this component and a type for each (used when converting
     // attributes to property values).
-    return { name: { type: String } };
-  }
-
-  static get styles() {
-    return css``;
+    return { size: { type: String }, layout: { type: String } };
   }
 
   constructor() {
     super();
+
+    this.paperSize = null;
   }
 
   // Uncomment this to remove the Shadow DOM from this component.
@@ -68,11 +66,12 @@ export class PaperPage extends LitElement {
       </div>
       <div class="panel-body">
         ${paperSizes.map((paperSize) => {
-          return html`<a href="#/paper/${paperSize.id}">
+          return html`<a href="/paper/${paperSize.id}">
             <div
-              class="paperIcon"
+              class="paperIcon ${paperSize.id === this.size
+                ? 'selected'
+                : 'notSelected'}"
               style="${styleMap(this.paperIconStyle(paperSize))}"
-              class=""
             >
               <span class="paperName">${paperSize.name}</span>
             </div>
@@ -82,37 +81,36 @@ export class PaperPage extends LitElement {
     </div>`;
   }
 
-  stepTwo(paperSize) {
+  stepTwo() {
     return html` <div class="panel panel-default layout-section">
       <div class="panel-heading">
         <h2>
           2: Pick a layout
-          ${paperSize ? `for ${paperSize.name} size paper` : ''}
+          ${this.paperSize ? `for ${this.paperSize.name} size paper` : ''}
         </h2>
       </div>
       <div class="panel-body">
-        <div>
-          <a
-            href="#/layout/{{ layout.id }}"
-            ng-repeat="layout in paperLayouts(selectedPaper)"
-          >
-            <div class="layoutIcon">
-              <span class="layoutName">{{ layout.name }}</span>
-              <div
-                style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"
-              >
-                <img
-                  style="position: relative; width: 100%;"
-                  ng-src="{{ layout.image }}"
-                />
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div ng-if="!selectedPaper">
-          You must pick a paper size before you pick a layout for your page.
-        </div>
+        ${this.size
+          ? html` <div>
+              ${paperLayouts.map((paperLayout) => {
+                return html`<a href="/${this.size}/${paperLayout.id}">
+                  <div class="layoutIcon">
+                    <span class="layoutName">${paperLayout.name}</span>
+                    <div
+                      style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"
+                    >
+                      <img
+                        style="position: relative; width: 100%;"
+                        src="/img/${paperLayout.id}-paper.jpg"
+                      />
+                    </div>
+                  </div>
+                </a>`;
+              })}
+            </div>`
+          : html`<div>
+              You must pick a paper size before you pick a layout for your page.
+            </div>`}
       </div>
     </div>`;
   }
@@ -176,6 +174,14 @@ export class PaperPage extends LitElement {
         </div>
       </div>
     </div> `;
+  }
+
+  willUpdate(changedProperties) {
+    if (changedProperties.has('size')) {
+      this.paperSize = paperSizes.find(
+        (paperSize) => paperSize.id === this.size
+      );
+    }
   }
 
   render() {

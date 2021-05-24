@@ -1,5 +1,28 @@
 import { html } from 'lit';
 
+export const paperLayouts = [
+  {
+    id: 'blank',
+    name: 'Blank',
+  },
+  {
+    id: 'dot-grid',
+    name: 'Dot Grid',
+  },
+  {
+    id: 'dotted-ruled-lines',
+    name: 'Dotted Ruled',
+  },
+  {
+    id: 'ruled-lines',
+    name: 'Ruled Lines',
+  },
+  {
+    id: 'square-graph',
+    name: 'Square Graph',
+  },
+];
+
 // All measurements are in mm and IDs are just randomly generated here:
 export const paperSizes = [
   {
@@ -19,6 +42,12 @@ export const paperSizes = [
     name: 'Legal',
     width: 215.9,
     height: 355.6,
+  },
+  {
+    id: 'legall',
+    name: 'Legal',
+    width: 355.6,
+    height: 215.9,
   },
   {
     id: 'a4',

@@ -13,10 +13,6 @@ export class AboutPage extends LitElement {
     return {};
   }
 
-  static get styles() {
-    return css``;
-  }
-
   constructor() {
     super();
   }
