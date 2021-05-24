@@ -1502,24 +1502,32 @@
       return "paper-page";
     }
     static get properties() {
-      return { size: { type: String }, layout: { type: String } };
+      return {
+        layout: { type: String },
+        size: { type: String },
+        showJumbotron: { state: true, type: Boolean }
+      };
     }
     constructor() {
       super();
       this.paperSize = null;
+      this.showJumbotron = true;
     }
     createRenderRoot() {
       return this;
     }
+    hideJumbotron() {
+      this.showJumbotron = false;
+    }
     jumbotron() {
-      return T` <div class="panel jumbotron" ng-show="$storage.showWelcome">
+      if (!this.showJumbotron) {
+        return T``;
+      }
+      return T`<div class="panel jumbotron">
       <h1>The Paper You Need - Available Right Away</h1>
       <p></p>
       <p>
-        <button
-          class="btn btn-primary btn-lg"
-          ng-click="$storage.showWelcome = false"
-        >
+        <button class="btn btn-primary btn-lg" @click="${this.hideJumbotron}">
           Get Started
         </button>
       </p>

@@ -99,6 +99,11 @@ paperquik-app {
   display: block;
 }
 
+pq-menu {
+  display: block;
+  margin-bottom: 10px;
+}
+
 .jumbotron {
   height: 350px;
   padding: 48px 60px 48px 60px;

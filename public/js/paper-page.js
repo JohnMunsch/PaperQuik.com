@@ -15,13 +15,18 @@ export class PaperPage extends LitElement {
   static get properties() {
     // All of the properties of this component and a type for each (used when converting
     // attributes to property values).
-    return { size: { type: String }, layout: { type: String } };
+    return {
+      layout: { type: String },
+      size: { type: String },
+      showJumbotron: { state: true, type: Boolean },
+    };
   }
 
   constructor() {
     super();
 
     this.paperSize = null;
+    this.showJumbotron = true;
   }
 
   // Uncomment this to remove the Shadow DOM from this component.
@@ -29,15 +34,20 @@ export class PaperPage extends LitElement {
     return this;
   }
 
+  hideJumbotron() {
+    this.showJumbotron = false;
+  }
+
   jumbotron() {
-    return html` <div class="panel jumbotron" ng-show="$storage.showWelcome">
+    if (!this.showJumbotron) {
+      return html``;
+    }
+
+    return html`<div class="panel jumbotron">
       <h1>The Paper You Need - Available Right Away</h1>
       <p></p>
       <p>
-        <button
-          class="btn btn-primary btn-lg"
-          ng-click="$storage.showWelcome = false"
-        >
+        <button class="btn btn-primary btn-lg" @click="${this.hideJumbotron}">
           Get Started
         </button>
       </p>
