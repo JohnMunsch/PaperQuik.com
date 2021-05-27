@@ -102,6 +102,13 @@ pq-menu {
   margin-bottom: 10px;
 }
 
+pq-menu img {
+  width: 25px;
+  margin-right: 4px;
+  position: relative;
+  top: 3px;
+}
+
 nav {
   background-color: #bf5a16;
   color: white;

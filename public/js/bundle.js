@@ -1260,6 +1260,28 @@
   // public/js/main.js
   var import_page = __toModule(require_page());
 
+  // public/js/pq-footer.js
+  var PaperQuikFooter = class extends h3 {
+    static get it() {
+      return "pq-footer";
+    }
+    static get properties() {
+      return { name: { type: String } };
+    }
+    constructor() {
+      super();
+    }
+    createRenderRoot() {
+      return this;
+    }
+    render() {
+      return T`<footer>
+      <p>© 2021 John Munsch</p>
+    </footer>`;
+    }
+  };
+  customElements.define(PaperQuikFooter.it, PaperQuikFooter);
+
   // public/js/about-page.js
   var AboutPage = class extends h3 {
     static get it() {
@@ -1275,7 +1297,11 @@
       return this;
     }
     render() {
-      return T`<pq-menu active="about"></pq-menu>`;
+      return T`<pq-menu active="about"></pq-menu>
+      <div class="container">
+        <p>print by Adrien Coquet from the Noun Project</p>
+        <pq-footer></pq-footer>
+      </div>`;
     }
   };
   customElements.define(AboutPage.it, AboutPage);
@@ -1497,7 +1523,9 @@
     render() {
       return T`<nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/paper">PaperQuik</a>
+        <a class="navbar-brand" href="/paper"
+          ><img src="/img/noun_print_3053742.svg" /> PaperQuik</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -1781,9 +1809,7 @@
         ${this.jumbotron()} ${this.adBlock()} ${this.stepOne()}
         ${this.stepTwo()} ${this.stepThree()} ${this.adBlock()} ${this.modal()}
 
-        <footer>
-          <p>© 2021 John Munsch</p>
-        </footer>
+        <pq-footer></pq-footer>
       </div>
     </div>`;
     }

@@ -3,6 +3,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 
 import { paper, paperLayouts, paperSizes } from './paper-generation.js';
 
+import './pq-footer.js';
 import './pq-menu.js';
 
 export class PaperPage extends LitElement {
@@ -288,9 +289,7 @@ export class PaperPage extends LitElement {
         ${this.jumbotron()} ${this.adBlock()} ${this.stepOne()}
         ${this.stepTwo()} ${this.stepThree()} ${this.adBlock()} ${this.modal()}
 
-        <footer>
-          <p>© 2021 John Munsch</p>
-        </footer>
+        <pq-footer></pq-footer>
       </div>
     </div>`;
   }

@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 
 export class PaperQuikMenu extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -25,7 +25,9 @@ export class PaperQuikMenu extends LitElement {
   render() {
     return html`<nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/paper">PaperQuik</a>
+        <a class="navbar-brand" href="/paper"
+          ><img src="/img/noun_print_3053742.svg" /> PaperQuik</a
+        >
         <button
           class="navbar-toggler"
           type="button"

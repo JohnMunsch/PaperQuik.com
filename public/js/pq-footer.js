@@ -1,18 +1,16 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 
-import './pq-footer.js';
-
-export class AboutPage extends LitElement {
+export class PaperQuikFooter extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
   // so that our components don't collide with future additions to HTML.
   static get it() {
-    return 'about-page';
+    return 'pq-footer';
   }
 
   static get properties() {
     // All of the properties of this component and a type for each (used when converting
     // attributes to property values).
-    return {};
+    return { name: { type: String } };
   }
 
   constructor() {
@@ -25,12 +23,10 @@ export class AboutPage extends LitElement {
   }
 
   render() {
-    return html`<pq-menu active="about"></pq-menu>
-      <div class="container">
-        <p>print by Adrien Coquet from the Noun Project</p>
-        <pq-footer></pq-footer>
-      </div>`;
+    return html`<footer>
+      <p>© 2021 John Munsch</p>
+    </footer>`;
   }
 }
 
-customElements.define(AboutPage.it, AboutPage);
+customElements.define(PaperQuikFooter.it, PaperQuikFooter);
