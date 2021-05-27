@@ -729,16 +729,6 @@
     return o5 === void 0 && n.set(t4, o5 = new s(t4, e)), o5;
   };
   var r = (t4) => o(typeof t4 == "string" ? t4 : t4 + "");
-  var i = (t4, ...e4) => {
-    const n5 = t4.length === 1 ? t4[0] : e4.reduce((e5, n6, o5) => e5 + ((t5) => {
-      if (t5 instanceof s)
-        return t5.cssText;
-      if (typeof t5 == "number")
-        return t5;
-      throw Error("Value passed to 'css' function must be a 'css' function result: " + t5 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-    })(n6) + t4[o5 + 1], t4[0]);
-    return o(n5);
-  };
   var S = (e4, s6) => {
     t ? e4.adoptedStyleSheets = s6.map((t4) => t4 instanceof CSSStyleSheet ? t4 : t4.styleSheet) : s6.forEach((t4) => {
       const s7 = document.createElement("style");
@@ -1406,34 +1396,58 @@
       height: 210
     }
   ];
+  function background(print, paperSize, margins) {
+    return x`<rect
+    style="fill:${print ? "none" : "white"};fill-rule:evenodd;"
+    width="${paperSize.width}"
+    height="${paperSize.height}"
+    x="0"
+    y="0"
+  />`;
+  }
+  function header(print, paperSize, margins) {
+    return x``;
+  }
+  function body(print, paperSize, margins) {
+    return x`
+    <rect
+      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
+      width="${paperSize.width - (margins.left + margins.right)}"
+      height="${paperSize.height - (margins.top + margins.bottom)}"
+      x="${margins.left}"
+      y="${margins.top}"
+    />
+  `;
+  }
+  function footer(print, paperSize, margins) {
+    return x`<text text-anchor="end" x="${paperSize.width - margins.right}" y="10" class="logo">
+  PAPERQUIK.com</text>`;
+  }
   function paper(print, paperSize) {
     if (!paperSize) {
-      return T``;
+      return x``;
     }
-    return T`<svg
-    class="${print ? "d-none d-print-block" : ""}"
-    width="${paperSize.width}mm"
-    height="${paperSize.height}mm"
-    viewBox="0 0 ${paperSize.width} ${paperSize.height}"
-    version="1.1"
-  >
-    <g>
-      <rect
-        style="fill:${print ? "none" : "white"};fill-rule:evenodd;"
-        width="${paperSize.width}"
-        height="${paperSize.height}"
-        x="0"
-        y="0"
-      />
-      <rect
-        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
-        width="${paperSize.width - 2 * 12.131895}"
-        height="${paperSize.height - 2 * 12.131895}"
-        x="12.131895"
-        y="12.131895"
-      />
-    </g>
-  </svg>`;
+    const margins = {
+      top: 12.131895,
+      right: 12.131895,
+      bottom: 12.131895,
+      left: 12.131895
+    };
+    return x`
+    <svg
+      class="${print ? "d-none d-print-block" : ""}"
+      width="${paperSize.width}mm"
+      height="${paperSize.height}mm"
+      viewBox="0 0 ${paperSize.width} ${paperSize.height}"
+      version="1.1"
+    >
+      <g>
+        ${background(print, paperSize, margins)}
+        ${header(print, paperSize, margins)}
+        ${body(print, paperSize, margins)}
+        ${footer(print, paperSize, margins)}
+      </g>
+    </svg>`;
   }
 
   // public/js/pq-menu.js
@@ -1444,9 +1458,6 @@
     static get properties() {
       return { active: String };
     }
-    static get styles() {
-      return i``;
-    }
     constructor() {
       super();
     }
@@ -1454,47 +1465,41 @@
       return this;
     }
     render() {
-      return T` <style>
-        nav {
-          background-color: #bf5a16;
-          color: white;
-        }
-      </style>
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">PaperQuik</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link ${this.active === "paper" ? "active" : ""}"
-                  aria-current="page"
-                  href="/paper"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link ${this.active === "about" ? "active" : ""}"
-                  href="/about"
-                  >About</a
-                >
-              </li>
-            </ul>
-          </div>
+      return T`<nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/paper">PaperQuik</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link ${this.active === "paper" ? "active" : ""}"
+                aria-current="page"
+                href="/paper"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ${this.active === "about" ? "active" : ""}"
+                href="/about"
+                >About</a
+              >
+            </li>
+          </ul>
         </div>
-      </nav>`;
+      </div>
+    </nav>`;
     }
   };
   customElements.define(PaperQuikMenu.it, PaperQuikMenu);

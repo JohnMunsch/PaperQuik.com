@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { svg } from 'lit';
 
 export const paperLayouts = [
   {
@@ -21,6 +21,32 @@ export const paperLayouts = [
     id: 'square-graph',
     name: 'Square Graph',
   },
+  // Empty areas (w/ optional label)
+  // Dot Grid
+  // Square Graph
+  // Ruled Lines (5mm, 6mm, 7mm)
+  // Ruled Lines w/ Dots
+  // Ruled Lines w/ Gaps
+  // Ruled Lines w/ Square Graph
+  // Ruled Lines w/ Dot Grid
+  // Music Staffs
+  // Isometric Dot Grid
+  // Triangle Graph
+  // hexes, logarithmic, polar, number lines
+  // Bookplates
+  // Images
+  // Foldable pocket notebooks
+  // Numbers and index lines for the graph paper
+  // Browser outline
+  // iPad/iPhone/iPod Touch outline
+  // Calendars
+  // Calculator screens
+  // Games (Sudoku, tic-tac-toe, hangman, battleship)
+  // Score keeping sheets for games
+  // Page numbers
+  // Quotes
+  // Support for bullet journalling ([Bullet Journal - The Analog System for the Digital Age](http://bulletjournal.com/))
+  // Lists of options (day of the week/month/year, weather, mood, etc) which can be checked, underlined, or colored in to quickly mark date or other info without writing it out
 ];
 
 // All measurements are in mm and IDs are just randomly generated here:
@@ -69,35 +95,66 @@ export const paperSizes = [
   },
 ];
 
+function background(print, paperSize, margins) {
+  return svg`<rect
+    style="fill:${print ? 'none' : 'white'};fill-rule:evenodd;"
+    width="${paperSize.width}"
+    height="${paperSize.height}"
+    x="0"
+    y="0"
+  />`;
+}
+
+function header(print, paperSize, margins) {
+  return svg``;
+}
+
+function body(print, paperSize, margins) {
+  return svg`
+    <rect
+      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
+      width="${paperSize.width - (margins.left + margins.right)}"
+      height="${paperSize.height - (margins.top + margins.bottom)}"
+      x="${margins.left}"
+      y="${margins.top}"
+    />
+  `;
+}
+
+function footer(print, paperSize, margins) {
+  return svg`<text text-anchor="end" x="${
+    paperSize.width - margins.right
+  }" y="10" class="logo">
+  PAPERQUIK.com</text>`;
+}
+
 export function paper(print, paperSize) {
-  // Render the sections within the page.
-  // Header - Body - Footer
   if (!paperSize) {
-    return html``;
+    return svg``;
   }
 
-  return html`<svg
-    class="${print ? 'd-none d-print-block' : ''}"
-    width="${paperSize.width}mm"
-    height="${paperSize.height}mm"
-    viewBox="0 0 ${paperSize.width} ${paperSize.height}"
-    version="1.1"
-  >
-    <g>
-      <rect
-        style="fill:${print ? 'none' : 'white'};fill-rule:evenodd;"
-        width="${paperSize.width}"
-        height="${paperSize.height}"
-        x="0"
-        y="0"
-      />
-      <rect
-        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
-        width="${paperSize.width - 2 * 12.131895}"
-        height="${paperSize.height - 2 * 12.131895}"
-        x="12.131895"
-        y="12.131895"
-      />
-    </g>
-  </svg>`;
+  const margins = {
+    top: 12.131895,
+    right: 12.131895,
+    bottom: 12.131895,
+    left: 12.131895,
+  };
+
+  // Render the sections within the page.
+  // Header - Body - Footer
+  return svg`
+    <svg
+      class="${print ? 'd-none d-print-block' : ''}"
+      width="${paperSize.width}mm"
+      height="${paperSize.height}mm"
+      viewBox="0 0 ${paperSize.width} ${paperSize.height}"
+      version="1.1"
+    >
+      <g>
+        ${background(print, paperSize, margins)}
+        ${header(print, paperSize, margins)}
+        ${body(print, paperSize, margins)}
+        ${footer(print, paperSize, margins)}
+      </g>
+    </svg>`;
 }

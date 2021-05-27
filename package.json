@@ -5,7 +5,7 @@
   "main": "index.mjs",
   "scripts": {
     "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --watch",
-    "docker-build": "docker build -t registry.gitlab.com/johnmunsch/paperquik .",
+    "docker-build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js & docker build -t registry.gitlab.com/johnmunsch/paperquik .",
     "docker-login": "docker login registry.gitlab.com",
     "docker-push": "docker push registry.gitlab.com/johnmunsch/paperquik",
     "docker-run": "docker run -p3000:3000 -it --rm --name paperquik registry.gitlab.com/johnmunsch/paperquik:latest",
