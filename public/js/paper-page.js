@@ -146,57 +146,64 @@ export class PaperPage extends LitElement {
         <h2>3: Print your paper</h2>
       </div>
       <div class="panel-body">
-        <div class="row">
-          <div class="col-md-8 preview">${paper(false, this.paperSize)}</div>
-          <div class="col-md-4">
-            <button class="btn btn-primary btn-block" ng-click="print()">
-              Print your paper
-            </button>
+        ${this.size && this.layout
+          ? html`<div class="row">
+              <div class="col-md-8 preview">
+                ${paper(false, this.paperSize)}
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-primary btn-block" ng-click="print()">
+                  Print your paper
+                </button>
 
-            <div id="mc_embed_signup">
-              <form
-                action="http://johnmunsch.us8.list-manage.com/subscribe/post?u=bd3c8c7355797b6633a3503e7&amp;id=e3f181919d"
-                method="post"
-                id="mc-embedded-subscribe-form"
-                name="mc-embedded-subscribe-form"
-                class="validate"
-                target="_blank"
-                novalidate
-              >
-                <label for="mce-EMAIL"
-                  >Subscribe to learn when PaperQuik updates</label
-                >
-                <input
-                  type="email"
-                  value=""
-                  name="EMAIL"
-                  class="email"
-                  id="mce-EMAIL"
-                  placeholder="email address"
-                  required
-                />
-                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div style="position: absolute; left: -5000px;">
-                  <input
-                    type="text"
-                    name="b_bd3c8c7355797b6633a3503e7_e3f181919d"
-                    value=""
-                  />
-                </div>
-                <div class="clear">
-                  <button
-                    type="submit"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    class="btn btn-primary"
+                <div id="mc_embed_signup">
+                  <form
+                    action="http://johnmunsch.us8.list-manage.com/subscribe/post?u=bd3c8c7355797b6633a3503e7&amp;id=e3f181919d"
+                    method="post"
+                    id="mc-embedded-subscribe-form"
+                    name="mc-embedded-subscribe-form"
+                    class="validate"
+                    target="_blank"
+                    novalidate
                   >
-                    Subscribe
-                  </button>
+                    <label for="mce-EMAIL"
+                      >Subscribe to learn when PaperQuik updates</label
+                    >
+                    <input
+                      type="email"
+                      value=""
+                      name="EMAIL"
+                      class="email"
+                      id="mce-EMAIL"
+                      placeholder="email address"
+                      required
+                    />
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;">
+                      <input
+                        type="text"
+                        name="b_bd3c8c7355797b6633a3503e7_e3f181919d"
+                        value=""
+                      />
+                    </div>
+                    <div class="clear">
+                      <button
+                        type="submit"
+                        name="subscribe"
+                        id="mc-embedded-subscribe"
+                        class="btn btn-primary"
+                      >
+                        Subscribe
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
+              </div>
+            </div>`
+          : html`<div>
+              You must pick a paper size and layout before you can print your
+              page.
+            </div>`}
       </div>
     </div> `;
   }
