@@ -1396,31 +1396,60 @@
       height: 210
     }
   ];
-  function background(print, paperSize, margins) {
-    return x`<rect
-    style="fill:${print ? "none" : "white"};fill-rule:evenodd;"
-    width="${paperSize.width}"
-    height="${paperSize.height}"
-    x="0"
-    y="0"
+  function calculateBoxes(paperSize, margins) {
+    return {
+      backgroundBox: {
+        x: 0,
+        y: 0,
+        width: paperSize.width,
+        height: paperSize.height
+      },
+      headerBox: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+      },
+      bodyBox: {
+        x: margins.left,
+        y: margins.top,
+        width: paperSize.width - (margins.left + margins.right),
+        height: paperSize.height - (margins.top + margins.bottom)
+      },
+      footerBox: {
+        x: margins.left,
+        y: margins.top,
+        width: paperSize.width - (margins.left + margins.right),
+        height: paperSize.height - (margins.top + margins.bottom)
+      }
+    };
+  }
+  function background(backgroundBox) {
+    return x`<rect class="background"
+    style="fill-rule:evenodd;"
+    width="${backgroundBox.width}"
+    height="${backgroundBox.height}"
+    x="${backgroundBox.x}"
+    y="${backgroundBox.y}"
   />`;
   }
-  function header(print, paperSize, margins) {
+  function header(headerBox) {
     return x``;
   }
-  function body(print, paperSize, margins) {
+  function body(bodyBox) {
     return x`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
-      width="${paperSize.width - (margins.left + margins.right)}"
-      height="${paperSize.height - (margins.top + margins.bottom)}"
-      x="${margins.left}"
-      y="${margins.top}"
+      width="${bodyBox.width}"
+      height="${bodyBox.height}"
+      x="${bodyBox.x}"
+      y="${bodyBox.y}"
     />
   `;
   }
-  function footer(print, paperSize, margins) {
-    return x`<text text-anchor="end" x="${paperSize.width - margins.right}" y="10" class="logo">
+  function footer(footerBox) {
+    return x`<text text-anchor="end"
+  x="${footerBox.x + footerBox.width}" y="${footerBox.y}" class="logo">
   PAPERQUIK.com</text>`;
   }
   function paper(print, paperSize) {
@@ -1433,19 +1462,20 @@
       bottom: 12.131895,
       left: 12.131895
     };
+    let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(paperSize, margins);
     return x`
     <svg
-      class="${print ? "d-none d-print-block" : ""}"
+      class="${print ? "d-none d-print-block" : "preview"}"
       width="${paperSize.width}mm"
       height="${paperSize.height}mm"
       viewBox="0 0 ${paperSize.width} ${paperSize.height}"
       version="1.1"
     >
       <g>
-        ${background(print, paperSize, margins)}
-        ${header(print, paperSize, margins)}
-        ${body(print, paperSize, margins)}
-        ${footer(print, paperSize, margins)}
+        ${background(backgroundBox)}
+        ${header(headerBox)}
+        ${body(bodyBox)}
+        ${footer(footerBox)}
       </g>
     </svg>`;
   }
@@ -1599,7 +1629,7 @@
       <div class="panel-body">
         ${this.size ? T` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
-        return T`<a href="/${this.size}/${paperLayout.id}">
+        return T`<a href="/paper/${this.size}/${paperLayout.id}">
                   <div class="layoutIcon">
                     <span class="layoutName">${paperLayout.name}</span>
                     <div

@@ -178,6 +178,14 @@ nav {
   height: 100%;
 }
 
+rect.background {
+  fill: none;
+}
+
+.preview rect.background {
+  fill: white;
+}
+
 svg .logo {
   font-family: 'Roboto Slab';
   font-size: 0.6mm;
