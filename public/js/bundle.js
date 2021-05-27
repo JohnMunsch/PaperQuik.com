@@ -1557,6 +1557,15 @@
     hideJumbotron() {
       this.showJumbotron = false;
     }
+    printModal() {
+      var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+      myModal.show();
+    }
+    print() {
+      var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+      myModal.hide();
+      window.print();
+    }
     jumbotron() {
       if (!this.showJumbotron) {
         return T``;
@@ -1660,7 +1669,10 @@
                 ${paper(false, this.paperSize)}
               </div>
               <div class="col-md-4">
-                <button class="btn btn-primary btn-block" ng-click="print()">
+                <button
+                  class="btn btn-primary btn-block"
+                  @click="${this.printModal}"
+                >
                   Print your paper
                 </button>
 
@@ -1714,6 +1726,47 @@
       </div>
     </div> `;
     }
+    modal() {
+      return T` <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">This is my modal body!</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="${this.print}"
+              >
+                Print
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
     willUpdate(changedProperties) {
       if (changedProperties.has("size")) {
         this.paperSize = paperSizes.find((paperSize) => paperSize.id === this.size);
@@ -1726,7 +1779,7 @@
 
       <div class="container d-print-none">
         ${this.jumbotron()} ${this.adBlock()} ${this.stepOne()}
-        ${this.stepTwo()} ${this.stepThree()} ${this.adBlock()}
+        ${this.stepTwo()} ${this.stepThree()} ${this.adBlock()} ${this.modal()}
 
         <footer>
           <p>© 2021 John Munsch</p>
