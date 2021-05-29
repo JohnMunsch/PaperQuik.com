@@ -21,32 +21,6 @@ export const paperLayouts = [
     id: 'square-graph',
     name: 'Square Graph',
   },
-  // Empty areas (w/ optional label)
-  // Dot Grid
-  // Square Graph
-  // Ruled Lines (5mm, 6mm, 7mm)
-  // Ruled Lines w/ Dots
-  // Ruled Lines w/ Gaps
-  // Ruled Lines w/ Square Graph
-  // Ruled Lines w/ Dot Grid
-  // Music Staffs
-  // Isometric Dot Grid
-  // Triangle Graph
-  // hexes, logarithmic, polar, number lines
-  // Bookplates
-  // Images
-  // Foldable pocket notebooks
-  // Numbers and index lines for the graph paper
-  // Browser outline
-  // iPad/iPhone/iPod Touch outline
-  // Calendars
-  // Calculator screens
-  // Games (Sudoku, tic-tac-toe, hangman, battleship)
-  // Score keeping sheets for games
-  // Page numbers
-  // Quotes
-  // Support for bullet journalling ([Bullet Journal - The Analog System for the Digital Age](http://bulletjournal.com/))
-  // Lists of options (day of the week/month/year, weather, mood, etc) which can be checked, underlined, or colored in to quickly mark date or other info without writing it out
 ];
 
 // All measurements are in mm and IDs are just randomly generated here:
@@ -106,7 +80,7 @@ function calculateBoxes(paperSize, margins) {
     headerBox: {
       x: 0,
       y: 0,
-      width: 0,
+      width: paperSize.width,
       height: 0,
     },
     bodyBox: {
