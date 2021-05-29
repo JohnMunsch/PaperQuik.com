@@ -1,4 +1,4 @@
-# Paperquik
+# Paperquik README
 
 I apparently started building the first version of PaperQuik some time around 2013-14! At that time I encountered a lot(!) of problems (SVG wouldn't print properly in any major browser so I had to make a huge image to print instead), I was using AngularJS/jQuery/Paper.js/Underscore.js/etc.
 

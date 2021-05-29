@@ -1307,6 +1307,7 @@
   customElements.define(AboutPage.it, AboutPage);
 
   // public/js/paper-generation.js
+  var halfInch = 12.131895;
   var paperLayouts = [
     {
       id: "blank",
@@ -1374,31 +1375,36 @@
     }
   ];
   function calculateBoxes(paperSize, margins) {
+    const gap = 2.5;
+    const backgroundBox = {
+      x: 0,
+      y: 0,
+      width: paperSize.width,
+      height: paperSize.height
+    };
+    const headerBox = {
+      x: margins.left,
+      y: margins.top,
+      width: paperSize.width - (margins.left + margins.right),
+      height: 15
+    };
+    const footerBox = {
+      x: margins.left,
+      y: paperSize.height - margins.bottom - 2,
+      width: paperSize.width - (margins.left + margins.right),
+      height: 2
+    };
+    const bodyBox = {
+      x: margins.left,
+      y: margins.top + headerBox.height + gap,
+      width: paperSize.width - (margins.left + margins.right),
+      height: paperSize.height - (margins.top + headerBox.height + gap + footerBox.height + margins.bottom)
+    };
     return {
-      backgroundBox: {
-        x: 0,
-        y: 0,
-        width: paperSize.width,
-        height: paperSize.height
-      },
-      headerBox: {
-        x: 0,
-        y: 0,
-        width: paperSize.width,
-        height: 0
-      },
-      bodyBox: {
-        x: margins.left,
-        y: margins.top,
-        width: paperSize.width - (margins.left + margins.right),
-        height: paperSize.height - (margins.top + margins.bottom)
-      },
-      footerBox: {
-        x: margins.left,
-        y: margins.top,
-        width: paperSize.width - (margins.left + margins.right),
-        height: paperSize.height - (margins.top + margins.bottom)
-      }
+      backgroundBox,
+      headerBox,
+      bodyBox,
+      footerBox
     };
   }
   function background(backgroundBox) {
@@ -1411,12 +1417,38 @@
   />`;
   }
   function header(headerBox) {
-    return x``;
+    return x`<rect style="fill: none;fill-rule:evenodd;"
+                   width="${headerBox.width}"
+                   height="${headerBox.height}"
+                   x="${headerBox.x}"
+                   y="${headerBox.y}"/>
+    <line x1="${headerBox.x}" y1="${headerBox.y}"
+          x2="${headerBox.x + headerBox.width}"
+          y2="${headerBox.y}"
+          stroke="black" stroke-width="0.1"/>
+    <line x1="${headerBox.x}" y1="${headerBox.y + headerBox.height}"
+          x2="${headerBox.x + headerBox.width}"
+          y2="${headerBox.y + headerBox.height}"
+          stroke="black" stroke-width="0.1" />
+    <line x1="${headerBox.x + headerBox.width * 0.2}"
+          y1="${headerBox.y + 1}"
+          x2="${headerBox.x + headerBox.width * 0.2}"
+          y2="${headerBox.y + headerBox.height - 1}"
+          stroke="black" stroke-width="0.1" />
+    <text
+       style="font-size:0.6mm;font-family:Lato;fill:#000000;"
+       x="${headerBox.x + 2}"
+       y="${headerBox.y + 3}">Date/Number</text>
+    <text
+       style="font-size:0.6mm;
+       font-family:Lato;fill:#000000;"
+       x="${headerBox.x + headerBox.width * 0.2 + 2}"
+       y="${headerBox.y + 3}">Title/Subject</text>`;
   }
   function body(bodyBox) {
     return x`
     <rect
-      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-opacity:1"
+      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
       width="${bodyBox.width}"
       height="${bodyBox.height}"
       x="${bodyBox.x}"
@@ -1425,8 +1457,14 @@
   `;
   }
   function footer(footerBox) {
-    return x`<text text-anchor="end"
-  x="${footerBox.x + footerBox.width}" y="${footerBox.y}" class="logo">
+    return x`<rect style="fill:none;fill-rule:evenodd;"
+                   width="${footerBox.width}"
+                   height="${footerBox.height}"
+                   x="${footerBox.x}"
+                   y="${footerBox.y}" />
+  <text text-anchor="end"
+        x="${footerBox.x + footerBox.width}"
+        y="${footerBox.y + footerBox.height}" class="logo">
   PAPERQUIK.com</text>`;
   }
   function paper(print, paperSize) {
@@ -1434,10 +1472,10 @@
       return x``;
     }
     const margins = {
-      top: 12.131895,
-      right: 12.131895,
-      bottom: 12.131895,
-      left: 12.131895
+      top: halfInch,
+      right: halfInch,
+      bottom: halfInch,
+      left: halfInch
     };
     let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(paperSize, margins);
     return x`
