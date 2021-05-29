@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 
-import { paper, paperSizes } from './paper-generation.js';
+import { paperSizes } from './generation/sizes.js';
+import { paper } from './paper-generation.js';
 
 import './pq-adblock.js';
 import './pq-footer.js';
@@ -49,7 +50,7 @@ export class PaperPage extends LitElement {
 
   render() {
     return html`<div>
-      ${paper(true, this.paperSize)}
+      ${paper(true, this.paperSize, this.layout)}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
       <div class="container d-print-none">
         <pq-jumbotron .show="${this.showJumbotron}"></pq-jumbotron>

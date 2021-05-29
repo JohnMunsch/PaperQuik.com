@@ -1306,30 +1306,7 @@
   };
   customElements.define(AboutPage.it, AboutPage);
 
-  // public/js/paper-generation.js
-  var halfInch = 12.131895;
-  var paperLayouts = [
-    {
-      id: "blank",
-      name: "Blank"
-    },
-    {
-      id: "dot-grid",
-      name: "Dot Grid"
-    },
-    {
-      id: "dotted-ruled-lines",
-      name: "Dotted Ruled"
-    },
-    {
-      id: "ruled-lines",
-      name: "Ruled Lines"
-    },
-    {
-      id: "square-graph",
-      name: "Square Graph"
-    }
-  ];
+  // public/js/generation/sizes.js
   var paperSizes = [
     {
       id: "letter",
@@ -1374,6 +1351,9 @@
       height: 210
     }
   ];
+
+  // public/js/paper-generation.js
+  var halfInch = 12.131895;
   function calculateBoxes(paperSize, margins) {
     const gap = 2.5;
     const backgroundBox = {
@@ -1445,7 +1425,56 @@
        x="${headerBox.x + headerBox.width * 0.2 + 2}"
        y="${headerBox.y + 3}">Title/Subject</text>`;
   }
-  function body(bodyBox) {
+  function dotGrid(bodyBox, rows, cols) {
+    return x`${rows.map((row) => {
+      return cols.map((col) => x`<circle cx="${bodyBox.x + col}"
+                        cy="${bodyBox.y + row}" r=".2"/>`);
+    })}`;
+  }
+  function ruledLines(bodyBox, rows) {
+    return x`${rows.map((row) => x`<line x1="${bodyBox.x}"
+          y1="${bodyBox.y + row}"
+          x2="${bodyBox.x + bodyBox.width}"
+          y2="${bodyBox.y + row}"
+          stroke="black" stroke-width="0.1" />`)}`;
+  }
+  function squareGraphColumns(bodyBox, cols) {
+    return x`${cols.map((col) => x`<line x1="${bodyBox.x + col}"
+          y1="${bodyBox.y}"
+          x2="${bodyBox.x + col}"
+          y2="${bodyBox.y + bodyBox.height}"
+          stroke="black" stroke-width="0.1" />`)}`;
+  }
+  function bodyLayout(bodyBox, layout) {
+    const rowHeight = 5;
+    const colWidth = 5;
+    let rows = [];
+    let row = rowHeight;
+    let cols = [];
+    let col = colWidth;
+    while (row < bodyBox.height) {
+      rows.push(row);
+      row += rowHeight;
+    }
+    while (col < bodyBox.width) {
+      cols.push(col);
+      col += colWidth;
+    }
+    switch (layout) {
+      case "blank":
+        return x``;
+      case "dot-grid":
+        return dotGrid(bodyBox, rows, cols);
+      case "dotted-ruled-lines":
+        return x`${dotGrid(bodyBox, rows, cols)}${ruledLines(bodyBox, rows)}`;
+      case "ruled-lines":
+        return ruledLines(bodyBox, rows);
+      case "square-graph":
+        return x`${ruledLines(bodyBox, rows)}
+      ${squareGraphColumns(bodyBox, cols)}`;
+    }
+  }
+  function body(bodyBox, layout) {
     return x`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
@@ -1454,7 +1483,7 @@
       x="${bodyBox.x}"
       y="${bodyBox.y}"
     />
-  `;
+    ${bodyLayout(bodyBox, layout)}`;
   }
   function footer(footerBox) {
     return x`<rect style="fill:none;fill-rule:evenodd;"
@@ -1467,7 +1496,7 @@
         y="${footerBox.y + footerBox.height}" class="logo">
   PAPERQUIK.com</text>`;
   }
-  function paper(print, paperSize) {
+  function paper(print, paperSize, layout) {
     if (!paperSize) {
       return x``;
     }
@@ -1489,7 +1518,7 @@
       <g>
         ${background(backgroundBox)}
         ${header(headerBox)}
-        ${body(bodyBox)}
+        ${body(bodyBox, layout)}
         ${footer(footerBox)}
       </g>
     </svg>`;
@@ -1659,6 +1688,30 @@
   };
   customElements.define(PaperQuikStepOne.it, PaperQuikStepOne);
 
+  // public/js/generation/layouts.js
+  var paperLayouts = [
+    {
+      id: "blank",
+      name: "Blank"
+    },
+    {
+      id: "dot-grid",
+      name: "Dot Grid"
+    },
+    {
+      id: "dotted-ruled-lines",
+      name: "Dotted Ruled"
+    },
+    {
+      id: "ruled-lines",
+      name: "Ruled Lines"
+    },
+    {
+      id: "square-graph",
+      name: "Square Graph"
+    }
+  ];
+
   // public/js/pq-step-two.js
   var PaperQuikStepTwo = class extends h3 {
     static get it() {
@@ -1783,7 +1836,7 @@
         <div class="panel-body">
           ${this.size && this.layout ? T`<div class="row">
                 <div class="col-md-8 preview">
-                  ${paper(false, this.paperSize)}
+                  ${paper(false, this.paperSize, this.layout)}
                 </div>
                 <div class="col-md-4">
                   <button
@@ -1930,7 +1983,7 @@
     }
     render() {
       return T`<div>
-      ${paper(true, this.paperSize)}
+      ${paper(true, this.paperSize, this.layout)}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
       <div class="container d-print-none">
         <pq-jumbotron .show="${this.showJumbotron}"></pq-jumbotron>

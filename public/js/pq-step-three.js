@@ -97,7 +97,7 @@ export class PaperQuikStepThree extends LitElement {
           ${this.size && this.layout
             ? html`<div class="row">
                 <div class="col-md-8 preview">
-                  ${paper(false, this.paperSize)}
+                  ${paper(false, this.paperSize, this.layout)}
                 </div>
                 <div class="col-md-4">
                   <button

@@ -2,75 +2,6 @@ import { svg } from 'lit';
 
 const halfInch = 12.131895;
 
-export const paperLayouts = [
-  {
-    id: 'blank',
-    name: 'Blank',
-  },
-  {
-    id: 'dot-grid',
-    name: 'Dot Grid',
-  },
-  {
-    id: 'dotted-ruled-lines',
-    name: 'Dotted Ruled',
-  },
-  {
-    id: 'ruled-lines',
-    name: 'Ruled Lines',
-  },
-  {
-    id: 'square-graph',
-    name: 'Square Graph',
-  },
-];
-
-// All measurements are in mm and IDs are just randomly generated here:
-export const paperSizes = [
-  {
-    id: 'letter',
-    name: 'Letter',
-    width: 215.9,
-    height: 279.4,
-  },
-  {
-    id: 'letterl',
-    name: 'Letter',
-    width: 279.4,
-    height: 215.9,
-  },
-  {
-    id: 'legal',
-    name: 'Legal',
-    width: 215.9,
-    height: 355.6,
-  },
-  {
-    id: 'legall',
-    name: 'Legal',
-    width: 355.6,
-    height: 215.9,
-  },
-  {
-    id: 'a4',
-    name: 'A4',
-    width: 210.0,
-    height: 297.0,
-  },
-  {
-    id: 'a4l',
-    name: 'A4',
-    width: 297.0,
-    height: 210.0,
-  },
-  {
-    id: 'a5',
-    name: 'A5',
-    width: 148,
-    height: 210,
-  },
-];
-
 function calculateBoxes(paperSize, margins) {
   const gap = 2.5;
 
@@ -157,7 +88,72 @@ function header(headerBox) {
        y="${headerBox.y + 3}">Title/Subject</text>`;
 }
 
-function body(bodyBox) {
+function dotGrid(bodyBox, rows, cols) {
+  return svg`${rows.map((row) => {
+    return cols.map(
+      (col) =>
+        svg`<circle cx="${bodyBox.x + col}"
+                        cy="${bodyBox.y + row}" r=".2"/>`
+    );
+  })}`;
+}
+
+function ruledLines(bodyBox, rows) {
+  return svg`${rows.map(
+    (row) => svg`<line x1="${bodyBox.x}"
+          y1="${bodyBox.y + row}"
+          x2="${bodyBox.x + bodyBox.width}"
+          y2="${bodyBox.y + row}"
+          stroke="black" stroke-width="0.1" />`
+  )}`;
+}
+
+function squareGraphColumns(bodyBox, cols) {
+  return svg`${cols.map(
+    (col) => svg`<line x1="${bodyBox.x + col}"
+          y1="${bodyBox.y}"
+          x2="${bodyBox.x + col}"
+          y2="${bodyBox.y + bodyBox.height}"
+          stroke="black" stroke-width="0.1" />`
+  )}`;
+}
+
+function bodyLayout(bodyBox, layout) {
+  const rowHeight = 5;
+  const colWidth = 5;
+
+  let rows = [];
+  let row = rowHeight;
+
+  let cols = [];
+  let col = colWidth;
+
+  while (row < bodyBox.height) {
+    rows.push(row);
+    row += rowHeight;
+  }
+
+  while (col < bodyBox.width) {
+    cols.push(col);
+    col += colWidth;
+  }
+
+  switch (layout) {
+    case 'blank':
+      return svg``;
+    case 'dot-grid':
+      return dotGrid(bodyBox, rows, cols);
+    case 'dotted-ruled-lines':
+      return svg`${dotGrid(bodyBox, rows, cols)}${ruledLines(bodyBox, rows)}`;
+    case 'ruled-lines':
+      return ruledLines(bodyBox, rows);
+    case 'square-graph':
+      return svg`${ruledLines(bodyBox, rows)}
+      ${squareGraphColumns(bodyBox, cols)}`;
+  }
+}
+
+function body(bodyBox, layout) {
   return svg`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
@@ -166,7 +162,7 @@ function body(bodyBox) {
       x="${bodyBox.x}"
       y="${bodyBox.y}"
     />
-  `;
+    ${bodyLayout(bodyBox, layout)}`;
 }
 
 function footer(footerBox) {
@@ -182,7 +178,7 @@ function footer(footerBox) {
   PAPERQUIK.com</text>`;
 }
 
-export function paper(print, paperSize) {
+export function paper(print, paperSize, layout) {
   if (!paperSize) {
     return svg``;
   }
@@ -211,7 +207,7 @@ export function paper(print, paperSize) {
       <g>
         ${background(backgroundBox)}
         ${header(headerBox)}
-        ${body(bodyBox)}
+        ${body(bodyBox, layout)}
         ${footer(footerBox)}
       </g>
     </svg>`;
