@@ -1542,10 +1542,6 @@
       return T`<div class="panel panel-default">
       <div class="panel-body">
         <div class="leaderboardAd">
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script>
           <!-- PaperQuik Leaderboard -->
           <ins
             class="adsbygoogle"
@@ -1553,9 +1549,6 @@
             data-ad-client="ca-pub-8376642740439271"
             data-ad-slot="6535942993"
           ></ins>
-          <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
         </div>
       </div>
     </div>`;

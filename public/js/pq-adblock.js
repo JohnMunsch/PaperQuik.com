@@ -26,10 +26,6 @@ export class PaperQuikAdblock extends LitElement {
     return html`<div class="panel panel-default">
       <div class="panel-body">
         <div class="leaderboardAd">
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script>
           <!-- PaperQuik Leaderboard -->
           <ins
             class="adsbygoogle"
@@ -37,9 +33,6 @@ export class PaperQuikAdblock extends LitElement {
             data-ad-client="ca-pub-8376642740439271"
             data-ad-slot="6535942993"
           ></ins>
-          <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
         </div>
       </div>
     </div>`;

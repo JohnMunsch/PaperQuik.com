@@ -25,7 +25,6 @@ export class PaperQuikApp extends LitElement {
       this.requestUpdate();
     });
     page('/paper/:size?/:layout?', (ctx) => {
-      console.log(ctx);
       this.renderer = () =>
         html`<paper-page
           .size="${ctx.params.size}"
