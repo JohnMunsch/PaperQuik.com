@@ -10,4 +10,5 @@ RUN npm install
 COPY ./index.mjs ./
 COPY ./public ./public
 
+EXPOSE 3000
 CMD [ "npm", "start" ]
