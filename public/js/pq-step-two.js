@@ -12,7 +12,7 @@ export class PaperQuikStepTwo extends LitElement {
   static get properties() {
     // All of the properties of this component and a type for each (used when converting
     // attributes to property values).
-    return { size: { type: String } };
+    return { size: { type: String }, layout: { type: String } };
   }
 
   constructor() {
@@ -37,7 +37,11 @@ export class PaperQuikStepTwo extends LitElement {
           ? html` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
                 return html`<a href="/paper/${this.size}/${paperLayout.id}">
-                  <div class="layoutIcon">
+                  <div
+                    class="layoutIcon ${paperLayout.id === this.layout
+                      ? 'selected'
+                      : 'notSelected'}"
+                  >
                     <span class="layoutName">${paperLayout.name}</span>
                     <div
                       style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"

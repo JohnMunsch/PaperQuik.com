@@ -28,6 +28,6 @@
     "page": "^1.11.6"
   },
   "devDependencies": {
-    "esbuild": "^0.12.1"
+    "esbuild": "^0.12.5"
   }
 }

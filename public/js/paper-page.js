@@ -57,7 +57,10 @@ export class PaperPage extends LitElement {
         <pq-adblock></pq-adblock>
 
         <pq-step-one .size="${this.size}"></pq-step-one>
-        <pq-step-two .size="${this.size}"></pq-step-two>
+        <pq-step-two
+          .size="${this.size}"
+          .layout="${this.layout}"
+        ></pq-step-two>
         <pq-step-three
           .size="${this.size}"
           .layout="${this.layout}"

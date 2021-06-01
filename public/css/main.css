@@ -159,8 +159,9 @@ nav {
   font-weight: bold;
 }
 
-.paperIcon.notSelected {
-  background-color: gray;
+.paperIcon.notSelected,
+.layoutIcon.notSelected {
+  opacity: 0.5;
 }
 
 .layouts-wrapper {

@@ -26,7 +26,6 @@ export class PaperQuikAdblock extends LitElement {
     return html`<div class="panel panel-default">
       <div class="panel-body">
         <div class="leaderboardAd">
-          <!-- PaperQuik Leaderboard -->
           <ins
             class="adsbygoogle"
             style="display:inline-block;width:728px;height:90px"
@@ -36,6 +35,11 @@ export class PaperQuikAdblock extends LitElement {
         </div>
       </div>
     </div>`;
+  }
+
+  firstUpdated() {
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adsbygoogle.push({});
   }
 }
 

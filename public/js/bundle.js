@@ -1278,7 +1278,6 @@
       return T`<div class="panel panel-default">
       <div class="panel-body">
         <div class="leaderboardAd">
-          <!-- PaperQuik Leaderboard -->
           <ins
             class="adsbygoogle"
             style="display:inline-block;width:728px;height:90px"
@@ -1288,6 +1287,10 @@
         </div>
       </div>
     </div>`;
+    }
+    firstUpdated() {
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.push({});
     }
   };
   customElements.define(PaperQuikAdblock.it, PaperQuikAdblock);
@@ -1744,7 +1747,7 @@
       return "pq-step-two";
     }
     static get properties() {
-      return { size: { type: String } };
+      return { size: { type: String }, layout: { type: String } };
     }
     constructor() {
       super();
@@ -1764,7 +1767,9 @@
         ${this.size ? T` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
         return T`<a href="/paper/${this.size}/${paperLayout.id}">
-                  <div class="layoutIcon">
+                  <div
+                    class="layoutIcon ${paperLayout.id === this.layout ? "selected" : "notSelected"}"
+                  >
                     <span class="layoutName">${paperLayout.name}</span>
                     <div
                       style="width: 100%; height: 125px; border: 1px solid black; overflow: hidden;"
@@ -2016,7 +2021,10 @@
         <pq-adblock></pq-adblock>
 
         <pq-step-one .size="${this.size}"></pq-step-one>
-        <pq-step-two .size="${this.size}"></pq-step-two>
+        <pq-step-two
+          .size="${this.size}"
+          .layout="${this.layout}"
+        ></pq-step-two>
         <pq-step-three
           .size="${this.size}"
           .layout="${this.layout}"
