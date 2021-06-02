@@ -1,3 +1,4 @@
+import compression from 'compression';
 import express from 'express';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -5,8 +6,9 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3000;
+const port = 7080;
 
+app.use(compression());
 app.use(express.json());
 app.use(
   express.urlencoded({
