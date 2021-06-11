@@ -5,10 +5,9 @@
   "main": "index.mjs",
   "scripts": {
     "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --watch",
-    "docker-build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js & docker build -t registry.gitlab.com/johnmunsch/paperquik .",
+    "docker": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js && docker build -t registry.gitlab.com/johnmunsch/paperquik . && docker push registry.gitlab.com/johnmunsch/paperquik",
     "docker-login": "docker login registry.gitlab.com",
-    "docker-push": "docker push registry.gitlab.com/johnmunsch/paperquik",
-    "docker-run": "docker run -p3000:3000 -it --rm --name paperquik registry.gitlab.com/johnmunsch/paperquik:latest",
+    "docker-run": "docker run -p7080:7080 -it --rm --name paperquik registry.gitlab.com/johnmunsch/paperquik:latest",
     "start": "node index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

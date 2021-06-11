@@ -2050,6 +2050,9 @@
     }
     constructor() {
       super();
+      this.renderer = () => {
+        return T``;
+      };
       (0, import_page.default)("/about", () => {
         this.renderer = () => T`<about-page></about-page>`;
         this.requestUpdate();

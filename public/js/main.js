@@ -20,6 +20,10 @@ export class PaperQuikApp extends LitElement {
   constructor() {
     super();
 
+    this.renderer = () => {
+      return html``;
+    };
+
     page('/about', () => {
       this.renderer = () => html`<about-page></about-page>`;
       this.requestUpdate();
