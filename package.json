@@ -9,7 +9,8 @@
     "docker-login": "docker login registry.gitlab.com",
     "docker-run": "docker run -p7080:7080 -it --rm --name paperquik registry.gitlab.com/johnmunsch/paperquik:latest",
     "start": "node index.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
+    "test:watch": "web-test-runner \"public/js/**/*.test.js\" --node-resolve --watch"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,10 @@
     "page": "^1.11.6"
   },
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/semantic-dom-diff": "^0.19.5",
+    "@open-wc/testing": "^3.0.1",
+    "@web/test-runner": "^0.13.20",
     "esbuild": "^0.12.5"
   }
 }
