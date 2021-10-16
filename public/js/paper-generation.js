@@ -123,18 +123,25 @@ function bodyLayout(bodyBox, layout) {
   const colWidth = 5;
 
   let rows = [];
+  let cols = [];
+
+  // Figure out if the last row has extra space and split that extra between
+  // the top and bottom.
+  // let row = ((bodyBox.height % rowHeight) + rowHeight) / 2;
   let row = rowHeight;
 
-  let cols = [];
-  let col = colWidth;
-
-  while (row < bodyBox.height) {
+  while (row + rowHeight < bodyBox.height) {
     rows.push(row);
     row += rowHeight;
   }
 
-  while (col < bodyBox.width) {
-    cols.push(col);
+  // Figure out if the last col has extra space and split that extra between
+  // the left and right.
+  let col = 0;
+  let adjustment = ((bodyBox.width % colWidth) + colWidth) / 2;
+
+  while (col + adjustment < bodyBox.width) {
+    cols.push(col + adjustment);
     col += colWidth;
   }
 
@@ -212,3 +219,40 @@ export function paper(print, paperSize, layout) {
       </g>
     </svg>`;
 }
+
+// From https://www.abeautifulsite.net/posts/getting-localized-month-and-day-names-in-the-browser/
+function getDayNames(locale = 'en', format = 'long') {
+  const formatter = new Intl.DateTimeFormat(locale, {
+    weekday: format,
+    timeZone: 'UTC',
+  });
+  const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
+    const dd = day < 10 ? `0${day}` : day;
+    return new Date(`2017-01-${dd}T00:00:00+00:00`);
+  });
+  return days.map((date) => formatter.format(date));
+}
+
+function getMonthNames(locale = 'en', format = 'long') {
+  const formatter = new Intl.DateTimeFormat(locale, {
+    month: format,
+    timeZone: 'UTC',
+  });
+  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
+    const mm = month < 10 ? `0${month}` : month;
+    return new Date(`2017-${mm}-01T00:00:00+00:00`);
+  });
+  return months.map((date) => formatter.format(date));
+}
+
+let preferredLanguage = navigator.language;
+console.log(preferredLanguage);
+
+console.log(getDayNames(preferredLanguage));
+console.log(getMonthNames(preferredLanguage));
+
+console.log(getDayNames('es'));
+console.log(getMonthNames('es'));
+
+console.log(getDayNames('fr'));
+console.log(getMonthNames('fr'));

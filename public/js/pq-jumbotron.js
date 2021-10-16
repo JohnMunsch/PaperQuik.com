@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 
+const key = 'pq-jumbotron';
 export class PaperQuikJumbotron extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
   // so that our components don't collide with future additions to HTML.
@@ -19,6 +20,7 @@ export class PaperQuikJumbotron extends LitElement {
 
   hide() {
     this.show = false;
+    window.localStorage.setItem(key, 'false');
   }
 
   // Remove the Shadow DOM from this component.
@@ -27,7 +29,7 @@ export class PaperQuikJumbotron extends LitElement {
   }
 
   render() {
-    if (!this.show) {
+    if (!((window.localStorage.getItem(key) ?? 'true') === 'true')) {
       return html``;
     }
 

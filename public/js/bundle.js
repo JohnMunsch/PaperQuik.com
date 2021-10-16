@@ -11,9 +11,9 @@
   };
   var __reExport = (target, module, desc) => {
     if (module && typeof module === "object" || typeof module === "function") {
-      for (let key of __getOwnPropNames(module))
-        if (!__hasOwnProp.call(target, key) && key !== "default")
-          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+      for (let key2 of __getOwnPropNames(module))
+        if (!__hasOwnProp.call(target, key2) && key2 !== "default")
+          __defProp(target, key2, { get: () => module[key2], enumerable: !(desc = __getOwnPropDesc(module, key2)) || desc.enumerable });
     }
     return target;
   };
@@ -42,7 +42,7 @@
         ].join("|"), "g");
         function parse(str) {
           var tokens = [];
-          var key = 0;
+          var key2 = 0;
           var index = 0;
           var path = "";
           var res;
@@ -71,7 +71,7 @@
             var delimiter = prefix || "/";
             var pattern = capture || group || (asterisk ? ".*" : "[^" + delimiter + "]+?");
             tokens.push({
-              name: name || key++,
+              name: name || key2++,
               prefix: prefix || "",
               delimiter,
               optional,
@@ -690,10 +690,10 @@
             return false;
           delete params[0];
           for (var i6 = 1, len = m2.length; i6 < len; ++i6) {
-            var key = keys[i6 - 1];
+            var key2 = keys[i6 - 1];
             var val = this.page._decodeURLEncodedURIComponent(m2[i6]);
-            if (val !== void 0 || !hasOwnProperty.call(params, key.name)) {
-              params[key.name] = val;
+            if (val !== void 0 || !hasOwnProperty.call(params, key2.name)) {
+              params[key2.name] = val;
             }
           }
           return true;
@@ -1517,15 +1517,16 @@
     const rowHeight = 5;
     const colWidth = 5;
     let rows = [];
-    let row = rowHeight;
     let cols = [];
-    let col = colWidth;
-    while (row < bodyBox.height) {
+    let row = rowHeight;
+    while (row + rowHeight < bodyBox.height) {
       rows.push(row);
       row += rowHeight;
     }
-    while (col < bodyBox.width) {
-      cols.push(col);
+    let col = 0;
+    let adjustment = (bodyBox.width % colWidth + colWidth) / 2;
+    while (col + adjustment < bodyBox.width) {
+      cols.push(col + adjustment);
       col += colWidth;
     }
     switch (layout) {
@@ -1593,6 +1594,7 @@
   }
 
   // public/js/pq-jumbotron.js
+  var key = "pq-jumbotron";
   var PaperQuikJumbotron = class extends h3 {
     static get it() {
       return "pq-jumbotron";
@@ -1605,12 +1607,13 @@
     }
     hide() {
       this.show = false;
+      window.localStorage.setItem(key, "false");
     }
     createRenderRoot() {
       return this;
     }
     render() {
-      if (!this.show) {
+      if (!((window.localStorage.getItem(key) ?? "true") === "true")) {
         return T``;
       }
       return T`<div class="panel jumbotron">
