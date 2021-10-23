@@ -2,9 +2,12 @@
 
 ## Links
 
-[lit](https://lit.dev)
-[page](https://github.com/visionmedia/page.js)
-[Bootstrap](https://getbootstrap.com)
+- [Lit](https://lit.dev)
+- [page](https://github.com/visionmedia/page.js)
+- [Bootstrap](https://getbootstrap.com)
+
+- [Open Web Components](https://open-wc.org)
+- [Modern Web](https://modern-web.dev)
 
 ## Deploy to Raspberry Pi
 
