@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+
+services:
+  paperquik:
+    image: ghcr.io/johnmunsch/paperquik.com:master
+    labels:
+      - "traefik.http.routers.paperquik.rule=Host(`www.paperquik.com`) || Host(`paperquik.com`)"
+      - "traefik.http.routers.paperquik.tls=true"
+      - "traefik.http.routers.paperquik.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.paperquik.tls.domains[0].main=www.paperquik.com"
+      - "traefik.http.routers.paperquik.tls.domains[0].sans=*.paperquik.com"
+      - "traefik.port=80"
+    networks:
+      - internal
+      - web
+    ports:
+      - '6080:6080'

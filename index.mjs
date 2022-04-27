@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 7080;
+const port = 6080;
 
 app.use(compression());
 app.use(express.json());

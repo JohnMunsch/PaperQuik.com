@@ -3,15 +3,6 @@
   "version": "2.0.0",
   "description": "A site where users can design printable pages.",
   "main": "index.mjs",
-  "scripts": {
-    "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --watch",
-    "docker": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js && docker build -t registry.gitlab.com/johnmunsch/paperquik . && docker push registry.gitlab.com/johnmunsch/paperquik",
-    "docker-login": "docker login registry.gitlab.com",
-    "docker-run": "docker run -p7080:7080 -it --rm --name paperquik registry.gitlab.com/johnmunsch/paperquik:latest",
-    "start": "node index.mjs",
-    "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
-    "test:watch": "web-test-runner \"public/js/**/*.test.js\" --node-resolve --watch"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/JohnMunsch/paperquik.git"
@@ -21,18 +12,34 @@
   "bugs": {
     "url": "https://gitlab.com/JohnMunsch/paperquik/issues"
   },
-  "homepage": "https://gitlab.com/JohnMunsch/paperquik#readme",
-  "dependencies": {
-    "compression": "^1.7.4",
-    "express": "^4.17.1",
-    "lit": "^2.0.2",
-    "page": "^1.11.6"
-  },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/semantic-dom-diff": "^0.19.5",
-    "@open-wc/testing": "^3.0.1",
-    "@web/test-runner": "^0.13.20",
-    "esbuild": "^0.13.10"
+    "@open-wc/testing": "^3.1.2",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/web-components": "^6.4.22",
+    "@web/test-runner": "^0.13.27",
+    "babel-loader": "^8.2.5",
+    "esbuild": "^0.14.36"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.3",
+    "lit": "^2.2.2",
+    "page": "^1.11.6"
+  },
+  "homepage": "https://www.PaperQuik.com",
+  "scripts": {
+    "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
+    "docker-build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js && docker build --platform linux/amd64 -t paperquik_amd . && docker image tag paperquik_amd:latest ghcr.io/johnmunsch/paperquik_amd:latest && docker push ghcr.io/johnmunsch/paperquik_amd:latest",
+    "docker-login": "echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin",
+    "start": "node index.mjs",
+    "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
+    "test:watch": "web-test-runner \"public/js/**/*.test.js\" --node-resolve --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   }
 }
