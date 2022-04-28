@@ -34,7 +34,8 @@
   "homepage": "https://www.PaperQuik.com",
   "scripts": {
     "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
-    "docker-build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js && docker build --platform linux/amd64 -t paperquik_amd . && docker image tag paperquik_amd:latest ghcr.io/johnmunsch/paperquik_amd:latest && docker push ghcr.io/johnmunsch/paperquik_amd:latest",
+    "build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap",
+    "docker-build": "npm run build && docker build --platform linux/amd64 -t paperquik_amd . && docker image tag paperquik_amd:latest ghcr.io/johnmunsch/paperquik_amd:latest && docker push ghcr.io/johnmunsch/paperquik_amd:latest",
     "docker-login": "echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin",
     "start": "node index.mjs",
     "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
