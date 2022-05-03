@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import page from 'page';
 
-import './about-page.js';
-import './paper-page.js';
+import './pages/about-page.component.js';
+import './pages/paper-page.component.js';
 
 export class PaperQuikApp extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
