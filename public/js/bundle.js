@@ -1324,13 +1324,13 @@
     }
     render() {
       return $`<footer>
-      <p>© 2021 John Munsch</p>
-    </footer>`;
+      <small>&copy; Copyright 2022, John Munsch</small>
+    </footer> `;
     }
   };
   customElements.define(PaperQuikFooter.it, PaperQuikFooter);
 
-  // public/js/about-page.js
+  // public/js/pages/about-page.component.js
   var AboutPage = class extends s4 {
     static get it() {
       return "about-page";
@@ -1433,7 +1433,7 @@
     }
   ];
 
-  // public/js/paper-generation.js
+  // public/js/generation/paper-generation.js
   var halfInch = 12.131895;
   function calculateBoxes(paperSize, margins) {
     const gap = 2.5;
@@ -2036,7 +2036,7 @@
   };
   customElements.define(PaperQuikMenu.it, PaperQuikMenu);
 
-  // public/js/paper-page.js
+  // public/js/pages/paper-page.component.js
   var PaperPage = class extends s4 {
     static get it() {
       return "paper-page";
@@ -2140,3 +2140,4 @@
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
+//# sourceMappingURL=bundle.js.map

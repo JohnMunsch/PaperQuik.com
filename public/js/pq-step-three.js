@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 
-import { paper } from './paper-generation.js';
+import { paper } from './generation/paper-generation.js';
 
 export class PaperQuikStepThree extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement

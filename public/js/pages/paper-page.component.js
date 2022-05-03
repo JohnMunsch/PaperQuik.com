@@ -1,15 +1,15 @@
 import { LitElement, html } from 'lit';
 
-import { paperSizes } from './generation/sizes.js';
-import { paper } from './paper-generation.js';
+import { paperSizes } from '../generation/sizes.js';
+import { paper } from '../generation/paper-generation.js';
 
-import './pq-adblock.js';
-import './pq-footer.js';
-import './pq-jumbotron.js';
-import './pq-step-one.js';
-import './pq-step-two.js';
-import './pq-step-three.js';
-import './pq-menu.js';
+import '../pq-adblock.js';
+import '../pq-footer.js';
+import '../pq-jumbotron.js';
+import '../pq-step-one.js';
+import '../pq-step-two.js';
+import '../pq-step-three.js';
+import '../pq-menu.js';
 
 export class PaperPage extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement

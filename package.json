@@ -33,7 +33,7 @@
   },
   "homepage": "https://www.PaperQuik.com",
   "scripts": {
-    "dev": "node index.mjs && esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
+    "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
     "build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap",
     "start": "node index.mjs",
     "storybook": "start-storybook -p 6006",
