@@ -36,7 +36,7 @@
     "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
     "build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap",
     "start": "node index.mjs",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook",
     "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
     "test:watch": "web-test-runner \"public/js/**/*.test.js\" --node-resolve --watch"
