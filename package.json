@@ -23,7 +23,8 @@
     "@storybook/web-components": "^6.4.22",
     "@web/test-runner": "^0.13.27",
     "babel-loader": "^8.2.5",
-    "esbuild": "^0.14.36"
+    "esbuild": "^0.14.36",
+    "nodemon": "^2.0.16"
   },
   "dependencies": {
     "compression": "^1.7.4",
@@ -33,7 +34,7 @@
   },
   "homepage": "https://www.PaperQuik.com",
   "scripts": {
-    "dev": "node index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
+    "dev": "nodemon index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
     "build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap",
     "start": "node index.mjs",
     "storybook": "start-storybook -p 6006 -s ./public",
