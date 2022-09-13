@@ -48,6 +48,12 @@ export class PaperQuikStepThree extends LitElement {
 
   modal() {
     return html` <!-- Modal -->
+      <style>
+        .modal {
+          color: black;
+        }
+      </style>
+
       <div
         class="modal fade"
         id="exampleModal"
@@ -89,7 +95,7 @@ export class PaperQuikStepThree extends LitElement {
   }
 
   render() {
-    return html`<div class="panel panel-default print-section">
+    return html` <div class="panel panel-default print-section">
         <div class="panel-heading">
           <h2>3: Print your paper</h2>
         </div>
