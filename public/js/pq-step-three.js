@@ -48,12 +48,6 @@ export class PaperQuikStepThree extends LitElement {
 
   modal() {
     return html` <!-- Modal -->
-      <style>
-        .modal {
-          color: black;
-        }
-      </style>
-
       <div
         class="modal fade"
         id="exampleModal"

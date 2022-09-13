@@ -109,6 +109,10 @@ svg .logo {
   font-size: 0.5mm;
 }
 
+.modal {
+  color: black;
+}
+
 #mc_embed_signup {
   margin-top: 80px;
   background: rgb(78, 93, 108);
