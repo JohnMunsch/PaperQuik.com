@@ -1,45 +1,35 @@
 {
-  "name": "paperquik",
-  "version": "2.0.0",
-  "description": "A site where users can design printable pages.",
-  "main": "index.mjs",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/JohnMunsch/paperquik.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/JohnMunsch/paperquik/issues"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@esm-bundle/chai": "^4.3.4-fix.0",
-    "@open-wc/semantic-dom-diff": "^0.19.5",
-    "@open-wc/testing": "^3.1.2",
-    "@storybook/addon-actions": "^6.5.0",
-    "@storybook/addon-essentials": "^6.5.0",
-    "@storybook/addon-links": "^6.5.0",
-    "@storybook/web-components": "^6.5.0",
-    "@web/test-runner": "^0.13.27",
-    "babel-loader": "^8.2.5",
-    "esbuild": "^0.14.36",
-    "nodemon": "^2.0.16"
+  "name": "paperquik-com",
+  "private": true,
+  "version": "2.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "compression": "^1.7.4",
-    "express": "^4.17.3",
-    "lit": "^2.2.2",
+    "express": "^4.18.2",
+    "lit": "^2.7.6",
     "page": "^1.11.6"
   },
-  "homepage": "https://www.PaperQuik.com",
-  "scripts": {
-    "dev": "nodemon index.mjs & esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap --watch",
-    "build": "esbuild public/js/main.js --bundle --outfile=public/js/bundle.js --sourcemap",
-    "start": "node index.mjs",
-    "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook",
-    "test": "web-test-runner \"public/js/**/*.test.js\" --node-resolve",
-    "test:watch": "web-test-runner \"public/js/**/*.test.js\" --node-resolve --watch"
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.4.6",
+    "@storybook/addon-links": "^7.4.6",
+    "@storybook/blocks": "^7.4.6",
+    "@storybook/web-components": "^7.4.6",
+    "@storybook/web-components-vite": "^7.4.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.4.6",
+    "vite": "^4.4.5"
+  },
+  "overrides": {
+    "@storybook/web-component": {
+      "lit": "^3.0.0"
+    }
   }
 }

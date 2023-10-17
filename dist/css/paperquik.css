@@ -1,0 +1,129 @@
+body {
+  background-color: #2f3d4e;
+  color: white;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+paperquik-app {
+  display: block;
+}
+
+pq-menu {
+  display: block;
+  margin-bottom: 10px;
+}
+
+pq-menu img {
+  width: 25px;
+  margin-right: 4px;
+  position: relative;
+  top: 3px;
+}
+
+nav {
+  background-color: #bf5a16;
+  color: white;
+}
+
+.jumbotron {
+  height: 350px;
+  padding: 48px 60px 48px 60px;
+  background-image: url('/img/Jumbotron-Group-Paper.jpg');
+  background-size: cover;
+}
+
+.jumbotron h1 {
+  font-size: 67.5px;
+  font-weight: 300;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #4e5d6c;
+}
+
+.panel-heading {
+  padding: 10px 15px 10px 15px;
+  background-color: #485563;
+}
+
+.panel-heading h2 {
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+.papers-wrapper {}
+
+.paperIcon {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 4px;
+
+  background-color: white;
+  color: black;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.paperIcon.notSelected,
+.layoutIcon.notSelected {
+  opacity: 0.5;
+}
+
+.layouts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layoutIcon {
+  display: inline-block;
+  background-color: white;
+  width: 200px;
+  height: 150px;
+  margin-right: 10px;
+  padding: 4px;
+  color: black;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.preview svg {
+  width: 100%;
+  height: 100%;
+}
+
+rect.background {
+  fill: none;
+}
+
+.preview rect.background {
+  fill: white;
+}
+
+svg .logo {
+  font-family: 'Roboto Slab';
+  font-size: 0.5mm;
+}
+
+.modal {
+  color: black;
+}
+
+#mc_embed_signup {
+  margin-top: 80px;
+  background: rgb(78, 93, 108);
+  clear: left;
+  font: 14px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#mc_embed_signup label {
+  font-weight: normal;
+}
+
+#mc_embed_signup input {
+  color: black;
+}
