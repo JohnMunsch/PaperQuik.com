@@ -22,3 +22,8 @@ I switched this project to Vite in version 2.1. Thus the commands for developmen
 - [Lit](https://lit.dev)
 - [page](https://github.com/visionmedia/page.js)
 - [Bootstrap](https://getbootstrap.com)
+
+### Server-Side
+
+- https://expressjs.com
+- https://github.com/expressjs/compression
