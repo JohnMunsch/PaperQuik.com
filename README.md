@@ -21,8 +21,11 @@ I switched this project to Vite in version 2.1. Thus the commands for developmen
 
 ## Packages
 
+### Client-Side
+
+- https://vitejs.dev
 - [Lit](https://lit.dev)
-- [page](https://github.com/visionmedia/page.js)
+- [page](https://github.com/visionmedia/page.js) - Needs to be swapped out for Vaadin Router or something more current.
 - [Bootstrap](https://getbootstrap.com)
 
 ### Server-Side
