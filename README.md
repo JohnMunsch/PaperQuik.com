@@ -23,9 +23,9 @@ I switched this project to Vite in version 2.1. Thus the commands for developmen
 
 ### Client-Side
 
-- https://vitejs.dev
+- [Vite](https://vitejs.dev) - I used to use esbuild for all my building and it worked OK. Vite is equally easy to use, standardizes things more, and works well not just for development (where it still uses esbuild) but for production builds too.
 - [Lit](https://lit.dev)
-- [page](https://github.com/visionmedia/page.js) - Needs to be swapped out for Vaadin Router or something more current.
+- [@lit-labs/router](https://www.npmjs.com/package/@lit-labs/router) - I know it's not "production ready" and I know that it requires a polyfill to be used on some browsers, but it's still better than "page" (which is what I used to use) and the poorly documented @vaadin/router. So if you know of something which works well with Lit that you can suggest instead then I'm more than happy to listen.
 - [Bootstrap](https://getbootstrap.com)
 
 ### Server-Side

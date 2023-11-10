@@ -246,13 +246,3 @@ function getMonthNames(locale = 'en', format = 'long') {
 }
 
 let preferredLanguage = navigator.language;
-console.log(preferredLanguage);
-
-console.log(getDayNames(preferredLanguage));
-console.log(getMonthNames(preferredLanguage));
-
-console.log(getDayNames('es'));
-console.log(getMonthNames('es'));
-
-console.log(getDayNames('fr'));
-console.log(getMonthNames('fr'));
