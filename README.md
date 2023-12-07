@@ -2,7 +2,7 @@
 
 https://github.com/JohnMunsch/PaperQuik.com
 
-This project is the complete source for what is deployed at PaperQuik.com. It generates SVG images for a page given some user selected characteristics (page size and format) and then you can print that to get the page you want.
+This project is the complete source for what is deployed at [PaperQuik.com](https://PaperQuik.com). It generates SVG images for a page given some user selected characteristics (page size and format) and then you can print that to get the page you want.
 
 ## Development
 
