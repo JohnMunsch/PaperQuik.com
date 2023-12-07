@@ -10,29 +10,24 @@ if (!globalThis.URLPattern) {
 }
 
 export class PaperQuikApp extends LitElement {
-  _router = new Router(
-    this,
-    [
-      { path: '/about', render: () => html`<about-page></about-page>` },
-      {
-        path: '/paper/:size?/:layout?',
-        render: ({ size, layout }) =>
-          html`<paper-page .size="${size}" .layout="${layout}"></paper-page>`,
-      },
-    ],
+  _router = new Router(this, [
+    { path: '/about', render: () => html`<about-page></about-page>` },
     {
-      fallback: {
-        enter: async () => {
-          await this._router.goto('/paper');
+      path: '/paper/:size?/:layout?',
+      render: ({ size, layout }) =>
+        html`<paper-page .size="${size}" .layout="${layout}"></paper-page>`,
+    },
+    {
+      path: '/*',
+      enter: async () => {
+        // Trigger the router again
+        await this._router.goto('/paper');
 
-          // Tell the router to cancel the original navigation to make it
-          // reentrant safe. It'll be better if we can detect reentrant calls
-          // to goto() and do this automatically.
-          return false;
-        },
+        // Reject this route so the dynamic one is matched
+        return false;
       },
-    }
-  );
+    },
+  ]);
 
   static get it() {
     return 'paperquik-app';
