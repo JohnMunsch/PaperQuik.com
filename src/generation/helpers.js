@@ -1,8 +1,6 @@
 import { svg } from 'lit';
 
-const halfInch = 12.131895;
-
-function calculateBoxes(paperSize, margins) {
+export function calculateBoxes(paperSize, margins) {
   const gap = 2.5;
 
   const backgroundBox = {
@@ -47,7 +45,7 @@ function calculateBoxes(paperSize, margins) {
   };
 }
 
-function background(backgroundBox) {
+export function background(backgroundBox) {
   return svg`<rect class="background"
     style="fill-rule:evenodd;"
     width="${backgroundBox.width}"
@@ -57,7 +55,7 @@ function background(backgroundBox) {
   />`;
 }
 
-function header(headerBox) {
+export function header(headerBox) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill: none;fill-rule:evenodd;"
                    width="${headerBox.width}"
@@ -91,8 +89,7 @@ function header(headerBox) {
 function dotGrid(bodyBox, rows, cols) {
   return svg`${rows.map((row) => {
     return cols.map(
-      (col) =>
-        svg`<circle cx="${bodyBox.x + col}"
+      (col) => svg`<circle cx="${bodyBox.x + col}"
                         cy="${bodyBox.y + row}" r=".2"/>`
     );
   })}`;
@@ -160,7 +157,7 @@ function bodyLayout(bodyBox, layout) {
   }
 }
 
-function body(bodyBox, layout) {
+export function body(bodyBox, layout) {
   return svg`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
@@ -172,7 +169,7 @@ function body(bodyBox, layout) {
     ${bodyLayout(bodyBox, layout)}`;
 }
 
-function footer(footerBox) {
+export function footer(footerBox) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill:none;fill-rule:evenodd;"
                    width="${footerBox.width}"
@@ -184,65 +181,3 @@ function footer(footerBox) {
         y="${footerBox.y + footerBox.height}" class="logo">
   PAPERQUIK.com</text>`;
 }
-
-export function paper(print, paperSize, layout) {
-  if (!paperSize) {
-    return svg``;
-  }
-
-  const margins = {
-    top: halfInch,
-    right: halfInch,
-    bottom: halfInch,
-    left: halfInch,
-  };
-
-  let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(
-    paperSize,
-    margins
-  );
-
-  // Render the sections within the page.
-  return svg`
-    <svg
-      class="${print ? 'd-none d-print-block' : 'preview'}"
-      width="${paperSize.width}mm"
-      height="${paperSize.height}mm"
-      viewBox="0 0 ${paperSize.width} ${paperSize.height}"
-      version="1.1"
-    >
-      <g>
-        ${background(backgroundBox)}
-        ${header(headerBox)}
-        ${body(bodyBox, layout)}
-        ${footer(footerBox)}
-      </g>
-    </svg>`;
-}
-
-// From https://www.abeautifulsite.net/posts/getting-localized-month-and-day-names-in-the-browser/
-function getDayNames(locale = 'en', format = 'long') {
-  const formatter = new Intl.DateTimeFormat(locale, {
-    weekday: format,
-    timeZone: 'UTC',
-  });
-  const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
-    const dd = day < 10 ? `0${day}` : day;
-    return new Date(`2017-01-${dd}T00:00:00+00:00`);
-  });
-  return days.map((date) => formatter.format(date));
-}
-
-function getMonthNames(locale = 'en', format = 'long') {
-  const formatter = new Intl.DateTimeFormat(locale, {
-    month: format,
-    timeZone: 'UTC',
-  });
-  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
-    const mm = month < 10 ? `0${month}` : month;
-    return new Date(`2017-${mm}-01T00:00:00+00:00`);
-  });
-  return months.map((date) => formatter.format(date));
-}
-
-let preferredLanguage = navigator.language;

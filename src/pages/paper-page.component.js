@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 
 import { paperSizes } from '../generation/sizes.js';
-import { paper } from '../generation/paper-generation.js';
+import { paper } from '../generation/paper.js';
 
 import '../pq-adblock.js';
 import '../pq-footer.js';
