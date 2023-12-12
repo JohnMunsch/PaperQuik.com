@@ -6,9 +6,9 @@ import { paper } from '../generation/paper.js';
 import '../pq-adblock.js';
 import '../pq-footer.js';
 import '../pq-jumbotron.js';
-import '../pq-step-one.js';
-import '../pq-step-two.js';
-import '../pq-step-three.js';
+import '../steps/pq-step-one.js';
+import '../steps/pq-step-two.js';
+import '../steps/pq-step-three.js';
 import '../pq-menu.js';
 
 export class PaperPage extends LitElement {

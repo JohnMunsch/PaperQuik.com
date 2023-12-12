@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import { paperSizes } from './generation/sizes.js';
+import { paperSizes } from '../generation/sizes.js';
 
 export class PaperQuikStepOne extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
