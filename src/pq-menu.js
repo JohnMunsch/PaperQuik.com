@@ -51,6 +51,13 @@ export class PaperQuikMenu extends LitElement {
             </li>
             <li class="nav-item">
               <a
+                class="nav-link ${this.active === 'sequence' ? 'active' : ''}"
+                href="/sequence"
+                >Sequence</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
                 class="nav-link ${this.active === 'about' ? 'active' : ''}"
                 href="/about"
                 >About</a
