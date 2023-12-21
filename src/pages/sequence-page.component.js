@@ -1,8 +1,41 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 
 export class SequencePage extends LitElement {
-  // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
-  // so that our components don't collide with future additions to HTML.
+  items = [
+    {
+      name: 'Single Page Full Year Calendar 2024',
+      layout: '',
+      side: 'verso',
+      pages: 1,
+    },
+    {
+      name: 'Single Page Full Year Calendar 2025',
+      layout: '',
+      side: 'recto',
+      pages: 1,
+    },
+    {
+      name: 'Monthly Horizontal Calendar 2024',
+      layout: '',
+      side: 'verso',
+      pages: 6,
+    },
+    {
+      name: 'Double Page Single Month Calendar Jan 2024',
+      layout: '',
+      side: 'verso',
+      pages: 2,
+    },
+    { name: 'Coming Up Jan 2024', layout: '', side: 'verso', pages: 1 },
+    {
+      name: 'Single Page Per Day Jan 2024 1-31',
+      layout: '',
+      side: 'recto',
+      pages: 31,
+    },
+    { name: 'Dot Grids', layout: '', side: 'recto', pages: 10 },
+  ];
+
   static get it() {
     return 'sequence-page';
   }
@@ -13,16 +46,24 @@ export class SequencePage extends LitElement {
     return { name: { type: String } };
   }
 
-  static get styles() {
-    return css``;
-  }
-
   constructor() {
     super();
   }
 
   createRenderRoot() {
     return this;
+  }
+
+  sequenceItem(item) {
+    return html`<tr>
+      <td>
+        <a href="" @click="${(e, item) => this.editItem(item)}">
+          ${item.name}</a
+        >
+      </td>
+      <td>${item.side}</td>
+      <td>${item.pages}</td>
+    </tr>`;
   }
 
   render() {
@@ -39,97 +80,9 @@ export class SequencePage extends LitElement {
                 <th scope="col">Pages</th>
               </tr>
             </thead>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Single Page Full Year Calendar 2024</a
-                >
-              </td>
-              <td>verso</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Single Page Full Year Calendar 2025</a
-                >
-              </td>
-              <td>recto</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Monthly Horizontal Calendar 2024</a
-                >
-              </td>
-              <td>verso</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Double Page Single Month Calendar Jan 2024</a
-                >
-              </td>
-              <td>recto</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Coming Up Jan 2024</a
-                >
-              </td>
-              <td>verso</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Single Page Per Day Jan 2024 1-31</a
-                >
-              </td>
-              <td>recto</td>
-              <td>31</td>
-            </tr>
-            <tr>
-              <td>
-                <a
-                  href=""
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Dot Grids</a
-                >
-              </td>
-              <td>verso</td>
-              <td>10</td>
-            </tr>
+            <tbody>
+              ${this.items.map((item) => this.sequenceItem(item))}
+            </tbody>
           </table>
 
           <pq-adblock></pq-adblock>
@@ -141,7 +94,7 @@ export class SequencePage extends LitElement {
       <!-- Modal -->
       <div
         class="modal fade"
-        id="exampleModal"
+        id="itemModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -150,7 +103,7 @@ export class SequencePage extends LitElement {
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Modal title
+                Sequence Item
               </h1>
               <button
                 type="button"
@@ -159,7 +112,37 @@ export class SequencePage extends LitElement {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body">
+              <form>
+                <label class="form-label">Name: </label>
+                <input type="text" class="form-control" />
+                <label class="form-label">Layout: </label>
+                <select name="layouts" class="form-control" id="layout-select">
+                  <option value="">--Please choose an option--</option>
+                  <option value="blank">Blank</option>
+                  <option value="dot-grid">Dot Grid</option>
+                  <option value="dotted-ruled-lines">Dotted Ruled</option>
+                  <option value="ruled-lines">Ruled</option>
+                  <option value="square-graph">Square Graph</option>
+                </select>
+                <label class="form-label">Side: </label>
+                <select name="sides" class="form-control" id="side-select">
+                  <option value="">--Please choose an option--</option>
+                  <option value="verso">Verso</option>
+                  <option value="recto">Recto</option>
+                </select>
+                <div class="row">
+                  <div class="col">
+                    <label class="form-label">Number of Pages: </label>
+                    <input type="number" min="1" class="form-control" />
+                  </div>
+                  <div class="col">
+                    <label class="form-label">Start Date: </label>
+                    <input type="date" class="form-control" />
+                  </div>
+                </div>
+              </form>
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -168,13 +151,26 @@ export class SequencePage extends LitElement {
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="${this.saveChanges}"
+              >
                 Save changes
               </button>
             </div>
           </div>
         </div>
       </div>`;
+  }
+
+  editItem(item) {
+    const itemModal = new bootstrap.Modal('#itemModal', {});
+    itemModal.show();
+  }
+
+  saveChanges() {
+    console.log('saveChanges');
   }
 }
 
