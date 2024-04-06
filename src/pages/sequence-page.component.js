@@ -35,6 +35,7 @@ export class SequencePage extends LitElement {
     },
     { name: 'Dot Grids', layout: '', side: 'recto', pages: 10 },
   ];
+  itemToEdit = {};
 
   static get it() {
     return 'sequence-page';
@@ -67,28 +68,41 @@ export class SequencePage extends LitElement {
   }
 
   render() {
-    return html`<div>
-        <pq-menu class="d-print-none" active="sequence"></pq-menu>
-        <div class="container d-print-none">
-          <pq-adblock></pq-adblock>
+    return html` <div>
+      <pq-menu class="d-print-none" active="sequence"></pq-menu>
+      <div class="container d-print-none">
+        <pq-adblock></pq-adblock>
 
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Side</th>
-                <th scope="col">Pages</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${this.items.map((item) => this.sequenceItem(item))}
-            </tbody>
-          </table>
-
-          <pq-adblock></pq-adblock>
-
-          <pq-footer></pq-footer>
+        <div class="panel panel-default print-section">
+          <div class="panel-heading">
+            <h2>1: Edit your sequence of pages</h2>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Side</th>
+                  <th scope="col">Pages</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${this.items.map((item) => this.sequenceItem(item))}
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        <div class="panel panel-default print-section">
+          <div class="panel-heading">
+            <h2>2: Print your pages</h2>
+          </div>
+          <div class="panel-body"></div>
+        </div>
+
+        <pq-adblock></pq-adblock>
+
+        <pq-footer></pq-footer>
       </div>
 
       <!-- Modal -->
@@ -115,7 +129,11 @@ export class SequencePage extends LitElement {
             <div class="modal-body">
               <form>
                 <label class="form-label">Name: </label>
-                <input type="text" class="form-control" />
+                <input
+                  type="text"
+                  class="form-control"
+                  value="${this.itemToEdit.name}"
+                />
                 <label class="form-label">Layout: </label>
                 <select name="layouts" class="form-control" id="layout-select">
                   <option value="">--Please choose an option--</option>
@@ -161,11 +179,14 @@ export class SequencePage extends LitElement {
             </div>
           </div>
         </div>
-      </div>`;
+      </div>
+    </div>`;
   }
 
   editItem(item) {
+    console.log('editItem', item);
     const itemModal = new bootstrap.Modal('#itemModal', {});
+    this.itemToEdit = Object.assign({}, item);
     itemModal.show();
   }
 

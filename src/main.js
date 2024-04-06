@@ -38,7 +38,6 @@ export class PaperQuikApp extends LitElement {
     return 'paperquik-app';
   }
 
-  // Uncomment this to remove the Shadow DOM from this component.
   createRenderRoot() {
     return this;
   }
