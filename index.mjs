@@ -15,6 +15,7 @@ app.use(
     extended: true,
   })
 );
+console.log('dirname: ', __dirname);
 app.use(express.static(join(__dirname, 'public')));
 
 // Rather than delivering a 404, any unknown path delivers the index.html
