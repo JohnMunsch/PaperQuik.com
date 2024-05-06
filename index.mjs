@@ -15,13 +15,12 @@ app.use(
     extended: true,
   })
 );
-console.log('dirname: ', __dirname);
-app.use(express.static(join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'dist')));
 
 // Rather than delivering a 404, any unknown path delivers the index.html
 // file. That works well with our single page app.
 app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/dist/index.html');
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

@@ -1,6 +1,9 @@
 {
   "name": "paperquik-com",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "version": "2.1.0",
   "type": "module",
   "scripts": {
