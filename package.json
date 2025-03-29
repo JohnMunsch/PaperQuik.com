@@ -24,14 +24,12 @@
     "urlpattern-polyfill": "^9.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.4",
-    "@storybook/addon-links": "^7.6.4",
-    "@storybook/blocks": "^7.6.4",
-    "@storybook/web-components": "^7.6.4",
-    "@storybook/web-components-vite": "^7.6.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "^7.6.4",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/addon-links": "^8.6.11",
+    "@storybook/blocks": "^8.6.11",
+    "@storybook/web-components": "^8.6.11",
+    "@storybook/web-components-vite": "^8.6.11",
+    "storybook": "^8.6.11",
     "vite": "^6.2.3"
   },
   "overrides": {
