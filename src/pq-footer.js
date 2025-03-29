@@ -24,7 +24,7 @@ export class PaperQuikFooter extends LitElement {
 
   render() {
     return html`<footer>
-      <small>&copy; Copyright 2022, John Munsch</small>
+      <small>&copy; Copyright 2025, John Munsch</small>
     </footer> `;
   }
 }
