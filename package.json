@@ -23,13 +23,11 @@
     "urlpattern-polyfill": "10.1.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.6.11",
-    "@storybook/addon-links": "^8.6.11",
-    "@storybook/blocks": "^8.6.11",
-    "@storybook/web-components": "^8.6.11",
-    "@storybook/web-components-vite": "^8.6.11",
-    "storybook": "^8.6.11",
-    "vite": "^7.2.2"
+    "@storybook/addon-links": "^10.0.7",
+    "@storybook/web-components-vite": "^10.0.7",
+    "storybook": "^10.0.7",
+    "vite": "^7.2.2",
+    "@storybook/addon-docs": "^10.0.7"
   },
   "overrides": {
     "@storybook/web-component": {
