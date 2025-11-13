@@ -6,11 +6,9 @@ This document provides instructions for AI agents working on the PaperQuik.com c
 
 This is a monorepo containing the source code for PaperQuik.com:
 
-- `src/`: A frontend web application built with Vite, Lit, and TypeScript. There is no back-end at this time.
+- `src/`: A frontend web application built with Vite, Lit, and TypeScript. The back-end is extremely simple and just serves up the static files which make up the UI.
 
 ## Development
-
-All of these commands are run in the "ui" directory:
 
 - `npm install` - Always do this after pulling down a new version of the source.
 

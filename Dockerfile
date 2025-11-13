@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24-alpine
 
 ENV NODE_ENV=production
 LABEL org.opencontainers.image.source="https://github.com/JohnMunsch/PaperQuik.com"
