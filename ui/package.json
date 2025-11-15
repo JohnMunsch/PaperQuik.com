@@ -10,16 +10,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "nodemon index.mjs",
     "storybook": "storybook dev",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@lit-labs/router": "^0.1.4",
-    "compression": "^1.7.4",
-    "express": "^4.18.2",
     "lit": "^3.3.1",
-    "nodemon": "^3.1.11",
     "urlpattern-polyfill": "10.1.0"
   },
   "devDependencies": {
@@ -28,10 +24,5 @@
     "storybook": "^10.0.7",
     "vite": "^7.2.2",
     "@storybook/addon-docs": "^10.0.7"
-  },
-  "overrides": {
-    "@storybook/web-component": {
-      "lit": "^3.3.1"
-    }
   }
 }
