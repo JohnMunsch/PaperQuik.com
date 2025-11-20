@@ -4,11 +4,29 @@ This document provides instructions for AI agents working on the PaperQuik.com c
 
 ## Project Overview
 
-This is a monorepo containing the source code for PaperQuik.com:
+This is a monorepo containing the source code for PaperQuik.com.  The project is split into two main parts:
 
-- `src/`: A frontend web application built with Vite, Lit, and TypeScript. There is no back-end at this time.
+- `ui/`: A frontend web application built with Vite, Lit, and TypeScript.
+- `server/`: A backend server built with Hono, Node.js, and TypeScript. At the moment the server does not have an API, it just serves up the static files which make up the UI.
 
 ## Development
+
+If any of the commands below don't seem to work, confirm what directory you're in by running `pwd` (present working directory) and checking to see if you're in the root, in the server directory, or in the ui directory.
+
+### Server
+
+All of these commands are run in the "server" directory:
+
+- `npm install` - Always do this after pulling down a new version of the source.
+- `npm run migrate` - Create a new database using the latest set of migrations or update an existing database.
+
+- `npm run dev` - Run this to do development work. It will tell you the URL to use to access the server.
+- `npm run build` - Always run this to make sure the code builds without TypeScript errors after making changes.
+- `npm run test` - Always run the unit tests to make sure the code still passes after making changes.
+
+- `npm start` - You will not need to run this while working on the site.
+
+### UI
 
 All of these commands are run in the "ui" directory:
 
@@ -27,6 +45,8 @@ All of these commands are run in the "ui" directory:
 - Vite
 - Lit + @lit-labs/router
 - Redux Toolkit
+
+- Hono
 
 ## General Workflow
 
