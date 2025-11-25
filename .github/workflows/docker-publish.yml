@@ -29,8 +29,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: npm install
+      - run: npm ci
+        working-directory: ./ui
       - run: npm run build
+        working-directory: ./ui
+
+      # I've got a pretty good set of unit tests for the UI, so I need to run them
+      # before building the Docker image.
+      - run: npm run test
+        working-directory: ./ui
+
+      # Build the Server project.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+        working-directory: ./server
+      - run: npm run build
+        working-directory: ./server
 
       # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
       - name: Log in to the Container registry
