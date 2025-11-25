@@ -1,5 +1,7 @@
 FROM node:24-alpine
 
+RUN apk add --no-cache python3 py3-pip make g++
+
 ENV NODE_ENV=production
 LABEL org.opencontainers.image.source="https://github.com/JohnMunsch/PaperQuik.com"
 
