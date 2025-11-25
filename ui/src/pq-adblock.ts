@@ -1,8 +1,6 @@
 import { LitElement, html } from 'lit';
 
 export class PaperQuikAdblock extends LitElement {
-  // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
-  // so that our components don't collide with future additions to HTML.
   static get it() {
     return 'pq-adblock';
   }

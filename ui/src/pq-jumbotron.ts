@@ -2,8 +2,6 @@ import { LitElement, html } from 'lit';
 
 const key = 'pq-jumbotron';
 export class PaperQuikJumbotron extends LitElement {
-  // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
-  // so that our components don't collide with future additions to HTML.
   static get it() {
     return 'pq-jumbotron';
   }
