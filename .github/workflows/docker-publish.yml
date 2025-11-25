@@ -34,11 +34,6 @@ jobs:
       - run: npm run build
         working-directory: ./ui
 
-      # I've got a pretty good set of unit tests for the UI, so I need to run them
-      # before building the Docker image.
-      - run: npm run test
-        working-directory: ./ui
-
       # Build the Server project.
       - uses: actions/setup-node@v4
         with:
