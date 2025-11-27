@@ -3,7 +3,6 @@ import { Router } from '@lit-labs/router';
 
 import './pages/about-page.component.js';
 import './pages/paper-page.component.js';
-import './pages/sequence-page.component.js';
 
 // Conditional ESM module loading (Node.js and browser)
 if (!globalThis.URLPattern) {
@@ -17,10 +16,6 @@ export class PaperQuikApp extends LitElement {
       path: '/paper/:size?/:layout?',
       render: ({ size, layout }) =>
         html`<paper-page .size="${size}" .layout="${layout}"></paper-page>`,
-    },
-    {
-      path: '/sequence',
-      render: () => html`<sequence-page></sequence-page>`,
     },
     {
       path: '/*',

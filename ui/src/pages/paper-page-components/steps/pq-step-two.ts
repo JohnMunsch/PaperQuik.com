@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 
-import { paperLayouts } from '../generation/layouts.js';
+import { paperLayouts } from '../../../generation/layouts.js';
 
 export class PaperQuikStepTwo extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -34,13 +34,13 @@ export class PaperQuikStepTwo extends LitElement {
       </div>
       <div class="panel-body">
         ${this.size
-          ? html` <div class="layouts-wrapper">
+        ? html` <div class="layouts-wrapper">
               ${paperLayouts.map((paperLayout) => {
-                return html`<a href="/paper/${this.size}/${paperLayout.id}">
+          return html`<a href="/paper/${this.size}/${paperLayout.id}">
                   <div
                     class="layoutIcon ${paperLayout.id === this.layout
-                      ? 'selected'
-                      : 'notSelected'}"
+              ? 'selected'
+              : 'notSelected'}"
                   >
                     <span class="layoutName">${paperLayout.name}</span>
                     <div
@@ -53,9 +53,9 @@ export class PaperQuikStepTwo extends LitElement {
                     </div>
                   </div>
                 </a>`;
-              })}
+        })}
             </div>`
-          : html`<div>
+        : html`<div>
               You must pick a paper size before you pick a layout for your page.
             </div>`}
       </div>

@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 
-import { paper } from '../generation/paper.js';
+import { paper } from '../../../generation/paper.js';
 
 export class PaperQuikStepThree extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -95,7 +95,7 @@ export class PaperQuikStepThree extends LitElement {
         </div>
         <div class="panel-body">
           ${this.size && this.layout
-            ? html`<div class="row">
+        ? html`<div class="row">
                 <div class="col-md-8 preview">
                   ${paper(false, this.paperSize, this.layout)}
                 </div>
@@ -151,7 +151,7 @@ export class PaperQuikStepThree extends LitElement {
                   </div>
                 </div>
               </div>`
-            : html`<div>
+        : html`<div>
                 You must pick a paper size and layout before you can print your
                 page.
               </div>`}

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 
-import '../pq-adblock.js';
-import '../pq-footer.js';
+import './shared-components/pq-adblock.js';
+import './shared-components/pq-footer.js';
 
 export class AboutPage extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
