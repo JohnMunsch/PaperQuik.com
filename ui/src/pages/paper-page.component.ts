@@ -3,13 +3,13 @@ import { LitElement, html } from 'lit';
 import { paperSizes } from '../generation/sizes.js';
 import { paper } from '../generation/paper.js';
 
-import '../pq-adblock.js';
-import '../pq-footer.js';
-import '../pq-jumbotron.js';
-import '../steps/pq-step-one.js';
-import '../steps/pq-step-two.js';
-import '../steps/pq-step-three.js';
-import '../pq-menu.js';
+import './shared-components/pq-adblock.js';
+import './shared-components/pq-footer.js';
+import './paper-page-components/pq-jumbotron.js';
+import './paper-page-components/steps/pq-step-one.js';
+import './paper-page-components/steps/pq-step-two.js';
+import './paper-page-components/steps/pq-step-three.js';
+import './shared-components/pq-menu.js';
 
 export class PaperPage extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import { paperSizes } from '../generation/sizes.js';
+import { paperSizes } from '../../../generation/sizes.js';
 
 export class PaperQuikStepOne extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
@@ -39,17 +39,17 @@ export class PaperQuikStepOne extends LitElement {
       </div>
       <div class="panel-body">
         ${paperSizes.map((paperSize) => {
-          return html`<a href="/paper/${paperSize.id}">
+      return html`<a href="/paper/${paperSize.id}">
             <div
               class="paperIcon ${paperSize.id === this.size
-                ? 'selected'
-                : 'notSelected'}"
+          ? 'selected'
+          : 'notSelected'}"
               style="${styleMap(this.paperIconStyle(paperSize))}"
             >
               <span class="paperName">${paperSize.name}</span>
             </div>
           </a>`;
-        })}
+    })}
       </div>
     </div>`;
   }
