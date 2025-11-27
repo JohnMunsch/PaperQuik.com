@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 
+import { version as uiVersion } from './version.ts';
 import './shared-components/pq-adblock.js';
 import './shared-components/pq-footer.js';
 
@@ -30,7 +31,7 @@ export class AboutPage extends LitElement {
       <div class="container">
         <pq-adblock></pq-adblock>
 
-        <h2>About PaperQuik</h2>
+        <h2>About PaperQuik v${uiVersion}</h2>
 
         <p>
           I apparently started building the first version of PaperQuik some time
