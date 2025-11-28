@@ -1,11 +1,27 @@
 import { svg } from 'lit';
 
-import type { PaperSize } from './sizes';
-import type { Margins } from './paper';
-
 export interface Box {
   x: number;
   y: number;
+  width: number;
+  height: number;
+}
+
+export interface Layout {
+  id: string;
+  name: string;
+}
+
+export interface Margins {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+export interface PaperSize {
+  id: string;
+  name: string;
   width: number;
   height: number;
 }

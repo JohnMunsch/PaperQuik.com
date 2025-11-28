@@ -1,14 +1,7 @@
 import { svg } from 'lit';
 
-import type { PaperSize } from './sizes';
+import type { Margins, PaperSize } from './helpers';
 import { calculateBoxes, background, header, body, footer } from './helpers';
-
-export interface Margins {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-}
 
 const halfInch = 12.131895;
 const margins: Margins = {

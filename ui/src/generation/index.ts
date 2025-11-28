@@ -1,8 +1,8 @@
 import { add } from 'date-fns/add';
-import { LitElement, css, svg } from 'lit';
+import { LitElement, svg, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { getDayNames, getMonthNames } from './calendarLocalization.ts';
+import { getDayNames, getMonthNames } from './helpers';
 
 class MonthCalendar extends LitElement {
   @property()

@@ -1,9 +1,4 @@
-export interface PaperSize {
-  id: string;
-  name: string;
-  width: number;
-  height: number;
-}
+import type { PaperSize } from './helpers.ts';
 
 export const paperSizes: PaperSize[] = [
   {

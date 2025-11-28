@@ -1,21 +1,14 @@
 import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
 
 export class PaperQuikMenu extends LitElement {
+  @property()
+  active: string = 'paper';
+
   static get it() {
     return 'pq-menu';
   }
 
-  static get properties() {
-    // All of the properties of this component and a type for each (used when converting
-    // attributes to property values).
-    return { active: String };
-  }
-
-  constructor() {
-    super();
-  }
-
-  // Uncomment this to remove the Shadow DOM from this component.
   createRenderRoot() {
     return this;
   }

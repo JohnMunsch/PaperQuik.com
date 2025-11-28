@@ -1,4 +1,6 @@
-export const paperLayouts = [
+import type { Layout } from './helpers';
+
+export const paperLayouts: Layout[] = [
   {
     id: 'blank',
     name: 'Blank',
