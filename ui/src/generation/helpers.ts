@@ -1,6 +1,16 @@
 import { svg } from 'lit';
 
-export function calculateBoxes(paperSize, margins) {
+import type { PaperSize } from './sizes';
+import type { Margins } from './paper';
+
+export interface Box {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export function calculateBoxes(paperSize: PaperSize, margins: Margins) {
   const gap = 2.5;
 
   const backgroundBox = {
@@ -45,7 +55,7 @@ export function calculateBoxes(paperSize, margins) {
   };
 }
 
-export function background(backgroundBox) {
+export function background(backgroundBox: Box) {
   return svg`<rect class="background"
     style="fill-rule:evenodd;"
     width="${backgroundBox.width}"
@@ -55,7 +65,7 @@ export function background(backgroundBox) {
   />`;
 }
 
-export function header(headerBox) {
+export function header(headerBox: Box) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill: none;fill-rule:evenodd;"
                    width="${headerBox.width}"
@@ -86,7 +96,7 @@ export function header(headerBox) {
        y="${headerBox.y + 3}">Title/Subject</text>`;
 }
 
-function dotGrid(bodyBox, rows, cols) {
+function dotGrid(bodyBox: Box, rows: number[], cols: number[]) {
   return svg`${rows.map((row) => {
     return cols.map(
       (col) => svg`<circle cx="${bodyBox.x + col}"
@@ -95,7 +105,7 @@ function dotGrid(bodyBox, rows, cols) {
   })}`;
 }
 
-function ruledLines(bodyBox, rows) {
+function ruledLines(bodyBox: Box, rows: number[]) {
   return svg`${rows.map(
     (row) => svg`<line x1="${bodyBox.x}"
           y1="${bodyBox.y + row}"
@@ -105,7 +115,7 @@ function ruledLines(bodyBox, rows) {
   )}`;
 }
 
-function squareGraphColumns(bodyBox, cols) {
+function squareGraphColumns(bodyBox: Box, cols: number[]) {
   return svg`${cols.map(
     (col) => svg`<line x1="${bodyBox.x + col}"
           y1="${bodyBox.y}"
@@ -115,7 +125,7 @@ function squareGraphColumns(bodyBox, cols) {
   )}`;
 }
 
-function bodyLayout(bodyBox, layout) {
+function bodyLayout(bodyBox: Box, layout: string) {
   const rowHeight = 5;
   const colWidth = 5;
 
@@ -157,7 +167,7 @@ function bodyLayout(bodyBox, layout) {
   }
 }
 
-export function body(bodyBox, layout) {
+export function body(bodyBox: Box, layout: string) {
   return svg`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
@@ -169,7 +179,7 @@ export function body(bodyBox, layout) {
     ${bodyLayout(bodyBox, layout)}`;
 }
 
-export function footer(footerBox) {
+export function footer(footerBox: Box) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill:none;fill-rule:evenodd;"
                    width="${footerBox.width}"

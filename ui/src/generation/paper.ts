@@ -1,20 +1,27 @@
 import { svg } from 'lit';
 
+import type { PaperSize } from './sizes';
 import { calculateBoxes, background, header, body, footer } from './helpers';
 
-const halfInch = 12.131895;
+export interface Margins {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
 
-export function paper(print, paperSize, layout) {
+const halfInch = 12.131895;
+const margins: Margins = {
+  top: halfInch,
+  right: halfInch,
+  bottom: halfInch,
+  left: halfInch,
+};
+
+export function paper(print: boolean, paperSize: PaperSize, layout: string) {
   if (!paperSize) {
     return svg``;
   }
-
-  const margins = {
-    top: halfInch,
-    right: halfInch,
-    bottom: halfInch,
-    left: halfInch,
-  };
 
   let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(
     paperSize,

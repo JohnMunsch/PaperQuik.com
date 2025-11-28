@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@lit-labs/router": "^0.1.4",
+    "date-fns": "^4.1.0",
     "lit": "^3.3.1",
     "urlpattern-polyfill": "10.1.0"
   },

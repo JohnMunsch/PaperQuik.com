@@ -26,3 +26,6 @@ Whenever there is a new pull request (PR) Dokploy is configured to build and dep
 
 - [GitHub repo](https://github.com/JohnMunsch/PaperQuik.com)
 - [PaperQuik.com Dokploy](https://dokploy.johnmunsch.com/dashboard/project/8tsAJInSOenk3HEWx-p75/environment/env_prod_8tsAJInSOenk3HEWx-p75_1759947079.935333/services/application/dK7hRyVgy7IM-QjGLseuV)
+
+### Research and Ideas
+- https://www.npmjs.com/package/@lume/autolayout

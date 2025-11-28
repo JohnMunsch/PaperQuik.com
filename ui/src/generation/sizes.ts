@@ -1,4 +1,11 @@
-export const paperSizes = [
+export interface PaperSize {
+  id: string;
+  name: string;
+  width: number;
+  height: number;
+}
+
+export const paperSizes: PaperSize[] = [
   {
     id: 'letter',
     name: 'Letter',
@@ -26,14 +33,14 @@ export const paperSizes = [
   {
     id: 'a4',
     name: 'A4',
-    width: 210.0,
-    height: 297.0,
+    width: 210,
+    height: 297,
   },
   {
     id: 'a4l',
     name: 'A4',
-    width: 297.0,
-    height: 210.0,
+    width: 297,
+    height: 210,
   },
   {
     id: 'a5',
