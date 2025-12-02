@@ -1,56 +1,30 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 
-import { paperSizes } from '../generation/sizes.js';
-import { paper } from '../generation/paper.js';
+import { PaperSizeNames } from "../generation/helpers.js";
+import { paper } from "../generation/paper.js";
 
-import './shared-components/pq-adblock.js';
-import './shared-components/pq-footer.js';
-import './paper-page-components/pq-jumbotron.js';
-import './paper-page-components/steps/pq-step-one.js';
-import './paper-page-components/steps/pq-step-two.js';
-import './paper-page-components/steps/pq-step-three.js';
-import './shared-components/pq-menu.js';
+import "./shared-components/pq-adblock.js";
+import "./shared-components/pq-footer.js";
+import "./paper-page-components/pq-jumbotron.js";
+import "./paper-page-components/steps/pq-step-one.js";
+import "./paper-page-components/steps/pq-step-two.js";
+import "./paper-page-components/steps/pq-step-three.js";
+import "./shared-components/pq-menu.js";
 
+@customElement("paper-page")
 export class PaperPage extends LitElement {
-  // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
-  // so that our components don't collide with future additions to HTML.
-  static get it() {
-    return 'paper-page';
-  }
+  @property() layout?: string;
+  @property() size?: PaperSizeNames;
+  @state() showJumbotron: boolean = true;
 
-  static get properties() {
-    // All of the properties of this component and a type for each (used when converting
-    // attributes to property values).
-    return {
-      layout: { type: String },
-      size: { type: String },
-      showJumbotron: { state: true, type: Boolean },
-    };
-  }
-
-  constructor() {
-    super();
-
-    this.paperSize = null;
-    this.showJumbotron = true;
-  }
-
-  // Remove the Shadow DOM from this component.
   createRenderRoot() {
     return this;
   }
 
-  willUpdate(changedProperties) {
-    if (changedProperties.has('size')) {
-      this.paperSize = paperSizes.find(
-        (paperSize) => paperSize.id === this.size
-      );
-    }
-  }
-
   render() {
     return html`<div>
-      ${paper(true, this.paperSize, this.layout)}
+      ${paper(true, this.size, this.layout)}
       <pq-menu class="d-print-none" active="paper"></pq-menu>
       <div class="container d-print-none">
         <pq-jumbotron .show="${this.showJumbotron}"></pq-jumbotron>
@@ -74,5 +48,3 @@ export class PaperPage extends LitElement {
     </div>`;
   }
 }
-
-customElements.define(PaperPage.it, PaperPage);

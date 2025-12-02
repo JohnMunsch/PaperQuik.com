@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit';
 import { Router } from '@lit-labs/router';
 
-import './pages/about-page.component.js';
-import './pages/paper-page.component.js';
+import './pages/about-page.component.ts';
+import './pages/paper-page.component.ts';
+import './pages/book-page.component.ts';
 
 // Conditional ESM module loading (Node.js and browser)
 if (!globalThis.URLPattern) {
@@ -16,6 +17,10 @@ export class PaperQuikApp extends LitElement {
       path: '/paper/:size?/:layout?',
       render: ({ size, layout }) =>
         html`<paper-page .size="${size}" .layout="${layout}"></paper-page>`,
+    },
+    {
+      path: '/book',
+      render: () => html`<book-page></book-page>`,
     },
     {
       path: '/*',

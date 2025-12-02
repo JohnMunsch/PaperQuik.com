@@ -1,7 +1,8 @@
-import { svg } from 'lit';
+import { svg } from "lit";
 
-import type { Margins, PaperSize } from './helpers';
-import { calculateBoxes, background, header, body, footer } from './helpers';
+import type { Margins, PaperSizeNames } from "./helpers.ts";
+import { calculateBoxes, background, header, body, footer } from "./helpers.ts";
+import { paperSizes } from "./sizes.ts";
 
 const halfInch = 12.131895;
 const margins: Margins = {
@@ -11,8 +12,18 @@ const margins: Margins = {
   left: halfInch,
 };
 
-export function paper(print: boolean, paperSize: PaperSize, layout: string) {
+export function paper(
+  print: boolean,
+  paperSizeName: PaperSizeNames | undefined,
+  layout: string | undefined
+) {
+  if (!paperSizeName || !layout) {
+    return svg``;
+  }
+
+  let paperSize = paperSizes.find((size) => size.name === paperSizeName);
   if (!paperSize) {
+    console.error(`Paper size ${paperSizeName} not found.`);
     return svg``;
   }
 
@@ -24,7 +35,7 @@ export function paper(print: boolean, paperSize: PaperSize, layout: string) {
   // Render the sections within the page.
   return svg`
     <svg
-      class="${print ? 'd-none d-print-block' : 'preview'}"
+      class="${print ? "d-none d-print-block" : "preview"}"
       width="${paperSize.width}mm"
       height="${paperSize.height}mm"
       viewBox="0 0 ${paperSize.width} ${paperSize.height}"

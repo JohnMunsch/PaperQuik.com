@@ -1,45 +1,46 @@
-import type { PaperSize } from './helpers.ts';
+import type { PaperSize } from "./helpers.ts";
+import { PaperSizeNames } from "./helpers.ts";
 
 export const paperSizes: PaperSize[] = [
   {
-    id: 'letter',
-    name: 'Letter',
+    id: "letter",
+    name: PaperSizeNames.Letter,
     width: 215.9,
     height: 279.4,
   },
   {
-    id: 'letterl',
-    name: 'Letter',
+    id: "letterl",
+    name: PaperSizeNames.LetterLandscape,
     width: 279.4,
     height: 215.9,
   },
   {
-    id: 'legal',
-    name: 'Legal',
+    id: "legal",
+    name: PaperSizeNames.Legal,
     width: 215.9,
     height: 355.6,
   },
   {
-    id: 'legall',
-    name: 'Legal',
+    id: "legall",
+    name: PaperSizeNames.LegalLandscape,
     width: 355.6,
     height: 215.9,
   },
   {
-    id: 'a4',
-    name: 'A4',
+    id: "a4",
+    name: PaperSizeNames.A4,
     width: 210,
     height: 297,
   },
   {
-    id: 'a4l',
-    name: 'A4',
+    id: "a4l",
+    name: PaperSizeNames.A4Landscape,
     width: 297,
     height: 210,
   },
   {
-    id: 'a5',
-    name: 'A5',
+    id: "a5",
+    name: PaperSizeNames.A5,
     width: 148,
     height: 210,
   },

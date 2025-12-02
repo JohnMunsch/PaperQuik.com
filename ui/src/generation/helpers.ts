@@ -1,4 +1,15 @@
-import { svg } from 'lit';
+import { svg } from "lit";
+
+export enum PaperSizeNames {
+  Letter = "letter",
+  LetterLandscape = "letterl",
+  Legal = "legal",
+  LegalLandscape = "legall",
+  A4 = "a4",
+  A4Landscape = "a4l",
+  A5 = "a5",
+  A5Landscape = "a5l",
+}
 
 export interface Box {
   x: number;
@@ -21,7 +32,7 @@ export interface Margins {
 
 export interface PaperSize {
   id: string;
-  name: string;
+  name: PaperSizeNames;
   width: number;
   height: number;
 }
@@ -169,17 +180,19 @@ function bodyLayout(bodyBox: Box, layout: string) {
   }
 
   switch (layout) {
-    case 'blank':
+    case "blank":
       return svg``;
-    case 'dot-grid':
+    case "dot-grid":
       return dotGrid(bodyBox, rows, cols);
-    case 'dotted-ruled-lines':
+    case "dotted-ruled-lines":
       return svg`${dotGrid(bodyBox, rows, cols)}${ruledLines(bodyBox, rows)}`;
-    case 'ruled-lines':
+    case "ruled-lines":
       return ruledLines(bodyBox, rows);
-    case 'square-graph':
-      return svg`${ruledLines(bodyBox, rows)}
-      ${squareGraphColumns(bodyBox, cols)}`;
+    case "square-graph":
+      return svg`${ruledLines(bodyBox, rows)}${squareGraphColumns(
+        bodyBox,
+        cols
+      )}`;
   }
 }
 
@@ -209,10 +222,10 @@ export function footer(footerBox: Box) {
 }
 
 // From https://www.abeautifulsite.net/posts/getting-localized-month-and-day-names-in-the-browser/
-export function getDayNames(locale = 'en', format = 'long') {
+export function getDayNames(locale = "en", format = "long") {
   const formatter = new Intl.DateTimeFormat(locale, {
     weekday: format,
-    timeZone: 'UTC',
+    timeZone: "UTC",
   } as Intl.DateTimeFormatOptions);
   const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
     const dd = day < 10 ? `0${day}` : day;
@@ -221,10 +234,10 @@ export function getDayNames(locale = 'en', format = 'long') {
   return days.map((date) => formatter.format(date));
 }
 
-export function getMonthNames(locale = 'en', format = 'long') {
+export function getMonthNames(locale = "en", format = "long") {
   const formatter = new Intl.DateTimeFormat(locale, {
     month: format,
-    timeZone: 'UTC',
+    timeZone: "UTC",
   } as Intl.DateTimeFormatOptions);
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
     const mm = month < 10 ? `0${month}` : month;
