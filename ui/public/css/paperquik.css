@@ -125,3 +125,22 @@ svg .logo {
 #mc_embed_signup input {
   color: black;
 }
+
+html {
+  background-color: #ffffff;
+  margin: 0px;
+}
+
+@media print {
+  @page {
+    size: 11in 8.5in;
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+}

@@ -1,16 +1,26 @@
-import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { property } from "lit/decorators.js";
 
 export class PaperQuikMenu extends LitElement {
   @property()
-  active: string = 'paper';
+  active: string = "paper";
 
   static get it() {
-    return 'pq-menu';
+    return "pq-menu";
   }
 
   createRenderRoot() {
     return this;
+  }
+
+  addPrintMenu() {
+    return html`<li class="nav-item">
+      <a
+        class="nav-link ${this.active === "print" ? "active" : ""}"
+        href="/print"
+        >Print</a
+      >
+    </li>`;
   }
 
   render() {
@@ -34,22 +44,16 @@ export class PaperQuikMenu extends LitElement {
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                class="nav-link ${this.active === 'paper' ? 'active' : ''}"
+                class="nav-link ${this.active === "paper" ? "active" : ""}"
                 aria-current="page"
                 href="/paper"
                 >Home</a
               >
             </li>
-            <!-- li class="nav-item">
-              <a
-                class="nav-link ${this.active === 'sequence' ? 'active' : ''}"
-                href="/sequence"
-                >Sequence</a
-              >
-            </li -->
+            ${import.meta.env.DEV ? this.addPrintMenu() : null}
             <li class="nav-item">
               <a
-                class="nav-link ${this.active === 'about' ? 'active' : ''}"
+                class="nav-link ${this.active === "about" ? "active" : ""}"
                 href="/about"
                 >About</a
               >
