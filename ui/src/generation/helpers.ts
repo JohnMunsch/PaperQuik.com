@@ -31,8 +31,8 @@ export interface Margins {
 }
 
 export interface PaperSize {
-  id: string;
-  name: PaperSizeNames;
+  id: PaperSizeNames;
+  name: string;
   width: number;
   height: number;
 }

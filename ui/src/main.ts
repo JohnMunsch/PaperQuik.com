@@ -3,7 +3,6 @@ import { Router } from "@lit-labs/router";
 
 import "./pages/about-page.component.ts";
 import "./pages/paper-page.component.ts";
-import "./pages/book-page.component.ts";
 import "./pages/print-page.component.ts";
 
 // Conditional ESM module loading (Node.js and browser)
@@ -22,10 +21,6 @@ export class PaperQuikApp extends LitElement {
     {
       path: "/print",
       render: () => html`<print-page></print-page>`,
-    },
-    {
-      path: "/book",
-      render: () => html`<book-page></book-page>`,
     },
     {
       path: "/*",

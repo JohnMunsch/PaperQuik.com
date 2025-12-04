@@ -21,7 +21,7 @@ export function paper(
     return svg``;
   }
 
-  let paperSize = paperSizes.find((size) => size.name === paperSizeName);
+  let paperSize = paperSizes.find((size) => size.id === paperSizeName);
   if (!paperSize) {
     console.error(`Paper size ${paperSizeName} not found.`);
     return svg``;
