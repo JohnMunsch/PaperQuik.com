@@ -1,14 +1,13 @@
 import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 
 import { paper } from "../../../generation/paper.ts";
-import type { PaperSize } from "../../../generation/helpers.ts";
+import type { PaperSizeNames } from "../../../generation/helpers.ts";
 
 @customElement("pq-step-three")
 export class PaperQuikStepThree extends LitElement {
-  @property() size?: string;
+  @property() size?: PaperSizeNames;
   @property() layout?: string;
-  @property() paperSize?: PaperSize;
 
   printModal() {
     var myModal = new bootstrap.Modal(
@@ -83,7 +82,7 @@ export class PaperQuikStepThree extends LitElement {
           ${this.size && this.layout
             ? html`<div class="row">
                 <div class="col-md-8 preview">
-                  ${paper(false, this.paperSize, this.layout)}
+                  ${paper(false, this.size, this.layout)}
                 </div>
                 <div class="col-md-4">
                   <button

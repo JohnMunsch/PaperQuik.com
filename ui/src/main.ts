@@ -1,32 +1,37 @@
-import { LitElement, html } from 'lit';
-import { Router } from '@lit-labs/router';
+import { LitElement, html } from "lit";
+import { Router } from "@lit-labs/router";
 
-import './pages/about-page.component.ts';
-import './pages/paper-page.component.ts';
-import './pages/book-page.component.ts';
+import "./pages/about-page.component.ts";
+import "./pages/paper-page.component.ts";
+import "./pages/book-page.component.ts";
+import "./pages/print-page.component.ts";
 
 // Conditional ESM module loading (Node.js and browser)
 if (!globalThis.URLPattern) {
-  await import('urlpattern-polyfill');
+  await import("urlpattern-polyfill");
 }
 
 export class PaperQuikApp extends LitElement {
   _router = new Router(this, [
-    { path: '/about', render: () => html`<about-page></about-page>` },
+    { path: "/about", render: () => html`<about-page></about-page>` },
     {
-      path: '/paper/:size?/:layout?',
+      path: "/paper/:size?/:layout?",
       render: ({ size, layout }) =>
         html`<paper-page .size="${size}" .layout="${layout}"></paper-page>`,
     },
     {
-      path: '/book',
+      path: "/print",
+      render: () => html`<print-page></print-page>`,
+    },
+    {
+      path: "/book",
       render: () => html`<book-page></book-page>`,
     },
     {
-      path: '/*',
+      path: "/*",
       enter: async () => {
         // Trigger the router again
-        await this._router.goto('/paper');
+        await this._router.goto("/paper");
 
         // Reject this route so the dynamic one is matched
         return false;
@@ -35,7 +40,7 @@ export class PaperQuikApp extends LitElement {
   ]);
 
   static get it() {
-    return 'paperquik-app';
+    return "paperquik-app";
   }
 
   createRenderRoot() {
