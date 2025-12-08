@@ -133,7 +133,7 @@ html {
 
 @media print {
   @page {
-    size: 11in 8.5in;
+    size: 8.5in 11in;
     margin: 0;
   }
 
