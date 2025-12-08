@@ -1,21 +1,8 @@
 import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
+@customElement('pq-adblock')
 export class PaperQuikAdblock extends LitElement {
-  static get it() {
-    return 'pq-adblock';
-  }
-
-  static get properties() {
-    // All of the properties of this component and a type for each (used when converting
-    // attributes to property values).
-    return {};
-  }
-
-  constructor() {
-    super();
-  }
-
-  // Remove the Shadow DOM from this component.
   createRenderRoot() {
     return this;
   }
@@ -40,5 +27,3 @@ export class PaperQuikAdblock extends LitElement {
     window.adsbygoogle.push({});
   }
 }
-
-customElements.define(PaperQuikAdblock.it, PaperQuikAdblock);

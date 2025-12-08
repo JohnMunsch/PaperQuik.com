@@ -1,19 +1,8 @@
 import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
+@customElement('pq-footer')
 export class PaperQuikFooter extends LitElement {
-  static get it() {
-    return 'pq-footer';
-  }
-
-  static get properties() {
-    return { name: { type: String } };
-  }
-
-  constructor() {
-    super();
-  }
-
-  // Uncomment this to remove the Shadow DOM from this component.
   createRenderRoot() {
     return this;
   }
@@ -24,5 +13,3 @@ export class PaperQuikFooter extends LitElement {
     </footer> `;
   }
 }
-
-customElements.define(PaperQuikFooter.it, PaperQuikFooter);
