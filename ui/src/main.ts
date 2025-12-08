@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 import { Router } from '@lit-labs/router';
 
-import './pages/about-page.component.js';
-import './pages/paper-page.component.js';
+import './pages/about-page.component.ts';
+import './pages/paper-page.component.ts';
 
 // Conditional ESM module loading (Node.js and browser)
 if (!globalThis.URLPattern) {

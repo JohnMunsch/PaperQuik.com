@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import './pq-step-two.js';
+import './pq-step-two.ts';
 
 // More on default export: https://storybook.js.org/docs/web-components/writing-stories/introduction#default-export
 export default {

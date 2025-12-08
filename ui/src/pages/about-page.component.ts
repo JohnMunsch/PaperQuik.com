@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit';
 
 import { version as uiVersion } from './version.ts';
-import './shared-components/pq-adblock.js';
-import './shared-components/pq-footer.js';
+import './shared-components/pq-adblock.ts';
+import './shared-components/pq-footer.ts';
 
 export class AboutPage extends LitElement {
   // Note: Your element must have a hyphen in the name (for example, "hello-world"). It's a requirement
