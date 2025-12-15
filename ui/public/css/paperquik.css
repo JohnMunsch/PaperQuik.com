@@ -74,3 +74,20 @@ svg .logo {
 #mc_embed_signup input {
   color: black;
 }
+
+@media print {
+  @page {
+    size: a4 landscape;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+  div.container {
+    all: revert;
+  }
+}

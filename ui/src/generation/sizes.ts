@@ -24,6 +24,12 @@ export const paperSizes = [
     height: 215.9,
   },
   {
+    id: 'halfletter',
+    name: 'Half Letter',
+    width: 148.7,
+    height: 215.9,
+  },
+  {
     id: 'a4',
     name: 'A4',
     width: 210.0,
