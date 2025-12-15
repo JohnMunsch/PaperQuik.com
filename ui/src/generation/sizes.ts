@@ -1,52 +1,68 @@
+export interface PaperSize {
+  id: string;
+  name: string;
+  width: number;
+  height: number;
+}
+
+export const letter: PaperSize = {
+  id: 'letter',
+  name: 'Letter',
+  width: 215.9,
+  height: 279.4,
+};
+export const letterl: PaperSize = {
+  id: 'letterl',
+  name: 'Letter',
+  width: letter.height,
+  height: letter.width,
+};
+export const legal: PaperSize = {
+  id: 'legal',
+  name: 'Legal',
+  width: 215.9,
+  height: 355.6,
+};
+export const legall: PaperSize = {
+  id: 'legall',
+  name: 'Legal',
+  width: legal.height,
+  height: legal.width,
+};
+export const halfletter: PaperSize = {
+  id: 'halfletter',
+  name: 'Half Letter',
+  width: letter.width / 2,
+  height: letter.height,
+};
+export const a4: PaperSize = {
+  id: 'a4',
+  name: 'A4',
+  width: 210.0,
+  height: 297.0,
+};
+export const a4l: PaperSize = {
+  id: 'a4l',
+  name: 'A4',
+  width: 297.0,
+  height: 210.0,
+};
+export const a5: PaperSize = {
+  id: 'a5',
+  name: 'A5',
+  width: 148,
+  height: 210,
+};
+
 export const paperSizes = [
-  {
-    id: 'letter',
-    name: 'Letter',
-    width: 215.9,
-    height: 279.4,
-  },
-  {
-    id: 'letterl',
-    name: 'Letter',
-    width: 279.4,
-    height: 215.9,
-  },
-  {
-    id: 'legal',
-    name: 'Legal',
-    width: 215.9,
-    height: 355.6,
-  },
-  {
-    id: 'legall',
-    name: 'Legal',
-    width: 355.6,
-    height: 215.9,
-  },
-  {
-    id: 'halfletter',
-    name: 'Half Letter',
-    width: 148.7,
-    height: 215.9,
-  },
-  {
-    id: 'a4',
-    name: 'A4',
-    width: 210.0,
-    height: 297.0,
-  },
-  {
-    id: 'a4l',
-    name: 'A4',
-    width: 297.0,
-    height: 210.0,
-  },
-  {
-    id: 'a5',
-    name: 'A5',
-    width: 148,
-    height: 210,
-  },
+  letter,
+  letterl,
+  legal,
+  legall,
+  halfletter,
+  a4,
+  a4l,
+  a5,
 ];
 
 // a0 - 841 x 1189

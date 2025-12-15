@@ -1,10 +1,16 @@
 import { svg } from 'lit';
 
 import { calculateBoxes, background, header, body, footer } from './helpers';
+import type { PaperSize } from './sizes';
 
 const halfInch = 12.131895;
 
-export function paper(print, paperSize, layout) {
+export function paper(
+  print: boolean,
+  paperSize: PaperSize,
+  layout: string,
+  x: number = 0
+) {
   if (!paperSize) {
     return svg``;
   }
@@ -24,11 +30,11 @@ export function paper(print, paperSize, layout) {
   // Render the sections within the page.
   return svg`
     <svg
-      class="${print ? 'd-none d-print-block' : 'preview'}"
+      class="${print ? 'd-print-block' : 'preview'}"
       width="${paperSize.width}mm"
       height="${paperSize.height}mm"
-      viewBox="0 0 ${paperSize.width} ${paperSize.height}"
       version="1.1"
+      x="${x}mm"
     >
       <g>
         ${background(backgroundBox)}
