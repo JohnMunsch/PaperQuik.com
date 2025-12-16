@@ -65,6 +65,11 @@ export const paperSizes = [
   a5,
 ];
 
+export enum PageSide {
+  Recto = 'recto', // (Front/Right)
+  Verso = 'verso', // (Back/Left)
+}
+
 // a0 - 841 x 1189
 // a1 - 594 x 841
 // a2 - 420 x 594
