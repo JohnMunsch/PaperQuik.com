@@ -5,64 +5,71 @@ export interface PaperSize {
   height: number;
 }
 
-export const letter: PaperSize = {
-  id: 'letter',
+export const letterPortrait: PaperSize = {
+  id: 'letterPortrait',
   name: 'Letter',
   width: 215.9,
   height: 279.4,
 };
-export const letterl: PaperSize = {
-  id: 'letterl',
-  name: 'Letter',
-  width: letter.height,
-  height: letter.width,
+
+export const letterLandscape: PaperSize = {
+  id: 'letterLandscape',
+  name: 'Letter Landscape',
+  width: letterPortrait.height,
+  height: letterPortrait.width,
 };
-export const legal: PaperSize = {
-  id: 'legal',
+
+export const legalPortrait: PaperSize = {
+  id: 'legalPortrait',
   name: 'Legal',
   width: 215.9,
   height: 355.6,
 };
-export const legall: PaperSize = {
-  id: 'legall',
-  name: 'Legal',
-  width: legal.height,
-  height: legal.width,
+
+export const legalLandscape: PaperSize = {
+  id: 'legalLandscape',
+  name: 'Legal Landscape',
+  width: legalPortrait.height,
+  height: legalPortrait.width,
 };
-export const halfletter: PaperSize = {
-  id: 'halfletter',
+
+export const halfLetterPortrait: PaperSize = {
+  id: 'halfLetterPortrait',
   name: 'Half Letter',
-  width: letter.width / 2,
-  height: letter.height,
+  width: letterPortrait.width / 2,
+  height: letterPortrait.height,
 };
+
 export const a4: PaperSize = {
   id: 'a4',
   name: 'A4',
   width: 210.0,
   height: 297.0,
 };
-export const a4l: PaperSize = {
-  id: 'a4l',
-  name: 'A4',
+
+export const a4Landscape: PaperSize = {
+  id: 'a4Landscape',
+  name: 'A4 Landscape',
   width: 297.0,
   height: 210.0,
 };
-export const a5: PaperSize = {
-  id: 'a5',
+
+export const a5Portrait: PaperSize = {
+  id: 'a5Portrait',
   name: 'A5',
   width: 148,
   height: 210,
 };
 
 export const paperSizes = [
-  letter,
-  letterl,
-  legal,
-  legall,
-  halfletter,
+  letterPortrait,
+  letterLandscape,
+  legalPortrait,
+  legalLandscape,
+  halfLetterPortrait,
   a4,
-  a4l,
-  a5,
+  a4Landscape,
+  a5Portrait,
 ];
 
 export enum PageSide {

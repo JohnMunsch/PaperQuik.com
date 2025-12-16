@@ -186,6 +186,7 @@ export function footer(footerBox: Box) {
                    x="${footerBox.x}mm"
                    y="${footerBox.y}mm" />
   <text text-anchor="end"
+        style="font-size:0.5em;fill:#000000;"
         x="${footerBox.x + footerBox.width}mm"
         y="${footerBox.y + footerBox.height}mm" class="logo">
   PAPERQUIK.com</text>`;
