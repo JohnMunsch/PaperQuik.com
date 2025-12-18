@@ -1,24 +1,43 @@
-import { svg } from 'lit';
+import { svg, type TemplateResult } from 'lit';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
 import { calculateBoxes, background, header, body, footer } from './helpers';
 import type { PaperSize } from './sizes';
 
 const halfInch = 12.131895;
 
-export function renderBook(
-  print: boolean,
+export function renderForPreview(paperSize: PaperSize, pages: string[]) {}
+
+export function renderForPrinting(
+  printPaperSize: PaperSize,
   paperSize: PaperSize,
-  pages: string[]
+  pageSpecs: string[]
 ) {
-  return pages.map((page) => renderPage(print, paperSize, page));
+  const printPages: TemplateResult[] = [];
+
+  for (let i = 0; i < pageSpecs.length; i += 2) {
+    const versoOffset = 0;
+    const rectoOffset = paperSize.width;
+
+    printPages.push(svg`
+      <svg version="1.1" width="${printPaperSize.width}mm" height="${
+      printPaperSize.height
+    }mm">
+        ${renderPage(true, paperSize, pageSpecs[i], versoOffset)}
+        ${renderPage(true, paperSize, pageSpecs[i + 1], rectoOffset)}
+      </svg>`);
+  }
+
+  return printPages;
 }
 
 export function renderPage(
   print: boolean,
   paperSize: PaperSize,
-  layout: string
+  layout: string,
+  xOffset?: number
 ) {
-  if (!paperSize) {
+  if (!paperSize || !layout) {
     return svg``;
   }
 
@@ -38,10 +57,10 @@ export function renderPage(
   return svg`
     <svg
       class="${print ? 'd-print-block' : 'preview'}"
+      version="1.1"
       width="${paperSize.width}mm"
       height="${paperSize.height}mm"
-      viewBox="0 0 ${paperSize.width}mm ${paperSize.height}mm"
-      version="1.1"
+      x="${xOffset}mm"
     >
       <g>
         ${background(backgroundBox)}

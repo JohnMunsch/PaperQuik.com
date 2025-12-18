@@ -36,8 +36,8 @@ export const legalLandscape: PaperSize = {
 export const halfLetterPortrait: PaperSize = {
   id: 'halfLetterPortrait',
   name: 'Half Letter',
-  width: letterPortrait.width / 2,
-  height: letterPortrait.height,
+  width: letterLandscape.width / 2,
+  height: letterLandscape.height,
 };
 
 export const a4: PaperSize = {

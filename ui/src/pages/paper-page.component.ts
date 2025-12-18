@@ -4,8 +4,8 @@ import { customElement } from 'lit/decorators.js';
 import './shared-components/pq-adblock.ts';
 import './shared-components/pq-footer.ts';
 import './shared-components/pq-menu.ts';
-import { renderBook } from '../generation/paper.ts';
-import { a5Portrait } from '../generation/sizes.ts';
+import { renderForPrinting } from '../generation/paper.ts';
+import { halfLetterPortrait, letterLandscape } from '../generation/sizes.ts';
 
 @customElement('paper-page')
 export class PaperPage extends LitElement {
@@ -15,14 +15,19 @@ export class PaperPage extends LitElement {
   }
 
   render() {
-    const pages = renderBook(true, a5Portrait, ['dot-grid']);
+    const printPages = renderForPrinting(letterLandscape, halfLetterPortrait, [
+      'dot-grid',
+      'dot-grid',
+      'dot-grid',
+      'dot-grid',
+    ]);
 
     return html`<div>
       <pq-menu class="d-print-none" active="paper"></pq-menu>
       <div class="container">
         <pq-adblock class="d-print-none"></pq-adblock>
 
-        <div class="thumbnails">${pages}</div>
+        <div class="preview">${printPages}</div>
 
         <pq-adblock class="d-print-none"></pq-adblock>
         <pq-footer class="d-print-none"></pq-footer>
