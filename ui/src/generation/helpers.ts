@@ -57,69 +57,69 @@ export function calculateBoxes(paperSize: PaperSize, margins) {
 export function background(backgroundBox: Box) {
   return svg`<rect class="background"
     style="fill-rule:evenodd;"
-    width="${backgroundBox.width}mm"
-    height="${backgroundBox.height}mm"
-    x="${backgroundBox.x}mm"
-    y="${backgroundBox.y}mm"
+    width="${backgroundBox.width}"
+    height="${backgroundBox.height}"
+    x="${backgroundBox.x}"
+    y="${backgroundBox.y}"
   />`;
 }
 
 export function header(headerBox: Box) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill: none;fill-rule:evenodd;"
-                   width="${headerBox.width}mm"
-                   height="${headerBox.height}mm"
-                   x="${headerBox.x}mm"
-                   y="${headerBox.y}mm"/>
-    <line x1="${headerBox.x}mm" y1="${headerBox.y}mm"
-          x2="${headerBox.x + headerBox.width}mm"
-          y2="${headerBox.y}mm"
+                   width="${headerBox.width}"
+                   height="${headerBox.height}"
+                   x="${headerBox.x}"
+                   y="${headerBox.y}"/>
+    <line x1="${headerBox.x}" y1="${headerBox.y}"
+          x2="${headerBox.x + headerBox.width}"
+          y2="${headerBox.y}"
           stroke="black" stroke-width="0.1"/>
-    <line x1="${headerBox.x}mm" y1="${headerBox.y + headerBox.height}mm"
-          x2="${headerBox.x + headerBox.width}mm"
-          y2="${headerBox.y + headerBox.height}mm"
+    <line x1="${headerBox.x}" y1="${headerBox.y + headerBox.height}"
+          x2="${headerBox.x + headerBox.width}"
+          y2="${headerBox.y + headerBox.height}"
           stroke="black" stroke-width="0.1" />
-    <line x1="${headerBox.x + headerBox.width * 0.2}mm"
-          y1="${headerBox.y + 1}mm"
-          x2="${headerBox.x + headerBox.width * 0.2}mm"
-          y2="${headerBox.y + headerBox.height - 1}mm"
+    <line x1="${headerBox.x + headerBox.width * 0.2}"
+          y1="${headerBox.y + 1}"
+          x2="${headerBox.x + headerBox.width * 0.2}"
+          y2="${headerBox.y + headerBox.height - 1}"
           stroke="black" stroke-width="0.1" />
     <text
        style="font-size:0.5em;font-family:Lato;fill:#000000;"
-       x="${headerBox.x + 2}mm"
-       y="${headerBox.y + 3}mm">Date/Number</text>
+       x="${headerBox.x + 2}"
+       y="${headerBox.y + 3}">Date/Number</text>
     <text
        style="font-size:0.5em;
        font-family:Lato;fill:#000000;"
-       x="${headerBox.x + headerBox.width * 0.2 + 2}mm"
-       y="${headerBox.y + 3}mm">Title/Subject</text>`;
+       x="${headerBox.x + headerBox.width * 0.2 + 2}"
+       y="${headerBox.y + 3}">Title/Subject</text>`;
 }
 
 function dotGrid(bodyBox: Box, rows: number[], cols: number[]) {
   return svg`${rows.map((row) => {
     return cols.map(
-      (col) => svg`<circle cx="${bodyBox.x + col}mm"
-                        cy="${bodyBox.y + row}mm" r=".2mm"/>`
+      (col) => svg`<circle cx="${bodyBox.x + col}"
+                        cy="${bodyBox.y + row}" r=".2"/>`
     );
   })}`;
 }
 
 function ruledLines(bodyBox: Box, rows: number[]) {
   return svg`${rows.map(
-    (row) => svg`<line x1="${bodyBox.x}mm"
-          y1="${bodyBox.y + row}mm"
-          x2="${bodyBox.x + bodyBox.width}mm"
-          y2="${bodyBox.y + row}mm"
+    (row) => svg`<line x1="${bodyBox.x}"
+          y1="${bodyBox.y + row}"
+          x2="${bodyBox.x + bodyBox.width}"
+          y2="${bodyBox.y + row}"
           stroke="black" stroke-width="0.1" />`
   )}`;
 }
 
 function squareGraphColumns(bodyBox: Box, cols: number[]) {
   return svg`${cols.map(
-    (col) => svg`<line x1="${bodyBox.x + col}mm"
-          y1="${bodyBox.y}mm"
-          x2="${bodyBox.x + col}mm"
-          y2="${bodyBox.y + bodyBox.height}mm"
+    (col) => svg`<line x1="${bodyBox.x + col}"
+          y1="${bodyBox.y}"
+          x2="${bodyBox.x + col}"
+          y2="${bodyBox.y + bodyBox.height}"
           stroke="black" stroke-width="0.1" />`
   )}`;
 }
@@ -170,10 +170,10 @@ export function body(bodyBox: Box, layout: string) {
   return svg`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
-      width="${bodyBox.width}mm"
-      height="${bodyBox.height}mm"
-      x="${bodyBox.x}mm"
-      y="${bodyBox.y}mm"
+      width="${bodyBox.width}"
+      height="${bodyBox.height}"
+      x="${bodyBox.x}"
+      y="${bodyBox.y}"
     />
     ${bodyLayout(bodyBox, layout)}`;
 }
@@ -181,14 +181,14 @@ export function body(bodyBox: Box, layout: string) {
 export function footer(footerBox: Box) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill:none;fill-rule:evenodd;"
-                   width="${footerBox.width}mm"
-                   height="${footerBox.height}mm"
-                   x="${footerBox.x}mm"
-                   y="${footerBox.y}mm" />
+                   width="${footerBox.width}"
+                   height="${footerBox.height}"
+                   x="${footerBox.x}"
+                   y="${footerBox.y}" />
   <text text-anchor="end"
         style="font-size:0.5em;fill:#000000;"
-        x="${footerBox.x + footerBox.width}mm"
-        y="${footerBox.y + footerBox.height}mm" class="logo">
+        x="${footerBox.x + footerBox.width}"
+        y="${footerBox.y + footerBox.height}" class="logo">
   PAPERQUIK.com</text>`;
 }
 

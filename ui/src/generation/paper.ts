@@ -20,9 +20,9 @@ export function renderForPrinting(
     const rectoOffset = paperSize.width;
 
     printPages.push(svg`
-      <svg version="1.1" width="${printPaperSize.width}mm" height="${
+      <svg version="1.1" width="${printPaperSize.width}" height="${
       printPaperSize.height
-    }mm">
+    }">
         ${renderPage(true, paperSize, pageSpecs[i], versoOffset)}
         ${renderPage(true, paperSize, pageSpecs[i + 1], rectoOffset)}
       </svg>`);
@@ -58,9 +58,9 @@ export function renderPage(
     <svg
       class="${print ? 'd-print-block' : 'preview'}"
       version="1.1"
-      width="${paperSize.width}mm"
-      height="${paperSize.height}mm"
-      x="${xOffset}mm"
+      width="${paperSize.width}"
+      height="${paperSize.height}"
+      x="${xOffset}"
     >
       <g>
         ${background(backgroundBox)}
