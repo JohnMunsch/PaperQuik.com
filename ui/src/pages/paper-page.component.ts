@@ -17,9 +17,9 @@ export class PaperPage extends LitElement {
   render() {
     const printPages = renderForPrinting(letterLandscape, halfLetterPortrait, [
       'dot-grid',
-      'dot-grid',
-      'dot-grid',
-      'dot-grid',
+      'ruled-lines',
+      'square-graph',
+      'dotted-ruled-lines',
     ]);
 
     return html`<div>
