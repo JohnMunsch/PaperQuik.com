@@ -53,7 +53,7 @@ svg .logo {
   font-size: 0.5mm;
 }
 
-print-preview {
+print-preview, thumbnail-preview {
   rect.background {
     fill: white;
   }

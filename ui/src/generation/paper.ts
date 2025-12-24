@@ -1,6 +1,6 @@
 import { svg, type TemplateResult } from 'lit';
 
-import type { PaperSize } from './sizes';
+import type { PaperSize } from './paper-sizes';
 
 // All units are in mm except where we are making unitless thumbnails.
 export const halfInch = 12.131895;
@@ -26,10 +26,16 @@ export interface PageElement {
 }
 
 export interface PageLayout {
-  pageElements: PageElement[];
+  elements: PageElement[];
+  data?: object;
 }
 
-export const paperLayouts: PageElement[] = [
+export interface BookLayout {
+  paperSize: PaperSize;
+  pages: PageLayout[];
+}
+
+export const bodyElements: PageElement[] = [
   {
     id: 'blank',
     name: 'Blank',
@@ -52,32 +58,28 @@ export const paperLayouts: PageElement[] = [
   },
 ];
 
-export function renderThumbnails(
-  paperSize: PaperSize,
-  pageLayouts: PageLayout[]
-) {
-  return pageLayouts.map((layout) => {
-    return renderPage(false, paperSize, layout);
+export function renderThumbnails(book: BookLayout) {
+  return book.pages.map((layout) => {
+    return renderPage(false, book.paperSize, layout);
   });
 }
 
 export function renderPrintablePages(
   printPaperSize: PaperSize,
-  paperSize: PaperSize,
-  pageLayouts: PageLayout[]
+  book: BookLayout
 ) {
   const printPages: TemplateResult[] = [];
 
   // TODO: This works differently when the print pager size is the same as the paper size.
-  for (let i = 0; i < pageLayouts.length; i += 2) {
+  for (let i = 0; i < book.pages.length; i += 2) {
     const versoOffset = 0;
-    const rectoOffset = paperSize.width;
+    const rectoOffset = book.paperSize.width;
 
     printPages.push(svg`
       <svg version="1.1" width="${printPaperSize.width}mm"
            height="${printPaperSize.height}mm">
-        ${renderPage(true, paperSize, pageLayouts[i], versoOffset)}
-        ${renderPage(true, paperSize, pageLayouts[i + 1], rectoOffset)}
+        ${renderPage(true, book.paperSize, book.pages[i], versoOffset)}
+        ${renderPage(true, book.paperSize, book.pages[i + 1], rectoOffset)}
       </svg>`);
   }
 
@@ -106,56 +108,11 @@ export function renderPage(
       x="${xOffset}${units}"
     >
       <g>
-        ${pageLayout.pageElements.map((element) => {
+        ${pageLayout.elements.map((element) => {
           return renderElement(units, element);
         })}
       </g>
     </svg>`;
-}
-
-export function calculateBoxes(paperSize: PaperSize, margins: Margins) {
-  const gap = 2.5;
-
-  const backgroundBox: Box = {
-    x: 0,
-    y: 0,
-    width: paperSize.width,
-    height: paperSize.height,
-  };
-
-  const headerBox: Box = {
-    x: margins.left,
-    y: margins.top,
-    width: paperSize.width - (margins.left + margins.right),
-    height: 15,
-  };
-
-  const footerBox: Box = {
-    x: margins.left,
-    y: paperSize.height - margins.bottom - 2,
-    width: paperSize.width - (margins.left + margins.right),
-    height: 2,
-  };
-
-  const bodyBox: Box = {
-    x: margins.left,
-    y: margins.top + headerBox.height + gap,
-    width: paperSize.width - (margins.left + margins.right),
-    height:
-      paperSize.height -
-      (margins.top +
-        headerBox.height +
-        gap +
-        footerBox.height +
-        margins.bottom),
-  };
-
-  return {
-    backgroundBox,
-    headerBox,
-    bodyBox,
-    footerBox,
-  };
 }
 
 export function renderElement(units: string, element: PageElement) {
