@@ -2,23 +2,34 @@ import { svg, type TemplateResult } from 'lit';
 
 import type { PaperSize } from './sizes';
 
-const halfInch = 12.131895;
+// All units are in mm except where we are making unitless thumbnails.
+export const halfInch = 12.131895;
 
-interface Box {
+export interface Box {
   x: number;
   y: number;
   width: number;
   height: number;
 }
 
-interface Margins {
+export interface Margins {
   top: number;
   right: number;
   bottom: number;
   left: number;
 }
 
-export const paperLayouts = [
+export interface PageElement {
+  id: string;
+  name?: string;
+  box?: Box;
+}
+
+export interface PageLayout {
+  pageElements: PageElement[];
+}
+
+export const paperLayouts: PageElement[] = [
   {
     id: 'blank',
     name: 'Blank',
@@ -41,40 +52,32 @@ export const paperLayouts = [
   },
 ];
 
-export function renderForPreview(paperSize: PaperSize, pageSpecs: string[]) {
-  const printPages: TemplateResult[] = [];
-
-  for (let i = 0; i < pageSpecs.length; i += 2) {
-    const versoOffset = 0;
-    const rectoOffset = paperSize.width;
-
-    printPages.push(svg`
-      <svg version="1.1" width="${paperSize.width}mm"
-           height="${paperSize.height}mm">
-        ${renderPage(false, paperSize, pageSpecs[i], versoOffset)}
-        ${renderPage(false, paperSize, pageSpecs[i + 1], rectoOffset)}
-      </svg>`);
-  }
-
-  return printPages;
+export function renderThumbnails(
+  paperSize: PaperSize,
+  pageLayouts: PageLayout[]
+) {
+  return pageLayouts.map((layout) => {
+    return renderPage(false, paperSize, layout);
+  });
 }
 
-export function renderForPrinting(
+export function renderPrintablePages(
   printPaperSize: PaperSize,
   paperSize: PaperSize,
-  pageSpecs: string[]
+  pageLayouts: PageLayout[]
 ) {
   const printPages: TemplateResult[] = [];
 
-  for (let i = 0; i < pageSpecs.length; i += 2) {
+  // TODO: This works differently when the print pager size is the same as the paper size.
+  for (let i = 0; i < pageLayouts.length; i += 2) {
     const versoOffset = 0;
     const rectoOffset = paperSize.width;
 
     printPages.push(svg`
       <svg version="1.1" width="${printPaperSize.width}mm"
            height="${printPaperSize.height}mm">
-        ${renderPage(true, paperSize, pageSpecs[i], versoOffset)}
-        ${renderPage(true, paperSize, pageSpecs[i + 1], rectoOffset)}
+        ${renderPage(true, paperSize, pageLayouts[i], versoOffset)}
+        ${renderPage(true, paperSize, pageLayouts[i + 1], rectoOffset)}
       </svg>`);
   }
 
@@ -84,26 +87,14 @@ export function renderForPrinting(
 export function renderPage(
   print: boolean,
   paperSize: PaperSize,
-  layout: string,
+  pageLayout: PageLayout,
   xOffset?: number
 ) {
   const units = print ? 'mm' : '';
 
-  if (!paperSize || !layout) {
+  if (!paperSize || !pageLayout) {
     return svg``;
   }
-
-  const margins = {
-    top: halfInch,
-    right: halfInch,
-    bottom: halfInch,
-    left: halfInch,
-  };
-
-  let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(
-    paperSize,
-    margins
-  );
 
   // Render the sections within the page.
   return svg`
@@ -115,10 +106,9 @@ export function renderPage(
       x="${xOffset}${units}"
     >
       <g>
-        ${background(units, backgroundBox)}
-        ${header(units, headerBox)}
-        ${body(units, bodyBox, layout)}
-        ${footer(units, footerBox)}
+        ${pageLayout.pageElements.map((element) => {
+          return renderElement(units, element);
+        })}
       </g>
     </svg>`;
 }
@@ -166,6 +156,25 @@ export function calculateBoxes(paperSize: PaperSize, margins: Margins) {
     bodyBox,
     footerBox,
   };
+}
+
+export function renderElement(units: string, element: PageElement) {
+  switch (element.id) {
+    case 'background':
+      return background(units, element.box!);
+    case 'header':
+      return header(units, element.box!);
+    case 'blank':
+    case 'dot-grid':
+    case 'ruled-lines':
+    case 'square-graph':
+    case 'dotted-ruled-lines':
+      return body(units, element.id, element.box!);
+    case 'footer':
+      return footer(units, element.box!);
+    default:
+      return svg``;
+  }
 }
 
 export function background(units: string, backgroundBox: Box) {
@@ -239,7 +248,7 @@ function squareGraphColumns(units: string, bodyBox: Box, cols: number[]) {
   )}`;
 }
 
-function bodyLayout(units: string, bodyBox: Box, layout: string) {
+function body(units: string, layout: string, bodyBox: Box) {
   const rowHeight = 5;
   const colWidth = 5;
 
@@ -266,35 +275,32 @@ function bodyLayout(units: string, bodyBox: Box, layout: string) {
     col += colWidth;
   }
 
-  switch (layout) {
-    case 'blank':
-      return svg``;
-    case 'dot-grid':
-      return dotGrid(units, bodyBox, rows, cols);
-    case 'dotted-ruled-lines':
-      return svg`${dotGrid(units, bodyBox, rows, cols)}${ruledLines(
-        units,
-        bodyBox,
-        rows
-      )}`;
-    case 'ruled-lines':
-      return ruledLines(units, bodyBox, rows);
-    case 'square-graph':
-      return svg`${ruledLines(units, bodyBox, rows)}
-      ${squareGraphColumns(units, bodyBox, cols)}`;
-  }
-}
-
-export function body(units: string, bodyBox: Box, layout: string) {
-  return svg`
+  const border = svg`
     <rect
       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;"
       width="${bodyBox.width}${units}"
       height="${bodyBox.height}${units}"
       x="${bodyBox.x}${units}"
       y="${bodyBox.y}${units}"
-    />
-    ${bodyLayout(units, bodyBox, layout)}`;
+    />`;
+
+  switch (layout) {
+    case 'blank':
+      return border;
+    case 'dot-grid':
+      return svg`${border}${dotGrid(units, bodyBox, rows, cols)}`;
+    case 'dotted-ruled-lines':
+      return svg`${border}${dotGrid(units, bodyBox, rows, cols)}${ruledLines(
+        units,
+        bodyBox,
+        rows
+      )}`;
+    case 'ruled-lines':
+      return svg`${border}${ruledLines(units, bodyBox, rows)}`;
+    case 'square-graph':
+      return svg`${border}${ruledLines(units, bodyBox, rows)}
+      ${squareGraphColumns(units, bodyBox, cols)}`;
+  }
 }
 
 export function footer(units: string, footerBox: Box) {

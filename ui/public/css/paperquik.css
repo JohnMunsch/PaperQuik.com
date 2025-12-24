@@ -48,17 +48,13 @@ rect.background {
   fill: none;
 }
 
-.preview rect.background {
-  fill: white;
-}
-
 svg .logo {
   font-family: 'Roboto Slab';
   font-size: 0.5mm;
 }
 
-div.preview {
-  svg rect.background {
+print-preview {
+  rect.background {
     fill: white;
   }
 }
