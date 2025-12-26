@@ -167,11 +167,11 @@ export function header(units: string, headerBox: Box) {
           y2="${headerBox.y + headerBox.height - 1}${units}"
           stroke="black" stroke-width="0.1" />
     <text
-       style="font-size:0.5em;font-family:Lato;fill:#000000;"
+       style="font-size:2.5${units};font-family:Lato;fill:#000000;"
        x="${headerBox.x + 2}${units}"
        y="${headerBox.y + 3}${units}">Date/Number</text>
     <text
-       style="font-size:0.5em;font-family:Lato;fill:#000000;"
+       style="font-size:2.5${units};font-family:Lato;fill:#000000;"
        x="${headerBox.x + headerBox.width * 0.2 + 2}${units}"
        y="${headerBox.y + 3}${units}">Title/Subject</text>`;
 }
@@ -180,7 +180,7 @@ function dotGrid(units: string, bodyBox: Box, rows: number[], cols: number[]) {
   return svg`${rows.map((row) => {
     return cols.map(
       (col) => svg`<circle cx="${bodyBox.x + col}${units}"
-                        cy="${bodyBox.y + row}${units}" r=".2mm"/>`
+                        cy="${bodyBox.y + row}${units}" r=".2${units}"/>`
     );
   })}`;
 }
@@ -268,9 +268,9 @@ export function footer(units: string, footerBox: Box) {
                    x="${footerBox.x}${units}"
                    y="${footerBox.y}${units}" />
   <text text-anchor="end"
-        style="font-size:0.5em;fill:#000000;"
+        style="font-size:2.5${units};fill:#000000;"
         x="${footerBox.x + footerBox.width}${units}"
-        y="${footerBox.y + footerBox.height}${units}" class="logo">
+        y="${footerBox.y + footerBox.height + 1}${units}" class="logo">
   PAPERQUIK.com</text>`;
 }
 
