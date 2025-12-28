@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { type BookLayout, renderThumbnails } from '../generation/paper';
@@ -9,9 +9,20 @@ export class ThumbnailPreview extends LitElement {
   @property()
   book: BookLayout = book;
 
-  createRenderRoot() {
-    return this;
-  }
+  static styles = css`
+    :host {
+      display: flex;
+      gap: 15px;
+    }
+
+    svg {
+      filter: drop-shadow(3px 3px 3px black);
+
+      rect.background {
+        fill: white;
+      }
+    }
+  `;
 
   render() {
     const thumbnails = renderThumbnails(this.book);
