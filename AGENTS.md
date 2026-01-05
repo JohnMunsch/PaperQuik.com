@@ -4,7 +4,7 @@ This document provides instructions for AI agents working on the PaperQuik.com c
 
 ## Project Overview
 
-This is a monorepo containing the source code for PaperQuik.com.  The project is split into two main parts:
+This is a monorepo containing the source code for PaperQuik.com. The project is split into two main parts:
 
 - `ui/`: A frontend web application built with Vite, Lit, and TypeScript.
 - `server/`: A backend server built with Hono, Node.js, and TypeScript. At the moment the server does not have an API, it just serves up the static files which make up the UI.
@@ -18,11 +18,9 @@ If any of the commands below don't seem to work, confirm what directory you're i
 All of these commands are run in the "server" directory:
 
 - `npm install` - Always do this after pulling down a new version of the source.
-- `npm run migrate` - Create a new database using the latest set of migrations or update an existing database.
 
 - `npm run dev` - Run this to do development work. It will tell you the URL to use to access the server.
 - `npm run build` - Always run this to make sure the code builds without TypeScript errors after making changes.
-- `npm run test` - Always run the unit tests to make sure the code still passes after making changes.
 
 - `npm start` - You will not need to run this while working on the site.
 
@@ -34,7 +32,6 @@ All of these commands are run in the "ui" directory:
 
 - `npm run dev` - Run this to do development work. It will tell you the URL to use to access the UI.
 - `npm run build` - Always run this to make sure the code builds without TypeScript errors after making changes.
-- `npm run test` - Always run the unit tests to make sure the code still passes after making changes.
 
 - `npm run preview` - You will not need to run this while working on the site.
 - `npm run storybook` - You will not need to run this while working on the site.
@@ -50,7 +47,7 @@ All of these commands are run in the "ui" directory:
 
 ## General Workflow
 
-When you create feature branches, just name them "feat/[short name for feature/bug/chore/etc.]" for consistency.
+When you create feature branches, just name them "feat/[short name for feature]" for consistency. Do the same for "fix/" and "chore/" branches.
 
 1.  Identify whether your task relates to the `ui`, the `server`, or both.
 2.  Navigate to the appropriate directory (`ui/` or `server/`).
