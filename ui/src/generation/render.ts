@@ -25,9 +25,14 @@ export interface PageElement {
   box?: Box;
 }
 
+export interface PageData {
+  pageNumber?: number;
+  sectionNumber?: number;
+}
+
 export interface PageLayout {
   elements: PageElement[];
-  data?: object;
+  data?: PageData;
 }
 
 export interface BookLayout {
@@ -109,13 +114,17 @@ export function renderPage(
     >
       <g>
         ${pageLayout.elements.map((element) => {
-          return renderElement(units, element);
+          return renderElement(units, element, pageLayout.data);
         })}
       </g>
     </svg>`;
 }
 
-export function renderElement(units: string, element: PageElement) {
+export function renderElement(
+  units: string,
+  element: PageElement,
+  data?: object
+) {
   switch (element.id) {
     case 'background':
       return background(units, element.box!);
@@ -129,6 +138,10 @@ export function renderElement(units: string, element: PageElement) {
       return body(units, element.id, element.box!);
     case 'footer':
       return footer(units, element.box!);
+    case 'page-number':
+      return pageNumber(units, element.box!, data);
+    case 'section-number':
+      return sectionNumber(units, element.box!, data);
     default:
       return svg``;
   }
@@ -260,7 +273,7 @@ function body(units: string, layout: string, bodyBox: Box) {
   }
 }
 
-export function footer(units: string, footerBox: Box) {
+function footer(units: string, footerBox: Box) {
   // The rect is hidden because it's used strictly for debugging.
   return svg`<rect style="fill:none;fill-rule:evenodd;"
                    width="${footerBox.width}${units}"
@@ -272,6 +285,24 @@ export function footer(units: string, footerBox: Box) {
         x="${footerBox.x + footerBox.width}${units}"
         y="${footerBox.y + footerBox.height + 1}${units}" class="logo">
   PAPERQUIK.com</text>`;
+}
+
+function pageNumber(units: string, pageNumberBox: Box, data?: PageData) {
+  return svg`<text text-anchor="middle"
+        style="font-size:2.5${units};fill:#000000;"
+        x="${pageNumberBox.x + pageNumberBox.width}${units}"
+        y="${pageNumberBox.y + pageNumberBox.height + 1}${units}">${
+    data?.pageNumber
+  }</text>`;
+}
+
+function sectionNumber(units: string, sectionNumberBox: Box, data?: PageData) {
+  return svg`<text text-anchor="end"
+        style="font-size:2.5${units};fill:#000000;"
+        x="${sectionNumberBox.x + sectionNumberBox.width}${units}"
+        y="${sectionNumberBox.y + sectionNumberBox.height + 1}${units}">${
+    data?.sectionNumber
+  }</text>`;
 }
 
 // From https://www.abeautifulsite.net/posts/getting-localized-month-and-day-names-in-the-browser/

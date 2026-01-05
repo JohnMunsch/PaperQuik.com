@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import { type BookLayout, renderPrintablePages } from '../generation/paper';
+import { type BookLayout, renderPrintablePages } from '../generation/render';
 import { letterLandscape } from '../generation/paper-sizes';
 import { book } from '../generation/sample-book';
 

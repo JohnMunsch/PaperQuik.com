@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import { type BookLayout, renderThumbnails } from '../generation/paper';
+import { type BookLayout, renderThumbnails } from '../generation/render';
 import { book } from '../generation/sample-book';
 
 @customElement('thumbnail-preview')

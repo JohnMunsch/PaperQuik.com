@@ -4,7 +4,7 @@ import {
   halfInch,
   type Margins,
   type PageLayout,
-} from '../generation/paper';
+} from './render';
 import { halfLetterPortrait, type PaperSize } from '../generation/paper-sizes';
 
 const margins: Margins = {
@@ -17,6 +17,16 @@ const margins: Margins = {
 const book: BookLayout = {
   paperSize: halfLetterPortrait,
   pages: Array(2).fill(generateLayout(margins, 'dot-grid')),
+};
+
+book.pages[0].data = {
+  pageNumber: 1,
+  sectionNumber: 1,
+};
+
+book.pages[1].data = {
+  pageNumber: 2,
+  sectionNumber: 1,
 };
 
 function calculateBoxes(paperSize: PaperSize, margins: Margins) {
@@ -56,19 +66,39 @@ function calculateBoxes(paperSize: PaperSize, margins: Margins) {
         margins.bottom),
   };
 
+  const pageNumberBox: Box = {
+    x: margins.left,
+    y: paperSize.height - margins.bottom - 2,
+    width: paperSize.width - (margins.left + margins.right),
+    height: 2,
+  };
+
+  const sectionNumberBox: Box = {
+    x: margins.left,
+    y: paperSize.height - margins.bottom - 2,
+    width: paperSize.width - (margins.left + margins.right),
+    height: 2,
+  };
+
   return {
     backgroundBox,
     headerBox,
     bodyBox,
     footerBox,
+    pageNumberBox,
+    sectionNumberBox,
   };
 }
 
 function generateLayout(margins: Margins, body: string): PageLayout {
-  let { backgroundBox, headerBox, bodyBox, footerBox } = calculateBoxes(
-    halfLetterPortrait,
-    margins
-  );
+  let {
+    backgroundBox,
+    headerBox,
+    bodyBox,
+    footerBox,
+    pageNumberBox,
+    sectionNumberBox,
+  } = calculateBoxes(halfLetterPortrait, margins);
 
   return {
     elements: [
@@ -76,6 +106,8 @@ function generateLayout(margins: Margins, body: string): PageLayout {
       { id: 'header', box: headerBox },
       { id: body, box: bodyBox },
       { id: 'footer', box: footerBox },
+      { id: 'page-number', box: pageNumberBox },
+      { id: 'section-number', box: sectionNumberBox },
     ],
   };
 }
