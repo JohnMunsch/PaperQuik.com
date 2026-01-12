@@ -131,6 +131,7 @@ export function renderElement(
     case 'header':
       return header(units, element.box!);
     case 'blank':
+    case 'cross-grid':
     case 'dot-grid':
     case 'ruled-lines':
     case 'square-graph':
@@ -187,6 +188,32 @@ export function header(units: string, headerBox: Box) {
        style="font-size:2.5${units};font-family:Lato;fill:#000000;"
        x="${headerBox.x + headerBox.width * 0.2 + 2}${units}"
        y="${headerBox.y + 3}${units}">Title/Subject</text>`;
+}
+
+function crossGrid(
+  units: string,
+  bodyBox: Box,
+  rows: number[],
+  cols: number[]
+) {
+  return svg`${rows.map((row) => {
+    // At each location, instead of drawing a dot, draw two lines that cross each other, but are
+    // fairly short.
+    return cols.map(
+      (col) => svg`
+        <line x1="${bodyBox.x + col - 0.5}${units}"
+              y1="${bodyBox.y + row}${units}"
+              x2="${bodyBox.x + col + 0.5}${units}"
+              y2="${bodyBox.y + row}${units}"
+              stroke="black" stroke-width="0.1" />
+        <line x1="${bodyBox.x + col}${units}"
+              y1="${bodyBox.y + row - 0.5}${units}"
+              x2="${bodyBox.x + col}${units}"
+              y2="${bodyBox.y + row + 0.5}${units}"
+              stroke="black" stroke-width="0.1" />
+        `
+    );
+  })}`;
 }
 
 function dotGrid(units: string, bodyBox: Box, rows: number[], cols: number[]) {
@@ -257,6 +284,8 @@ function body(units: string, layout: string, bodyBox: Box) {
   switch (layout) {
     case 'blank':
       return border;
+    case 'cross-grid':
+      return svg`${border}${crossGrid(units, bodyBox, rows, cols)}`;
     case 'dot-grid':
       return svg`${border}${dotGrid(units, bodyBox, rows, cols)}`;
     case 'dotted-ruled-lines':
@@ -289,16 +318,14 @@ function footer(units: string, footerBox: Box) {
 
 function pageNumber(units: string, pageNumberBox: Box, data?: PageData) {
   return svg`<text text-anchor="middle"
-        style="font-size:2.5${units};fill:#000000;"
-        x="${pageNumberBox.x + pageNumberBox.width}${units}"
-        y="${pageNumberBox.y + pageNumberBox.height + 1}${units}">${
-    data?.pageNumber
-  }</text>`;
+        style="font-size:2.5${units};font-family:Lato;fill:#000000;"
+        x="${pageNumberBox.x}${units}"
+        y="${pageNumberBox.y}${units}">${data?.pageNumber}</text>`;
 }
 
 function sectionNumber(units: string, sectionNumberBox: Box, data?: PageData) {
   return svg`<text text-anchor="end"
-        style="font-size:2.5${units};fill:#000000;"
+        style="font-size:2.5${units};font-family:Lato;fill:#000000;"
         x="${sectionNumberBox.x + sectionNumberBox.width}${units}"
         y="${sectionNumberBox.y + sectionNumberBox.height + 1}${units}">${
     data?.sectionNumber
