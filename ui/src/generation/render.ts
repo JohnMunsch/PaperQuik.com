@@ -1,6 +1,7 @@
 import { svg, type TemplateResult } from 'lit';
 
 import type { PaperSize } from './paper-sizes';
+import { reorderForSignatures } from './signatures';
 
 // All units are in mm except where we are making unitless thumbnails.
 export const halfInch = 12.131895;
@@ -69,22 +70,37 @@ export function renderThumbnails(book: BookLayout) {
   });
 }
 
+/**
+ * The scale factor both reduces the size of the SVG page as seen on the screen and is used as a
+ * factor in a group which wraps the pages and scales them up and down by the same amount.
+ *
+ * That gives us the ability to generate a "thumbnail" for any of our printable pages.
+ */
 export function renderPrintablePages(
   printPaperSize: PaperSize,
-  book: BookLayout
+  book: BookLayout,
+  scale: number = 1.0,
 ) {
   const printPages: TemplateResult[] = [];
 
-  // TODO: This works differently when the print pager size is the same as the paper size.
-  for (let i = 0; i < book.pages.length; i += 2) {
+  const printPageOrder = reorderForSignatures(book.pages, 16);
+
+  for (let i = 0; i < printPageOrder.length; i += 2) {
     const versoOffset = 0;
     const rectoOffset = book.paperSize.width;
 
     printPages.push(svg`
-      <svg version="1.1" width="${printPaperSize.width}mm"
-           height="${printPaperSize.height}mm">
-        ${renderPage(true, book.paperSize, book.pages[i], versoOffset)}
-        ${renderPage(true, book.paperSize, book.pages[i + 1], rectoOffset)}
+      <svg version="1.1" width="${printPaperSize.width * scale}mm"
+           height="${printPaperSize.height * scale}mm">
+        <g transform="scale(${scale})">
+          ${renderPage(true, book.paperSize, printPageOrder[i], versoOffset)}
+          ${renderPage(
+            true,
+            book.paperSize,
+            printPageOrder[i + 1],
+            rectoOffset,
+          )}
+        </g>
       </svg>`);
   }
 
@@ -95,7 +111,7 @@ export function renderPage(
   print: boolean,
   paperSize: PaperSize,
   pageLayout: PageLayout,
-  xOffset?: number
+  xOffset?: number,
 ) {
   const units = print ? 'mm' : '';
 
@@ -123,7 +139,7 @@ export function renderPage(
 export function renderElement(
   units: string,
   element: PageElement,
-  data?: object
+  data?: object,
 ) {
   switch (element.id) {
     case 'background':
@@ -170,8 +186,8 @@ export function header(units: string, headerBox: Box) {
           y2="${headerBox.y}${units}"
           stroke="black" stroke-width="0.1"/>
     <line x1="${headerBox.x}${units}" y1="${
-    headerBox.y + headerBox.height
-  }${units}"
+      headerBox.y + headerBox.height
+    }${units}"
           x2="${headerBox.x + headerBox.width}${units}"
           y2="${headerBox.y + headerBox.height}${units}"
           stroke="black" stroke-width="0.1" />
@@ -194,7 +210,7 @@ function crossGrid(
   units: string,
   bodyBox: Box,
   rows: number[],
-  cols: number[]
+  cols: number[],
 ) {
   return svg`${rows.map((row) => {
     // At each location, instead of drawing a dot, draw two lines that cross each other, but are
@@ -211,7 +227,7 @@ function crossGrid(
               x2="${bodyBox.x + col}${units}"
               y2="${bodyBox.y + row + 0.5}${units}"
               stroke="black" stroke-width="0.1" />
-        `
+        `,
     );
   })}`;
 }
@@ -220,7 +236,7 @@ function dotGrid(units: string, bodyBox: Box, rows: number[], cols: number[]) {
   return svg`${rows.map((row) => {
     return cols.map(
       (col) => svg`<circle cx="${bodyBox.x + col}${units}"
-                        cy="${bodyBox.y + row}${units}" r=".2${units}"/>`
+                        cy="${bodyBox.y + row}${units}" r=".2${units}"/>`,
     );
   })}`;
 }
@@ -231,7 +247,7 @@ function ruledLines(units: string, bodyBox: Box, rows: number[]) {
           y1="${bodyBox.y + row}${units}"
           x2="${bodyBox.x + bodyBox.width}${units}"
           y2="${bodyBox.y + row}${units}"
-          stroke="black" stroke-width="0.1" />`
+          stroke="black" stroke-width="0.1" />`,
   )}`;
 }
 
@@ -241,7 +257,7 @@ function squareGraphColumns(units: string, bodyBox: Box, cols: number[]) {
           y1="${bodyBox.y}${units}"
           x2="${bodyBox.x + col}${units}"
           y2="${bodyBox.y + bodyBox.height}${units}"
-          stroke="black" stroke-width="0.1" />`
+          stroke="black" stroke-width="0.1" />`,
   )}`;
 }
 
@@ -292,7 +308,7 @@ function body(units: string, layout: string, bodyBox: Box) {
       return svg`${border}${dotGrid(units, bodyBox, rows, cols)}${ruledLines(
         units,
         bodyBox,
-        rows
+        rows,
       )}`;
     case 'ruled-lines':
       return svg`${border}${ruledLines(units, bodyBox, rows)}`;
@@ -328,8 +344,8 @@ function sectionNumber(units: string, sectionNumberBox: Box, data?: PageData) {
         style="font-size:2.5${units};font-family:Lato;fill:#000000;"
         x="${sectionNumberBox.x + sectionNumberBox.width}${units}"
         y="${sectionNumberBox.y + sectionNumberBox.height + 1}${units}">${
-    data?.sectionNumber
-  }</text>`;
+          data?.sectionNumber
+        }</text>`;
 }
 
 // From https://www.abeautifulsite.net/posts/getting-localized-month-and-day-names-in-the-browser/
@@ -356,3 +372,9 @@ export function getMonthNames(locale = 'en', format = 'long') {
   });
   return months.map((date) => formatter.format(date));
 }
+
+export {
+  reorderForSignatures,
+  reorderForSignature,
+  type ReorderForSignaturesOptions,
+} from './signatures';

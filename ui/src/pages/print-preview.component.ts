@@ -3,19 +3,20 @@ import { customElement, property } from 'lit/decorators.js';
 
 import { type BookLayout, renderPrintablePages } from '../generation/render';
 import { letterLandscape } from '../generation/paper-sizes';
-import { book } from '../generation/sample-book';
 
 @customElement('print-preview')
 export class PrintPreview extends LitElement {
   @property()
-  book: BookLayout = book;
+  book: BookLayout | null = null;
 
   createRenderRoot() {
     return this;
   }
 
   render() {
-    const printPages = renderPrintablePages(letterLandscape, this.book);
+    const printPages = this.book
+      ? renderPrintablePages(letterLandscape, this.book)
+      : [];
 
     return html`${printPages}`;
   }

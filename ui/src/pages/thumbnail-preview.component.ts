@@ -2,12 +2,11 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { type BookLayout, renderThumbnails } from '../generation/render';
-import { book } from '../generation/sample-book';
 
 @customElement('thumbnail-preview')
 export class ThumbnailPreview extends LitElement {
   @property()
-  book: BookLayout = book;
+  book: BookLayout | null = null;
 
   static styles = css`
     :host {
@@ -25,7 +24,7 @@ export class ThumbnailPreview extends LitElement {
   `;
 
   render() {
-    const thumbnails = renderThumbnails(this.book);
+    const thumbnails = this.book ? renderThumbnails(this.book) : [];
 
     return html`${thumbnails}`;
   }

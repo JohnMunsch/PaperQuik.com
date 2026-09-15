@@ -1,13 +1,15 @@
-import { LitElement, html, svg } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import './shared-components/pq-adblock.ts';
 import './shared-components/pq-footer.ts';
 import './shared-components/pq-menu.ts';
 import './print-preview.component.ts';
+import './thumbnail-preview.component.ts';
+import { book } from '../generation/sample-book.ts';
 
-@customElement('paper-page')
-export class PaperPage extends LitElement {
+@customElement('sample-book-page')
+export class SampleBookPage extends LitElement {
   createRenderRoot() {
     return this;
   }
@@ -18,7 +20,8 @@ export class PaperPage extends LitElement {
       <div class="container">
         <pq-adblock class="d-print-none"></pq-adblock>
 
-        <print-preview></print-preview>
+        <thumbnail-preview .book="${book}"></thumbnail-preview>
+        <print-preview .book="${book}"></print-preview>
 
         <pq-adblock class="d-print-none"></pq-adblock>
         <pq-footer class="d-print-none"></pq-footer>

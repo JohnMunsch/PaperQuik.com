@@ -18,8 +18,70 @@ const margins: Margins = {
 const book: BookLayout = {
   paperSize: halfLetterPortrait,
   pages: [
-    generateLayout(margins, 'cross-grid', { pageNumber: 1, sectionNumber: 1 }),
-    generateLayout(margins, 'cross-grid', { pageNumber: 2, sectionNumber: 1 }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 1,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 2,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 3,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 4,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 5,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 6,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 7,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 8,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 9,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 10,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 11,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 12,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 13,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 14,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 15,
+      sectionNumber: 1,
+    }),
+    generateLayout(margins, 'cross-grid', {
+      pageNumber: 16,
+      sectionNumber: 1,
+    }),
   ],
 };
 
@@ -87,7 +149,7 @@ function calculateBoxes(paperSize: PaperSize, margins: Margins) {
 function generateLayout(
   margins: Margins,
   body: string,
-  data?: PageData
+  data?: PageData,
 ): PageLayout {
   let {
     backgroundBox,

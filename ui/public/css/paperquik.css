@@ -54,6 +54,8 @@ svg .logo {
 }
 
 print-preview, thumbnail-preview {
+  display: block;
+  
   rect.background {
     fill: white;
   }
