@@ -1,9 +1,16 @@
-import add from 'date-fns/add';
 import { LitElement, css, svg } from 'lit';
 
-import { getDayNames, getMonthNames } from './calendarLocalization';
+import { getDayNames, getMonthNames } from './calendarLocalization.ts';
 
 class MonthCalendar extends LitElement {
+  preferredLanguage: string;
+
+  dayNames: Array<string>;
+  monthNames: Array<string>;
+
+  monthDays: Array<Date>;
+  monthName: string;
+
   static properties = {
     month: { type: Number },
     year: { type: Number },
@@ -72,7 +79,6 @@ class MonthCalendar extends LitElement {
   }
 
   render() {
-    console.log(this.month, this.year);
     if (this.month === undefined || this.year === undefined) {
       return svg``;
     }
@@ -84,11 +90,11 @@ class MonthCalendar extends LitElement {
 
     return svg`<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
       <text x="80" y="15" class="month">${this.month + 1} | ${
-      this.monthName
-    }</text>
+        this.monthName
+      }</text>
       
       ${this.dayNames.map((dayOfTheWeek, index) =>
-        this.dayOfTheWeek(dayOfTheWeek, index)
+        this.dayOfTheWeek(dayOfTheWeek, index),
       )}
       <line x1="5" y1="40" x2="155" y2="40" stroke="black" />
 
