@@ -6,9 +6,9 @@ Information about building and running is largely contained in the AGENTS.md so 
 
 ## TODOs
 
-- Refactor to code which generates both the SVG thumbnails and the full size pages (including multiple book pages on a single piece of paper for print purposes).
-- Add rendering for a month calendar block and for a single page year calendar.
-- Switch to Redux for the book details.
+- [ ] Refactor to code which generates both the SVG thumbnails and the full size pages (including multiple book pages on a single piece of paper for print purposes).
+- [ ] Add rendering for a month calendar block and for a single page year calendar.
+- [ ] Switch to Redux for the book details.
 
 ## Ops
 
